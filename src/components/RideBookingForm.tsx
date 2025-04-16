@@ -1,14 +1,13 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import LocationSearch from "@/components/LocationSearch";
 import { 
   Select, 
   SelectContent, 
   SelectItem, 
   SelectTrigger,
-
   SelectValue 
 } from "@/components/ui/select";
 import { 
@@ -106,27 +105,17 @@ const RideBookingForm = () => {
 
         {/* Location Step */}
         {currentStep === 'location' && (
-          <div className="space-y-4">
-            <div className="relative">
-              <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-              <Input
-                name="from"
-                placeholder="Departure location"
-                value={formData.from}
-                onChange={handleInputChange}
-                className="pl-10"
-              />
-            </div>
-            <div className="relative">
-              <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-              <Input
-                name="to"
-                placeholder="Destination"
-                value={formData.to}
-                onChange={handleInputChange}
-                className="pl-10"
-              />
-            </div>
+          <div className="space-y-6">
+            <LocationSearch
+              type="from"
+              value={formData.from}
+              onChange={(value) => handleSelectChange('from', value)}
+            />
+            <LocationSearch
+              type="to"
+              value={formData.to}
+              onChange={(value) => handleSelectChange('to', value)}
+            />
             <Button 
               onClick={nextStep} 
               className="w-full" 
