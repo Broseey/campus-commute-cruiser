@@ -10,24 +10,18 @@ import {
 } from "@/components/ui/select";
 import { MapPin, ArrowRight, ArrowLeft, University, Flag } from "lucide-react";
 
-// List of Nigerian universities and states
+// List of Nigerian universities and states that we operate from
 const nigerianLocations = {
   universities: [
-    "University of Lagos, Lagos",
-    "University of Ibadan, Ibadan",
-    "University of Nigeria, Nsukka",
-    "Obafemi Awolowo University, Ile-Ife",
-    "Ahmadu Bello University, Zaria",
-    "Federal University of Technology, Akure",
-    "University of Port Harcourt, Port Harcourt",
-    "University of Benin, Benin City",
-    "University of Ilorin, Ilorin",
-    "Federal University of Technology, Minna",
-    "University of Jos, Jos",
-    "University of Calabar, Calabar",
-    "Nnamdi Azikiwe University, Awka",
-    "Lagos State University, Lagos",
-    "Bayero University, Kano"
+    "Babcock University, Ilishan-Remo",
+    "Afe Babalola University, Ado-Ekiti",
+    "Redeemer's University, Ede",
+    "Covenant University, Ota",
+    "Bowen University, Iwo",
+    "Lead City University, Ibadan",
+    "Pan-Atlantic University, Lagos",
+    "Landmark University, Omu-Aran",
+    "American University of Nigeria, Yola"
   ],
   states: [
     "Abia",

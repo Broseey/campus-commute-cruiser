@@ -14,12 +14,12 @@ const Index = () => {
       <Navbar />
       
       <div className="flex-1 px-4 py-6 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        {/* Header section */}
+        {/* Header section with improved typography */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-800 mb-3 tracking-tight">
             Campus Rides Made Easy
           </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Book affordable rides to and from your university with just a few clicks.
             Join existing rides or book a full vehicle for your journey.
           </p>
@@ -105,7 +105,7 @@ const Index = () => {
         
         {/* Features section */}
         <div className="mt-16">
-          <h2 className="text-2xl font-bold text-center mb-8">Why Choose CampusRide?</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-purple-700">Why Choose CampusRide?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">

@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav className="bg-white shadow-sm py-4 px-6">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <span className="text-purple-600 font-bold text-2xl">CampusRide</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-800 font-extrabold text-2xl tracking-tight">CampusRide</span>
         </div>
         
         <div className="flex items-center space-x-4">
