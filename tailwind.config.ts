@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -33,16 +32,16 @@ export default {
 					foreground: 'hsl(var(--primary-foreground))'
 				},
                 campuspurple: {
-                    50: '#f5f3ff',
-                    100: '#ede9fe',
-                    200: '#ddd6fe',
-                    300: '#c4b5fd',
-                    400: '#a78bfa',
-                    500: '#8b5cf6',
-                    600: '#7e69ab',
-                    700: '#6e59a5',
-                    800: '#5e4c8a',
-                    900: '#4c3575',
+                    50: '#f5f3ff',   // Lightest purple
+                    100: '#ede9fe',  // Very light purple
+                    200: '#ddd6fe',  // Light purple
+                    300: '#c4b5fd',  // Soft purple
+                    400: '#a78bfa',  // Medium light purple
+                    500: '#8b5cf6',  // Vibrant purple (primary)
+                    600: '#7e69ab',  // Dark medium purple
+                    700: '#6e59a5',  // Dark purple
+                    800: '#5e4c8a',  // Deeper purple
+                    900: '#4c3575',  // Darkest purple
                 },
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
