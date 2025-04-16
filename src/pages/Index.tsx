@@ -14,9 +14,9 @@ const Index = () => {
       <Navbar />
       
       <div className="flex-1 px-4 py-6 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        {/* Header section with improved typography */}
+        {/* Header section with Uber-like styling */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-800 mb-3 tracking-tight">
+          <h1 className="text-3xl md:text-5xl font-bold mb-3 tracking-tight">
             Campus Rides Made Easy
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
