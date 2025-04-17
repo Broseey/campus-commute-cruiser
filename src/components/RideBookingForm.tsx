@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -28,6 +28,33 @@ const vehicles = [
   { id: 'corolla', name: 'Corolla', capacity: 4, price: 3500 },
 ];
 
+// Function to determine if a location is a university or state
+const getLocationType = (value: string): "university" | "state" | null => {
+  const universities = [
+    "Babcock University, Ilishan-Remo",
+    "Afe Babalola University, Ado-Ekiti",
+    "Redeemer's University, Ede",
+    "Covenant University, Ota",
+    "Bowen University, Iwo",
+    "Lead City University, Ibadan",
+    "Pan-Atlantic University, Lagos",
+    "Landmark University, Omu-Aran",
+    "American University of Nigeria, Yola"
+  ];
+  
+  const states = [
+    "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", 
+    "Borno", "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", 
+    "FCT - Abuja", "Gombe", "Imo", "Jigawa", "Kaduna", "Kano", "Katsina", 
+    "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", "Ogun", "Ondo", 
+    "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara"
+  ];
+  
+  if (universities.includes(value)) return "university";
+  if (states.includes(value)) return "state";
+  return null;
+};
+
 const RideBookingForm = () => {
   const [currentStep, setCurrentStep] = useState<BookingStep>('location');
   const [bookingType, setBookingType] = useState<'join' | 'full'>('join');
@@ -39,6 +66,10 @@ const RideBookingForm = () => {
     passengers: '1',
     vehicleId: ''
   });
+
+  // Determine the location types of "from" and "to"
+  const fromLocationType = useMemo(() => getLocationType(formData.from), [formData.from]);
+  const toLocationType = useMemo(() => getLocationType(formData.to), [formData.to]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -67,6 +98,13 @@ const RideBookingForm = () => {
   };
 
   const selectedVehicle = vehicles.find(v => v.id === formData.vehicleId);
+
+  // Check if the location step is valid (one must be university, other must be state)
+  const isLocationStepValid = (
+    formData.from && formData.to && 
+    ((fromLocationType === 'university' && toLocationType === 'state') || 
+     (fromLocationType === 'state' && toLocationType === 'university'))
+  );
 
   return (
     <Card className="w-full max-w-md shadow-lg">
@@ -110,17 +148,26 @@ const RideBookingForm = () => {
             <LocationSearch
               type="from"
               value={formData.from}
+              otherLocationType={toLocationType}
               onChange={(value) => handleSelectChange('from', value)}
             />
             <LocationSearch
               type="to"
               value={formData.to}
+              otherLocationType={fromLocationType}
               onChange={(value) => handleSelectChange('to', value)}
             />
+            
+            {(formData.from && formData.to && !isLocationStepValid) && (
+              <div className="text-destructive text-sm mt-2">
+                You must select a university for one location and a state for the other.
+              </div>
+            )}
+            
             <Button 
               onClick={nextStep} 
               className="w-full" 
-              disabled={!formData.from || !formData.to}
+              disabled={!isLocationStepValid}
             >
               Next
             </Button>

@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { 
   Select,
@@ -68,10 +68,32 @@ interface LocationSearchProps {
   type: "from" | "to";
   value: string;
   onChange: (value: string) => void;
+  otherLocationType?: "university" | "state" | null;
 }
 
-const LocationSearch = ({ type, value, onChange }: LocationSearchProps) => {
-  const [locationType, setLocationType] = useState<"university" | "state">("university");
+const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSearchProps) => {
+  const [locationType, setLocationType] = useState<"university" | "state">(
+    otherLocationType ? (otherLocationType === "university" ? "state" : "university") : "university"
+  );
+  
+  // Effect to ensure the location types are complementary (one university, one state)
+  useEffect(() => {
+    if (otherLocationType) {
+      setLocationType(otherLocationType === "university" ? "state" : "university");
+    }
+  }, [otherLocationType]);
+
+  // Get the location type from a value
+  const getLocationType = (val: string): "university" | "state" | null => {
+    if (nigerianLocations.universities.includes(val)) return "university";
+    if (nigerianLocations.states.includes(val)) return "state";
+    return null;
+  };
+  
+  // When the user selects a value, update the parent
+  const handleValueChange = (val: string) => {
+    onChange(val);
+  };
   
   return (
     <div className="relative space-y-3">
@@ -93,7 +115,13 @@ const LocationSearch = ({ type, value, onChange }: LocationSearchProps) => {
             <Button 
               variant={locationType === "university" ? "default" : "outline"} 
               size="sm"
-              onClick={() => setLocationType("university")}
+              onClick={() => {
+                if (otherLocationType !== "university") {
+                  setLocationType("university");
+                  onChange(""); // Clear the selection when changing type
+                }
+              }}
+              disabled={otherLocationType === "university"}
               className="h-8 px-3 py-1"
             >
               <University className="h-4 w-4 mr-1" />
@@ -102,7 +130,13 @@ const LocationSearch = ({ type, value, onChange }: LocationSearchProps) => {
             <Button 
               variant={locationType === "state" ? "default" : "outline"} 
               size="sm"
-              onClick={() => setLocationType("state")}
+              onClick={() => {
+                if (otherLocationType !== "state") {
+                  setLocationType("state");
+                  onChange(""); // Clear the selection when changing type
+                }
+              }}
+              disabled={otherLocationType === "state"}
               className="h-8 px-3 py-1"
             >
               <Flag className="h-4 w-4 mr-1" />
@@ -110,7 +144,7 @@ const LocationSearch = ({ type, value, onChange }: LocationSearchProps) => {
             </Button>
           </div>
           
-          <Select value={value} onValueChange={onChange}>
+          <Select value={value} onValueChange={handleValueChange}>
             <SelectTrigger id={`location-${type}`} className="w-full">
               <div className="flex items-center">
                 <MapPin className="h-4 w-4 mr-2 text-gray-500" />
