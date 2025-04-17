@@ -54,7 +54,7 @@ const Navbar = () => {
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="w-full h-full p-0 m-0 max-w-full bg-black text-black border-none">
-        <div className="flex justify-between items-center p-6 border-b border-gray-200 bg-white">
+        <div className="flex justify-between items-center py-4 px-6 border-b border-gray-200 bg-white">
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
             <span className="text-black font-bold text-2xl tracking-tight">CampusRide</span>
           </Link>
