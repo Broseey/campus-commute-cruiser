@@ -44,41 +44,6 @@ const sampleRides = [
   }
 ];
 
-// Illustration component
-const RideIllustration = ({ id }: { id: number }) => {
-  // Different illustrations for each ride type
-  const getIllustration = () => {
-    switch (id % 3) {
-      case 0:
-        return (
-          <div className="relative w-16 h-16 bg-campusblue-100 rounded-full flex items-center justify-center">
-            <Users className="h-8 w-8 text-campusblue-600" />
-          </div>
-        );
-      case 1:
-        return (
-          <div className="relative w-16 h-16 bg-campusblue-100 rounded-full flex items-center justify-center">
-            <MapPin className="h-8 w-8 text-campusblue-600" />
-          </div>
-        );
-      case 2:
-        return (
-          <div className="relative w-16 h-16 bg-campusblue-100 rounded-full flex items-center justify-center">
-            <Clock className="h-8 w-8 text-campusblue-600" />
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
-
-  return (
-    <div className="hidden md:flex items-center justify-center mr-4">
-      {getIllustration()}
-    </div>
-  );
-};
-
 const AvailableRides = () => {
   return (
     <div className="w-full max-w-4xl">
@@ -87,8 +52,6 @@ const AvailableRides = () => {
         {sampleRides.map(ride => (
           <Card key={ride.id} className="p-4 hover:shadow-md transition-shadow">
             <div className="flex flex-col md:flex-row md:items-center justify-between">
-              <RideIllustration id={ride.id} />
-              
               <div className="flex-1">
                 <div className="flex items-center text-lg font-medium mb-2">
                   <span>{ride.from}</span>
@@ -113,19 +76,19 @@ const AvailableRides = () => {
                 
                 <div className="flex items-center text-sm">
                   <span className="font-medium">Driver: {ride.driver}</span>
-                  <Badge variant="outline" className="ml-2 bg-campusblue-50">
+                  <Badge variant="outline" className="ml-2 bg-yellow-50">
                     ★ {ride.rating}
                   </Badge>
                 </div>
               </div>
               
               <div className="mt-4 md:mt-0 flex flex-col items-end">
-                <div className="text-xl font-bold text-campusblue-700 mb-1">
+                <div className="text-xl font-bold text-campusorange-700 mb-1">
                   ₦{ride.price}
                 </div>
                 <Button 
                   size="sm" 
-                  className="bg-campusblue-600 hover:bg-campusblue-700"
+                  className="bg-campusorange-700 hover:bg-campusorange-800"
                   onClick={() => window.location.href = '/booking-confirmation'}
                 >
                   Book Seat
