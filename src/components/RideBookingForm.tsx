@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -82,22 +83,22 @@ const RideBookingForm = () => {
         {/* Progress indicator */}
         <div className="mb-6">
           <div className="flex justify-between">
-            <div className={`flex flex-col items-center ${currentStep === 'location' ? 'text-purple-600' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'location' ? 'bg-purple-600 text-white' : 'bg-gray-200'}`}>1</div>
+            <div className={`flex flex-col items-center ${currentStep === 'location' ? 'text-campusorange-600' : 'text-gray-400'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'location' ? 'bg-campusorange-600 text-white' : 'bg-gray-200'}`}>1</div>
               <span className="text-xs">Location</span>
             </div>
-            <div className={`flex flex-col items-center ${currentStep === 'date' ? 'text-purple-600' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'date' ? 'bg-purple-600 text-white' : 'bg-gray-200'}`}>2</div>
+            <div className={`flex flex-col items-center ${currentStep === 'date' ? 'text-campusorange-600' : 'text-gray-400'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'date' ? 'bg-campusorange-600 text-white' : 'bg-gray-200'}`}>2</div>
               <span className="text-xs">Date & Time</span>
             </div>
-            <div className={`flex flex-col items-center ${currentStep === 'vehicle' ? 'text-purple-600' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'vehicle' ? 'bg-purple-600 text-white' : 'bg-gray-200'}`}>3</div>
+            <div className={`flex flex-col items-center ${currentStep === 'vehicle' ? 'text-campusorange-600' : 'text-gray-400'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'vehicle' ? 'bg-campusorange-600 text-white' : 'bg-gray-200'}`}>3</div>
               <span className="text-xs">Vehicle</span>
             </div>
           </div>
           <div className="mt-2 h-1 bg-gray-200 rounded-full">
             <div 
-              className="h-full bg-purple-600 rounded-full transition-all" 
+              className="h-full bg-campusorange-600 rounded-full transition-all" 
               style={{ width: currentStep === 'location' ? '33.3%' : currentStep === 'date' ? '66.6%' : '100%' }}
             ></div>
           </div>

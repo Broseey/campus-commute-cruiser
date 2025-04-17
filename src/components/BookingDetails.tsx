@@ -102,7 +102,7 @@ const BookingDetails = ({ bookingData }: BookingDetailsProps) => {
         </div>
       </div>
       
-      <Button className="w-full mt-6 bg-purple-600 hover:bg-purple-700">
+      <Button className="w-full mt-6 bg-campusorange-700 hover:bg-campusorange-800">
         Proceed to Payment
       </Button>
     </Card>

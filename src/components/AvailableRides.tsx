@@ -83,12 +83,12 @@ const AvailableRides = () => {
               </div>
               
               <div className="mt-4 md:mt-0 flex flex-col items-end">
-                <div className="text-xl font-bold text-purple-700 mb-1">
+                <div className="text-xl font-bold text-campusorange-700 mb-1">
                   ₦{ride.price}
                 </div>
                 <Button 
                   size="sm" 
-                  className="bg-purple-600 hover:bg-purple-700"
+                  className="bg-campusorange-700 hover:bg-campusorange-800"
                   onClick={() => window.location.href = '/booking-confirmation'}
                 >
                   Book Seat
