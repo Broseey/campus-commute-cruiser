@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { User, Menu, Bell, X, Home, Car, Calendar, HelpCircle } from "lucide-react";
+import { User, Menu, Bell, X, Home, Car, Calendar, HelpCircle, Info } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 import {
@@ -29,6 +29,7 @@ const Navbar = () => {
     { icon: Car, label: "My Rides", path: "/my-rides" },
     { icon: Calendar, label: "Schedule", path: "/schedule" },
     { icon: HelpCircle, label: "Help", path: "/help" },
+    { icon: Info, label: "About", path: "/about" },
   ];
 
   const renderMenuItems = () => (
@@ -53,7 +54,7 @@ const Navbar = () => {
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-full h-full p-0 m-0 max-w-full bg-black text-black border-none">
+      <SheetContent side="right" className="w-full h-full p-0 m-0 max-w-full bg-black text-black border-none data-[state=open]:duration-0">
         <div className="flex justify-between items-center py-4 px-6 border-b border-gray-200 bg-white">
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
             <span className="text-black font-bold text-2xl tracking-tight">CampusRide</span>
