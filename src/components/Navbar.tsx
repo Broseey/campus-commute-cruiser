@@ -53,18 +53,25 @@ const Navbar = () => {
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-[250px] bg-black text-white">
-        <div className="flex flex-col gap-4 pt-10">
+      <SheetContent side="right" className="w-full p-0 bg-black text-white">
+        <div className="flex justify-between items-center p-6 border-b border-gray-800">
+          <Link to="/" onClick={() => setIsMenuOpen(false)}>
+            <span className="text-white font-bold text-2xl tracking-tight">CampusRide</span>
+          </Link>
+          <SheetClose asChild>
+            <Button variant="ghost" size="icon" className="text-white hover:opacity-80 bg-transparent">
+              <X className="h-5 w-5" />
+            </Button>
+          </SheetClose>
+        </div>
+        <div className="flex flex-col pt-6">
           {menuItems.map((item) => (
             <SheetClose asChild key={item.label}>
               <Link to={item.path}>
-                <Button 
-                  variant="ghost" 
-                  className="w-full justify-start text-white hover:opacity-80 bg-transparent"
-                >
-                  <item.icon className="mr-2 h-5 w-5" />
-                  {item.label}
-                </Button>
+                <div className="py-5 px-6 flex items-center hover:bg-gray-900">
+                  <item.icon className="mr-4 h-6 w-6" />
+                  <span className="text-xl font-medium">{item.label}</span>
+                </div>
               </Link>
             </SheetClose>
           ))}
