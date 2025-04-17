@@ -49,8 +49,8 @@ const Index = () => {
                     
                     <div className="grid grid-cols-1 gap-4">
                       <div className="flex items-start">
-                        <div className="bg-purple-100 rounded-full p-3 mr-4">
-                          <MapPin className="h-6 w-6 text-purple-600" />
+                        <div className="bg-campusorange-100 rounded-full p-3 mr-4">
+                          <MapPin className="h-6 w-6 text-campusorange-600" />
                         </div>
                         <div>
                           <h3 className="font-medium">1. Choose Your Route</h3>
@@ -61,8 +61,8 @@ const Index = () => {
                       </div>
                       
                       <div className="flex items-start">
-                        <div className="bg-purple-100 rounded-full p-3 mr-4">
-                          <Calendar className="h-6 w-6 text-purple-600" />
+                        <div className="bg-campusorange-100 rounded-full p-3 mr-4">
+                          <Calendar className="h-6 w-6 text-campusorange-600" />
                         </div>
                         <div>
                           <h3 className="font-medium">2. Pick Date & Time</h3>
@@ -73,8 +73,8 @@ const Index = () => {
                       </div>
                       
                       <div className="flex items-start">
-                        <div className="bg-purple-100 rounded-full p-3 mr-4">
-                          <Car className="h-6 w-6 text-purple-600" />
+                        <div className="bg-campusorange-100 rounded-full p-3 mr-4">
+                          <Car className="h-6 w-6 text-campusorange-600" />
                         </div>
                         <div>
                           <h3 className="font-medium">3. Select Vehicle</h3>
@@ -85,8 +85,8 @@ const Index = () => {
                       </div>
                       
                       <div className="flex items-start">
-                        <div className="bg-purple-100 rounded-full p-3 mr-4">
-                          <CreditCard className="h-6 w-6 text-purple-600" />
+                        <div className="bg-campusorange-100 rounded-full p-3 mr-4">
+                          <CreditCard className="h-6 w-6 text-campusorange-600" />
                         </div>
                         <div>
                           <h3 className="font-medium">4. Confirm & Pay</h3>
@@ -105,11 +105,11 @@ const Index = () => {
         
         {/* Features section */}
         <div className="mt-16">
-          <h2 className="text-2xl font-bold text-center mb-8 text-purple-700">Why Choose CampusRide?</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-campusorange-700">Why Choose CampusRide?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Users className="h-6 w-6 text-purple-600" />
+              <div className="bg-campusorange-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                <Users className="h-6 w-6 text-campusorange-600" />
               </div>
               <h3 className="font-bold text-lg mb-2">Share & Save</h3>
               <p className="text-gray-600">
@@ -118,8 +118,8 @@ const Index = () => {
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Car className="h-6 w-6 text-purple-600" />
+              <div className="bg-campusorange-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                <Car className="h-6 w-6 text-campusorange-600" />
               </div>
               <h3 className="font-bold text-lg mb-2">Vehicle Options</h3>
               <p className="text-gray-600">
@@ -128,8 +128,8 @@ const Index = () => {
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <MapPin className="h-6 w-6 text-purple-600" />
+              <div className="bg-campusorange-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                <MapPin className="h-6 w-6 text-campusorange-600" />
               </div>
               <h3 className="font-bold text-lg mb-2">Campus Focused</h3>
               <p className="text-gray-600">
