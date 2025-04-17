@@ -32,29 +32,17 @@ export default {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))'
 				},
-                campusorange: {
-                    50: '#fff7ed',   // Lightest orange
-                    100: '#ffedd5',  // Very light orange
-                    200: '#fed7aa',  // Light orange
-                    300: '#fdba74',  // Soft orange
-                    400: '#fb923c',  // Medium light orange
-                    500: '#f97316',  // Burnt orange (primary)
-                    600: '#ea580c',  // Dark medium orange
-                    700: '#c2410c',  // Dark orange
-                    800: '#9a3412',  // Deeper orange
-                    900: '#7c2d12',  // Darkest orange
-                },
-                campus: {
-                    50: '#f0f9ff',   // Lightest blue
-                    100: '#e0f2fe',  // Very light blue
-                    200: '#bae6fd',  // Light blue
-                    300: '#7dd3fc',  // Soft blue
-                    400: '#38bdf8',  // Medium light blue
-                    500: '#0ea5e9',  // Primary blue
-                    600: '#0284c7',  // Dark medium blue
-                    700: '#0369a1',  // Dark blue
-                    800: '#075985',  // Deeper blue
-                    900: '#0c4a6e',  // Darkest blue
+                campusblue: {
+                    50: '#f0f7ff',   // Lightest blue
+                    100: '#e0eeff',  // Very light blue
+                    200: '#c7e0ff',  // Light blue
+                    300: '#a2caff',  // Soft blue
+                    400: '#73abff',  // Medium light blue
+                    500: '#4287f5',  // Bright blue (primary)
+                    600: '#2865e9',  // Medium blue
+                    700: '#1f4fd1',  // Dark blue
+                    800: '#1e41a8',  // Deeper blue
+                    900: '#1e3a8a',  // Darkest blue
                 },
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -112,22 +100,11 @@ export default {
 					to: {
 						height: '0'
 					}
-				},
-                'fade-in': {
-                    '0%': {
-                        opacity: '0',
-                        transform: 'translateY(10px)'
-                    },
-                    '100%': {
-                        opacity: '1',
-                        transform: 'translateY(0)'
-                    }
-                }
+				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out',
-                'fade-in': 'fade-in 0.5s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out'
 			}
 		}
 	},
