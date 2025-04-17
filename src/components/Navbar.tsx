@@ -36,12 +36,10 @@ const Navbar = () => {
       {menuItems.map((item) => (
         <NavigationMenuItem key={item.label}>
           <Link to={item.path}>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <div className="flex items-center gap-2">
-                <item.icon className="h-4 w-4" />
-                <span>{item.label}</span>
-              </div>
-            </NavigationMenuLink>
+            <div className="flex items-center gap-2 px-4 py-2 text-white hover:opacity-80 transition-opacity">
+              <item.icon className="h-4 w-4" />
+              <span>{item.label}</span>
+            </div>
           </Link>
         </NavigationMenuItem>
       ))}
@@ -51,7 +49,7 @@ const Navbar = () => {
   const renderMobileMenu = () => (
     <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="text-white hover:bg-blue-900 md:hidden">
+        <Button variant="ghost" size="icon" className="text-white hover:opacity-80 md:hidden">
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
@@ -62,7 +60,7 @@ const Navbar = () => {
               <Link to={item.path}>
                 <Button 
                   variant="ghost" 
-                  className="w-full justify-start text-white hover:bg-blue-900"
+                  className="w-full justify-start text-white hover:opacity-80 bg-transparent"
                 >
                   <item.icon className="mr-2 h-5 w-5" />
                   {item.label}
@@ -87,7 +85,7 @@ const Navbar = () => {
         {!isMobile && (
           <div className="hidden md:flex items-center">
             <NavigationMenu>
-              <NavigationMenuList>
+              <NavigationMenuList className="bg-transparent border-none">
                 {renderMenuItems()}
               </NavigationMenuList>
             </NavigationMenu>
@@ -95,18 +93,14 @@ const Navbar = () => {
         )}
         
         <div className="flex items-center space-x-2">
-          <Button variant="ghost" size="icon" className="text-white hover:bg-blue-900">
+          <Button variant="ghost" size="icon" className="text-white hover:opacity-80 bg-transparent">
             <Bell className="h-5 w-5" />
           </Button>
           
-          {isMobile ? renderMobileMenu() : (
-            <Button variant="ghost" size="icon" className="text-white hover:bg-blue-900">
-              <User className="h-5 w-5" />
-            </Button>
-          )}
-          
-          {!isMobile && (
-            <Button variant="ghost" size="icon" className="text-white hover:bg-blue-900">
+          {isMobile ? (
+            renderMobileMenu()
+          ) : (
+            <Button variant="ghost" size="icon" className="text-white hover:opacity-80 bg-transparent">
               <User className="h-5 w-5" />
             </Button>
           )}
