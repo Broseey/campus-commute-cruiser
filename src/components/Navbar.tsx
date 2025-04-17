@@ -53,7 +53,7 @@ const Navbar = () => {
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-full h-full p-0 m-0 max-w-full bg-black text-white border-none">
+      <SheetContent side="right" className="w-full h-full p-0 m-0 max-w-full bg-black text-white border-none">
         <div className="flex justify-between items-center p-6 border-b border-gray-800">
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
             <span className="text-white font-bold text-2xl tracking-tight">CampusRide</span>
