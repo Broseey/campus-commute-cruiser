@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { User, Menu, Bell, X, Home, Car, Calendar, HelpCircle, Info, LogIn } from "lucide-react";
@@ -76,14 +75,6 @@ const Navbar = () => {
               </Link>
             </SheetClose>
           ))}
-          <SheetClose asChild>
-            <Link to="/signin">
-              <div className="py-6 px-6 flex items-center hover:bg-gray-900">
-                <LogIn className="mr-5 h-7 w-7" />
-                <span className="text-2xl font-medium">Sign In</span>
-              </div>
-            </Link>
-          </SheetClose>
         </div>
       </SheetContent>
     </Sheet>
@@ -116,7 +107,7 @@ const Navbar = () => {
           {isMobile ? (
             renderMobileMenu()
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center space-x-2">
               <Link to="/signin">
                 <Button variant="outline" size="sm" className="text-white border-white hover:bg-white hover:text-black">
                   <LogIn className="h-4 w-4 mr-2" />
