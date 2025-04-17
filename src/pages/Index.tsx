@@ -4,7 +4,29 @@ import Navbar from "@/components/Navbar";
 import RideBookingForm from "@/components/RideBookingForm";
 import AvailableRides from "@/components/AvailableRides";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Car, Calendar, CreditCard, MapPin, Users } from "lucide-react";
+import { Car, Calendar, CreditCard, MapPin, Users, Navigation, Route, BookOpen } from "lucide-react";
+
+// Hero Illustration Component
+const HeroIllustration = () => (
+  <div className="relative w-full h-40 md:h-60 mb-6 overflow-hidden rounded-xl bg-gradient-to-r from-campusblue-50 to-campusblue-100">
+    <div className="absolute bottom-0 right-0 transform translate-x-16 translate-y-8">
+      <div className="w-40 h-40 bg-campusblue-200 rounded-full opacity-50"></div>
+    </div>
+    <div className="absolute top-0 left-0 transform -translate-x-8 -translate-y-8">
+      <div className="w-24 h-24 bg-campusblue-300 rounded-full opacity-30"></div>
+    </div>
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center z-10">
+      <Car className="w-16 h-16 text-campusblue-600 mb-2" />
+      <span className="text-campusblue-800 font-semibold">Campus Transportation</span>
+    </div>
+    <div className="absolute bottom-4 left-8 hidden md:block">
+      <Users className="w-10 h-10 text-campusblue-500" />
+    </div>
+    <div className="absolute top-4 right-8 hidden md:block">
+      <MapPin className="w-10 h-10 text-campusblue-500" />
+    </div>
+  </div>
+);
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("book");
@@ -14,9 +36,10 @@ const Index = () => {
       <Navbar />
       
       <div className="flex-1 px-4 py-6 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        {/* Header section with Uber-like styling */}
+        {/* Header section with illustration */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-5xl font-bold mb-3 tracking-tight">
+          <HeroIllustration />
+          <h1 className="text-3xl md:text-5xl font-bold mb-3 tracking-tight text-gray-900">
             Campus Rides Made Easy
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
@@ -49,8 +72,8 @@ const Index = () => {
                     
                     <div className="grid grid-cols-1 gap-4">
                       <div className="flex items-start">
-                        <div className="bg-campusorange-100 rounded-full p-3 mr-4">
-                          <MapPin className="h-6 w-6 text-campusorange-600" />
+                        <div className="bg-campusblue-100 rounded-full p-3 mr-4">
+                          <MapPin className="h-6 w-6 text-campusblue-600" />
                         </div>
                         <div>
                           <h3 className="font-medium">1. Choose Your Route</h3>
@@ -61,8 +84,8 @@ const Index = () => {
                       </div>
                       
                       <div className="flex items-start">
-                        <div className="bg-campusorange-100 rounded-full p-3 mr-4">
-                          <Calendar className="h-6 w-6 text-campusorange-600" />
+                        <div className="bg-campusblue-100 rounded-full p-3 mr-4">
+                          <Calendar className="h-6 w-6 text-campusblue-600" />
                         </div>
                         <div>
                           <h3 className="font-medium">2. Pick Date & Time</h3>
@@ -73,8 +96,8 @@ const Index = () => {
                       </div>
                       
                       <div className="flex items-start">
-                        <div className="bg-campusorange-100 rounded-full p-3 mr-4">
-                          <Car className="h-6 w-6 text-campusorange-600" />
+                        <div className="bg-campusblue-100 rounded-full p-3 mr-4">
+                          <Car className="h-6 w-6 text-campusblue-600" />
                         </div>
                         <div>
                           <h3 className="font-medium">3. Select Vehicle</h3>
@@ -85,8 +108,8 @@ const Index = () => {
                       </div>
                       
                       <div className="flex items-start">
-                        <div className="bg-campusorange-100 rounded-full p-3 mr-4">
-                          <CreditCard className="h-6 w-6 text-campusorange-600" />
+                        <div className="bg-campusblue-100 rounded-full p-3 mr-4">
+                          <CreditCard className="h-6 w-6 text-campusblue-600" />
                         </div>
                         <div>
                           <h3 className="font-medium">4. Confirm & Pay</h3>
@@ -103,38 +126,47 @@ const Index = () => {
           </div>
         </div>
         
-        {/* Features section */}
+        {/* Features section with illustrations */}
         <div className="mt-16">
-          <h2 className="text-2xl font-bold text-center mb-8 text-campusorange-700">Why Choose CampusRide?</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-campusblue-700">Why Choose CampusRide?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="bg-campusorange-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Users className="h-6 w-6 text-campusorange-600" />
+            <div className="bg-white p-6 rounded-lg shadow-sm relative overflow-hidden">
+              <div className="bg-campusblue-100 w-full h-24 absolute top-0 left-0 rounded-t-lg"></div>
+              <div className="relative z-10">
+                <div className="bg-white w-12 h-12 rounded-lg flex items-center justify-center mb-4 shadow-md">
+                  <Users className="h-6 w-6 text-campusblue-600" />
+                </div>
+                <h3 className="font-bold text-lg mb-2">Share & Save</h3>
+                <p className="text-gray-600">
+                  Join existing rides and split the cost with other students for affordable travel.
+                </p>
               </div>
-              <h3 className="font-bold text-lg mb-2">Share & Save</h3>
-              <p className="text-gray-600">
-                Join existing rides and split the cost with other students for affordable travel.
-              </p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="bg-campusorange-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <Car className="h-6 w-6 text-campusorange-600" />
+            <div className="bg-white p-6 rounded-lg shadow-sm relative overflow-hidden">
+              <div className="bg-campusblue-100 w-full h-24 absolute top-0 left-0 rounded-t-lg"></div>
+              <div className="relative z-10">
+                <div className="bg-white w-12 h-12 rounded-lg flex items-center justify-center mb-4 shadow-md">
+                  <Car className="h-6 w-6 text-campusblue-600" />
+                </div>
+                <h3 className="font-bold text-lg mb-2">Vehicle Options</h3>
+                <p className="text-gray-600">
+                  Choose from Sienna, Hiace bus, Long bus, or Corolla based on your needs.
+                </p>
               </div>
-              <h3 className="font-bold text-lg mb-2">Vehicle Options</h3>
-              <p className="text-gray-600">
-                Choose from Sienna, Hiace bus, Long bus, or Corolla based on your needs.
-              </p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="bg-campusorange-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                <MapPin className="h-6 w-6 text-campusorange-600" />
+            <div className="bg-white p-6 rounded-lg shadow-sm relative overflow-hidden">
+              <div className="bg-campusblue-100 w-full h-24 absolute top-0 left-0 rounded-t-lg"></div>
+              <div className="relative z-10">
+                <div className="bg-white w-12 h-12 rounded-lg flex items-center justify-center mb-4 shadow-md">
+                  <MapPin className="h-6 w-6 text-campusblue-600" />
+                </div>
+                <h3 className="font-bold text-lg mb-2">Campus Focused</h3>
+                <p className="text-gray-600">
+                  Specialized in routes between universities and major cities for students.
+                </p>
               </div>
-              <h3 className="font-bold text-lg mb-2">Campus Focused</h3>
-              <p className="text-gray-600">
-                Specialized in routes between universities and major cities for students.
-              </p>
             </div>
           </div>
         </div>
