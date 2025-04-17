@@ -44,6 +44,18 @@ export default {
                     800: '#9a3412',  // Deeper orange
                     900: '#7c2d12',  // Darkest orange
                 },
+                campus: {
+                    50: '#f0f9ff',   // Lightest blue
+                    100: '#e0f2fe',  // Very light blue
+                    200: '#bae6fd',  // Light blue
+                    300: '#7dd3fc',  // Soft blue
+                    400: '#38bdf8',  // Medium light blue
+                    500: '#0ea5e9',  // Primary blue
+                    600: '#0284c7',  // Dark medium blue
+                    700: '#0369a1',  // Dark blue
+                    800: '#075985',  // Deeper blue
+                    900: '#0c4a6e',  // Darkest blue
+                },
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
@@ -100,11 +112,22 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+                'fade-in': {
+                    '0%': {
+                        opacity: '0',
+                        transform: 'translateY(10px)'
+                    },
+                    '100%': {
+                        opacity: '1',
+                        transform: 'translateY(0)'
+                    }
+                }
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+                'fade-in': 'fade-in 0.5s ease-out'
 			}
 		}
 	},
