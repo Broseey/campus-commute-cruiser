@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { User, Menu, Bell, X, Home, Car, Calendar, HelpCircle, Info } from "lucide-react";
+import { User, Menu, Bell, X, Home, Car, Calendar, HelpCircle, Info, LogIn } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 import {
@@ -54,7 +54,7 @@ const Navbar = () => {
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-full h-full p-0 m-0 max-w-full bg-black text-black border-none data-[state=open]:duration-0">
+      <SheetContent side="right" className="w-full h-full p-0 m-0 max-w-full bg-black text-black border-none">
         <div className="flex justify-between items-center py-4 px-6 border-b border-gray-200 bg-white">
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
             <span className="text-black font-bold text-2xl tracking-tight">CampusRide</span>
@@ -76,6 +76,14 @@ const Navbar = () => {
               </Link>
             </SheetClose>
           ))}
+          <SheetClose asChild>
+            <Link to="/signin">
+              <div className="py-6 px-6 flex items-center hover:bg-gray-900">
+                <LogIn className="mr-5 h-7 w-7" />
+                <span className="text-2xl font-medium">Sign In</span>
+              </div>
+            </Link>
+          </SheetClose>
         </div>
       </SheetContent>
     </Sheet>
@@ -108,9 +116,17 @@ const Navbar = () => {
           {isMobile ? (
             renderMobileMenu()
           ) : (
-            <Button variant="ghost" size="icon" className="text-white hover:opacity-80 bg-transparent">
-              <User className="h-5 w-5" />
-            </Button>
+            <div className="flex items-center gap-2">
+              <Link to="/signin">
+                <Button variant="outline" size="sm" className="text-white border-white hover:bg-white hover:text-black">
+                  <LogIn className="h-4 w-4 mr-2" />
+                  Sign In
+                </Button>
+              </Link>
+              <Button variant="ghost" size="icon" className="text-white hover:opacity-80 bg-transparent">
+                <User className="h-5 w-5" />
+              </Button>
+            </div>
           )}
         </div>
       </div>
