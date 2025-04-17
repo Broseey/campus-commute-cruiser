@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { User, Menu, Bell, X, Home, Car, Calendar, HelpCircle, Info, LogIn } from "lucide-react";
@@ -58,11 +59,19 @@ const Navbar = () => {
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
             <span className="text-black font-bold text-2xl tracking-tight">CampusRide</span>
           </Link>
-          <SheetClose asChild>
-            <Button variant="ghost" size="icon" className="text-black hover:opacity-80 bg-transparent">
-              <X className="h-6 w-6" />
-            </Button>
-          </SheetClose>
+          <div className="flex items-center space-x-2">
+            <Link to="/signin" onClick={() => setIsMenuOpen(false)}>
+              <Button variant="default" size="sm" className="bg-black text-white hover:bg-gray-800">
+                <LogIn className="h-4 w-4 mr-1" />
+                Sign In
+              </Button>
+            </Link>
+            <SheetClose asChild>
+              <Button variant="ghost" size="icon" className="text-black hover:opacity-80 bg-transparent">
+                <X className="h-6 w-6" />
+              </Button>
+            </SheetClose>
+          </div>
         </div>
         <div className="flex flex-col pt-8 bg-black text-white">
           {menuItems.map((item) => (
@@ -109,7 +118,7 @@ const Navbar = () => {
           ) : (
             <div className="flex items-center space-x-2">
               <Link to="/signin">
-                <Button variant="outline" size="sm" className="text-white border-white hover:bg-white hover:text-black">
+                <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100">
                   <LogIn className="h-4 w-4 mr-2" />
                   Sign In
                 </Button>
