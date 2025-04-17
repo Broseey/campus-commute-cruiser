@@ -53,18 +53,18 @@ const Navbar = () => {
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-full h-full p-0 m-0 max-w-full bg-black text-white border-none">
-        <div className="flex justify-between items-center p-6 border-b border-gray-800">
+      <SheetContent side="right" className="w-full h-full p-0 m-0 max-w-full bg-black text-black border-none">
+        <div className="flex justify-between items-center p-6 border-b border-gray-200 bg-white">
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
-            <span className="text-white font-bold text-2xl tracking-tight">CampusRide</span>
+            <span className="text-black font-bold text-2xl tracking-tight">CampusRide</span>
           </Link>
           <SheetClose asChild>
-            <Button variant="ghost" size="icon" className="text-white hover:opacity-80 bg-transparent">
+            <Button variant="ghost" size="icon" className="text-black hover:opacity-80 bg-transparent">
               <X className="h-6 w-6" />
             </Button>
           </SheetClose>
         </div>
-        <div className="flex flex-col pt-8">
+        <div className="flex flex-col pt-8 bg-black text-white">
           {menuItems.map((item) => (
             <SheetClose asChild key={item.label}>
               <Link to={item.path}>
