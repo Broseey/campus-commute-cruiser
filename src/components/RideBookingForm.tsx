@@ -1,4 +1,3 @@
-
 import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -28,7 +27,6 @@ const vehicles = [
   { id: 'corolla', name: 'Corolla', capacity: 4, price: 3500 },
 ];
 
-// Function to determine if a location is a university or state
 const getLocationType = (value: string): "university" | "state" | null => {
   const universities = [
     "Babcock University, Ilishan-Remo",
@@ -67,7 +65,6 @@ const RideBookingForm = () => {
     vehicleId: ''
   });
 
-  // Determine the location types of "from" and "to"
   const fromLocationType = useMemo(() => getLocationType(formData.from), [formData.from]);
   const toLocationType = useMemo(() => getLocationType(formData.to), [formData.to]);
 
@@ -91,15 +88,12 @@ const RideBookingForm = () => {
   };
 
   const handleSubmit = () => {
-    // In a real app, this would submit the booking
     console.log('Booking submitted:', { bookingType, ...formData });
-    // Navigate to booking confirmation page
     window.location.href = '/booking-confirmation';
   };
 
   const selectedVehicle = vehicles.find(v => v.id === formData.vehicleId);
 
-  // Check if the location step is valid (one must be university, other must be state)
   const isLocationStepValid = (
     formData.from && formData.to && 
     ((fromLocationType === 'university' && toLocationType === 'state') || 
@@ -118,7 +112,6 @@ const RideBookingForm = () => {
           </TabsList>
         </Tabs>
 
-        {/* Progress indicator */}
         <div className="mb-6">
           <div className="flex justify-between">
             <div className={`flex flex-col items-center ${currentStep === 'location' ? 'text-campusorange-600' : 'text-gray-400'}`}>
@@ -142,7 +135,6 @@ const RideBookingForm = () => {
           </div>
         </div>
 
-        {/* Location Step */}
         {currentStep === 'location' && (
           <div className="space-y-6">
             <LocationSearch
@@ -166,7 +158,7 @@ const RideBookingForm = () => {
             
             <Button 
               onClick={nextStep} 
-              className="w-full bg-black text-white hover:bg-neutral-800" 
+              className="w-full" 
               disabled={!isLocationStepValid}
             >
               Next
@@ -174,7 +166,6 @@ const RideBookingForm = () => {
           </div>
         )}
 
-        {/* Date and Time Step */}
         {currentStep === 'date' && (
           <div className="space-y-4">
             <div className="relative">
@@ -229,7 +220,6 @@ const RideBookingForm = () => {
           </div>
         )}
 
-        {/* Vehicle Step */}
         {currentStep === 'vehicle' && (
           <div className="space-y-4">
             <div className="relative">
