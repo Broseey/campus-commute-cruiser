@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { User, Menu, Home, Car, Calendar, HelpCircle, Info, LogIn, X } from "lucide-react";
@@ -61,7 +60,7 @@ const Navbar = () => {
           </Link>
           <div className="flex items-center space-x-2">
             <Link to="/signin" onClick={() => setIsMenuOpen(false)}>
-              <Button variant="default" size="sm" className="bg-neutral-600 text-white hover:bg-neutral-700">
+              <Button variant="default" size="sm" className="bg-black text-white hover:bg-neutral-800">
                 <LogIn className="h-4 w-4 mr-1" />
                 Sign In
               </Button>
