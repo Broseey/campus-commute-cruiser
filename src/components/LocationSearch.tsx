@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { 
@@ -97,22 +98,22 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
   return (
     <div className="relative space-y-3">
       <div className="flex items-center space-x-2">
-        <div className={`flex items-center justify-center w-8 h-8 rounded-full ${type === "from" ? "bg-green-100" : "bg-purple-100"}`}>
+        <div className={`flex items-center justify-center w-8 h-8 rounded-full ${type === "from" ? "bg-black" : "bg-gray-800"}`}>
           {type === "from" ? (
-            <ArrowRight className="h-4 w-4 text-green-600" />
+            <ArrowRight className="h-4 w-4 text-white" />
           ) : (
-            <ArrowLeft className="h-4 w-4 text-purple-600" />
+            <ArrowLeft className="h-4 w-4 text-gray-300" />
           )}
         </div>
         
         <div className="flex-1">
-          <label htmlFor={`location-${type}`} className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor={`location-${type}`} className="block text-sm font-medium text-gray-900 mb-1">
             {type === "from" ? "Departing From" : "Going To"}
           </label>
           
           <div className="flex items-center gap-2 mb-2">
             <Button 
-              variant={locationType === "university" ? "default" : "outline"} 
+              variant={locationType === "university" ? undefined : "outline"} 
               size="sm"
               onClick={() => {
                 if (otherLocationType !== "university") {
@@ -121,13 +122,13 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
                 }
               }}
               disabled={otherLocationType === "university"}
-              className="h-8 px-3 py-1"
+              className={`${locationType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed`}
             >
-              <University className="h-4 w-4 mr-1" />
+              <University className={`h-4 w-4 mr-1 ${locationType === "university" ? "text-white" : "text-black"}`} />
               University
             </Button>
             <Button 
-              variant={locationType === "state" ? "default" : "outline"} 
+              variant={locationType === "state" ? undefined : "outline"} 
               size="sm"
               onClick={() => {
                 if (otherLocationType !== "state") {
@@ -136,9 +137,9 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
                 }
               }}
               disabled={otherLocationType === "state"}
-              className="h-8 px-3 py-1"
+              className={`${locationType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed`}
             >
-              <Flag className="h-4 w-4 mr-1" />
+              <Flag className={`h-4 w-4 mr-1 ${locationType === "state" ? "text-white" : "text-black"}`} />
               State
             </Button>
           </div>
@@ -146,7 +147,7 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
           <Select value={value} onValueChange={handleValueChange}>
             <SelectTrigger id={`location-${type}`} className="w-full">
               <div className="flex items-center">
-                <MapPin className="h-4 w-4 mr-2 text-gray-500" />
+                <MapPin className="h-4 w-4 mr-2 text-gray-600" />
                 <SelectValue placeholder={type === "from" ? `Select departure ${locationType}` : `Select destination ${locationType}`} />
               </div>
             </SelectTrigger>
@@ -186,3 +187,4 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
 };
 
 export default LocationSearch;
+
