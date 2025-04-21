@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { 
@@ -98,16 +97,16 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
   return (
     <div className="relative space-y-3">
       <div className="flex items-center space-x-2">
-        <div className={`flex items-center justify-center w-8 h-8 rounded-full border border-gray-300 ${type === "from" ? "bg-white" : "bg-white"}`}>
+        <div className={`flex items-center justify-center w-8 h-8 rounded-full ${type === "from" ? "bg-green-100" : "bg-purple-100"}`}>
           {type === "from" ? (
-            <ArrowRight className="h-4 w-4 text-black" />
+            <ArrowRight className="h-4 w-4 text-green-600" />
           ) : (
-            <ArrowLeft className="h-4 w-4 text-gray-700" />
+            <ArrowLeft className="h-4 w-4 text-purple-600" />
           )}
         </div>
         
         <div className="flex-1">
-          <label htmlFor={`location-${type}`} className="block text-sm font-medium text-gray-800 mb-1">
+          <label htmlFor={`location-${type}`} className="block text-sm font-medium text-gray-700 mb-1">
             {type === "from" ? "Departing From" : "Going To"}
           </label>
           
@@ -122,11 +121,7 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
                 }
               }}
               disabled={otherLocationType === "university"}
-              className={`h-8 px-3 py-1 font-semibold border-black ${
-                locationType === "university"
-                  ? "bg-black text-white border border-black shadow-md"
-                  : "bg-white text-black border border-gray-300"
-              }`}
+              className="h-8 px-3 py-1"
             >
               <University className="h-4 w-4 mr-1" />
               University
@@ -141,11 +136,7 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
                 }
               }}
               disabled={otherLocationType === "state"}
-              className={`h-8 px-3 py-1 font-semibold border-black ${
-                locationType === "state"
-                  ? "bg-black text-white border border-black shadow-md"
-                  : "bg-white text-black border border-gray-300"
-              }`}
+              className="h-8 px-3 py-1"
             >
               <Flag className="h-4 w-4 mr-1" />
               State
@@ -153,7 +144,7 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
           </div>
           
           <Select value={value} onValueChange={handleValueChange}>
-            <SelectTrigger id={`location-${type}`} className="w-full bg-white border-gray-300">
+            <SelectTrigger id={`location-${type}`} className="w-full">
               <div className="flex items-center">
                 <MapPin className="h-4 w-4 mr-2 text-gray-500" />
                 <SelectValue placeholder={type === "from" ? `Select departure ${locationType}` : `Select destination ${locationType}`} />
@@ -195,4 +186,3 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
 };
 
 export default LocationSearch;
-
