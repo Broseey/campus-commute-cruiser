@@ -103,7 +103,7 @@ const RideBookingForm = () => {
   return (
     <Card className="w-full max-w-md shadow-lg">
       <div className="p-6">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Book Your Campus Ride</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Book Your Campus Ride</h2>
         
         <Tabs value={bookingType} onValueChange={(v) => setBookingType(v as 'join' | 'full')} className="mb-6">
           <TabsList className="grid w-full grid-cols-2">
@@ -114,22 +114,22 @@ const RideBookingForm = () => {
 
         <div className="mb-6">
           <div className="flex justify-between">
-            <div className={`flex flex-col items-center ${currentStep === 'location' ? 'text-campusorange-600' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'location' ? 'bg-campusorange-600 text-white' : 'bg-gray-200'}`}>1</div>
+            <div className={`flex flex-col items-center ${currentStep === 'location' ? 'text-black' : 'text-gray-400'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'location' ? 'bg-black text-white' : 'bg-gray-200'}`}>1</div>
               <span className="text-xs">Location</span>
             </div>
-            <div className={`flex flex-col items-center ${currentStep === 'date' ? 'text-campusorange-600' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'date' ? 'bg-campusorange-600 text-white' : 'bg-gray-200'}`}>2</div>
+            <div className={`flex flex-col items-center ${currentStep === 'date' ? 'text-black' : 'text-gray-400'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'date' ? 'bg-black text-white' : 'bg-gray-200'}`}>2</div>
               <span className="text-xs">Date & Time</span>
             </div>
-            <div className={`flex flex-col items-center ${currentStep === 'vehicle' ? 'text-campusorange-600' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'vehicle' ? 'bg-campusorange-600 text-white' : 'bg-gray-200'}`}>3</div>
+            <div className={`flex flex-col items-center ${currentStep === 'vehicle' ? 'text-black' : 'text-gray-400'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'vehicle' ? 'bg-black text-white' : 'bg-gray-200'}`}>3</div>
               <span className="text-xs">Vehicle</span>
             </div>
           </div>
           <div className="mt-2 h-1 bg-gray-200 rounded-full">
             <div 
-              className="h-full bg-campusorange-600 rounded-full transition-all" 
+              className="h-full bg-black rounded-full transition-all" 
               style={{ width: currentStep === 'location' ? '33.3%' : currentStep === 'date' ? '66.6%' : '100%' }}
             ></div>
           </div>
@@ -158,7 +158,7 @@ const RideBookingForm = () => {
             
             <Button 
               onClick={nextStep} 
-              className="w-full" 
+              className="w-full bg-black text-white hover:bg-gray-900" 
               disabled={!isLocationStepValid}
             >
               Next
@@ -260,7 +260,7 @@ const RideBookingForm = () => {
               </Button>
               <Button 
                 onClick={handleSubmit} 
-                className="w-1/2" 
+                className="w-1/2 bg-black text-white hover:bg-gray-900" 
                 disabled={!formData.vehicleId}
               >
                 Book Now
