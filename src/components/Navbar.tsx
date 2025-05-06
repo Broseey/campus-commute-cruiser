@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { User, Menu, Home, Car, Calendar, HelpCircle, Info, LogIn, X } from "lucide-react";
@@ -98,7 +99,7 @@ const Navbar = () => {
         </div>
         
         {!isMobile && (
-          <div className="hidden md:flex items-center">
+          <div className="hidden lg:flex items-center">
             <NavigationMenu>
               <NavigationMenuList className="bg-transparent border-none">
                 {renderMenuItems()}

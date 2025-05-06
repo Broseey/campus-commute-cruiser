@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, MapPin, Users, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Sample ride data
 const sampleRides = [
@@ -86,13 +87,14 @@ const AvailableRides = () => {
                 <div className="text-xl font-bold text-campusorange-700 mb-1">
                   ₦{ride.price}
                 </div>
-                <Button 
-                  size="sm" 
-                  className="bg-campusorange-700 hover:bg-campusorange-800"
-                  onClick={() => window.location.href = '/booking-confirmation'}
-                >
-                  Book Seat
-                </Button>
+                <Link to="/signin">
+                  <Button 
+                    size="sm" 
+                    className="bg-campusorange-700 hover:bg-campusorange-800"
+                  >
+                    Book Seat
+                  </Button>
+                </Link>
               </div>
             </div>
           </Card>
