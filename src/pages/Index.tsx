@@ -163,17 +163,19 @@ const Index = () => {
       </footer>
       
       {/* Add global styles for special effects */}
-      <style jsx global>{`
-        @keyframes glow {
-          0% { box-shadow: 0 0 0 rgba(255, 153, 0, 0.4); }
-          50% { box-shadow: 0 0 10px rgba(255, 153, 0, 0.7); }
-          100% { box-shadow: 0 0 0 rgba(255, 153, 0, 0.4); }
-        }
-        
-        .hover\:shadow-glow-orange:hover {
-          animation: glow 2s infinite;
-        }
-      `}</style>
+      <style>
+        {`
+          @keyframes glow {
+            0% { box-shadow: 0 0 0 rgba(255, 153, 0, 0.4); }
+            50% { box-shadow: 0 0 10px rgba(255, 153, 0, 0.7); }
+            100% { box-shadow: 0 0 0 rgba(255, 153, 0, 0.4); }
+          }
+          
+          .hover\\:shadow-glow-orange:hover {
+            animation: glow 2s infinite;
+          }
+        `}
+      </style>
     </div>
   );
 };

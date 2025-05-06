@@ -76,13 +76,15 @@ const RoutePreview: React.FC<RoutePreviewProps> = ({ from, to, fromType, toType 
       </div>
       
       {/* Add animation styles */}
-      <style jsx>{`
-        @keyframes dash {
-          to {
-            stroke-dashoffset: -16;
+      <style>
+        {`
+          @keyframes dash {
+            to {
+              stroke-dashoffset: -16;
+            }
           }
-        }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };
