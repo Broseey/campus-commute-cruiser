@@ -66,14 +66,13 @@ const Navbar = () => {
           <div className="flex items-center space-x-2">
             {isAuthenticated ? (
               <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
-                <Button variant="default" size="sm" className="bg-black text-white hover:bg-neutral-800">
-                  <User className="h-4 w-4 mr-1" />
+                <Button variant="default" size="sm" className="bg-accent text-white hover:bg-accent-dark">
                   Dashboard
                 </Button>
               </Link>
             ) : (
               <Link to="/signin" onClick={() => setIsMenuOpen(false)}>
-                <Button variant="default" size="sm" className="bg-black text-white hover:bg-neutral-800">
+                <Button variant="default" size="sm" className="bg-accent text-white hover:bg-accent-dark">
                   <LogIn className="h-4 w-4 mr-1" />
                   Sign In
                 </Button>
@@ -103,6 +102,16 @@ const Navbar = () => {
                 <div className="py-6 px-6 flex items-center hover:bg-gray-900">
                   <User className="mr-5 h-7 w-7" />
                   <span className="text-2xl font-medium">Dashboard</span>
+                </div>
+              </Link>
+            </SheetClose>
+          )}
+          {!isAuthenticated && (
+            <SheetClose asChild>
+              <Link to="/signin">
+                <div className="py-6 px-6 flex items-center hover:bg-gray-900 mt-auto border-t border-gray-800">
+                  <LogIn className="mr-5 h-7 w-7" />
+                  <span className="text-2xl font-medium">Sign In</span>
                 </div>
               </Link>
             </SheetClose>
@@ -138,22 +147,18 @@ const Navbar = () => {
             <div className="flex items-center space-x-2">
               {isAuthenticated ? (
                 <Link to="/dashboard">
-                  <Button variant="default" size="sm" className="bg-neutral-600 text-white hover:bg-neutral-700">
-                    <User className="h-4 w-4 mr-2" />
+                  <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100">
                     Dashboard
                   </Button>
                 </Link>
               ) : (
                 <Link to="/signin">
-                  <Button variant="default" size="sm" className="bg-neutral-600 text-white hover:bg-neutral-700">
+                  <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100">
                     <LogIn className="h-4 w-4 mr-2" />
                     Sign In
                   </Button>
                 </Link>
               )}
-              <Button variant="ghost" size="icon" className="text-white hover:opacity-80 bg-transparent">
-                <User className="h-5 w-5" />
-              </Button>
             </div>
           )}
         </div>
