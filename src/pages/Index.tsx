@@ -1,12 +1,12 @@
 
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import RideBookingForm from "@/components/RideBookingForm";
 import AvailableRides from "@/components/AvailableRides";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Car, Calendar, CreditCard, MapPin, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import RideBookingFormNew from "@/components/RideBookingFormNew";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("book");
@@ -36,7 +36,7 @@ const Index = () => {
         <div className="flex flex-col md:flex-row gap-8">
           {/* Left column - Booking form */}
           <div className="w-full md:w-1/2 flex justify-center">
-            <RideBookingForm />
+            <RideBookingFormNew />
           </div>
           
           {/* Right column - Available rides */}

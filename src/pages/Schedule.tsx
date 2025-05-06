@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Clock, MapPin } from "lucide-react";
 import { format } from "date-fns";
+import RideBookingFormNew from "@/components/RideBookingFormNew";
 
 const Schedule = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
@@ -38,38 +39,7 @@ const Schedule = () => {
         
         <div className="flex flex-col md:flex-row gap-6">
           <div className="md:w-1/2">
-            <Card>
-              <CardHeader>
-                <CardTitle>Select Date & Time</CardTitle>
-                <CardDescription>Choose when you'd like to travel</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    className="rounded-md border mx-auto"
-                  />
-                  
-                  <div>
-                    <h3 className="font-medium mb-3">Available Time Slots</h3>
-                    <div className="grid grid-cols-4 gap-2">
-                      {timeSlots.map((time) => (
-                        <Button
-                          key={time}
-                          variant={selectedTimeSlot === time ? "default" : "outline"}
-                          className={selectedTimeSlot === time ? "bg-black text-white" : "border-gray-300"}
-                          onClick={() => setSelectedTimeSlot(time)}
-                        >
-                          {time}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <RideBookingFormNew />
           </div>
           
           <div className="md:w-1/2">
@@ -77,8 +47,7 @@ const Schedule = () => {
               <CardHeader>
                 <CardTitle>Popular Routes</CardTitle>
                 <CardDescription>
-                  {date ? `Available on ${format(date, "PPP")}` : "Select a date"}
-                  {selectedTimeSlot ? ` at ${selectedTimeSlot}` : ""}
+                  Frequently traveled routes
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -98,34 +67,12 @@ const Schedule = () => {
                       <Button
                         size="sm"
                         className="bg-black text-white hover:bg-neutral-800"
-                        disabled={!date || !selectedTimeSlot}
                       >
                         Select
                       </Button>
                     </div>
                   ))}
-                  
-                  {(!date || !selectedTimeSlot) && (
-                    <p className="text-center text-sm text-amber-600 mt-4">
-                      Please select both a date and time to view available rides
-                    </p>
-                  )}
                 </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="mt-6">
-              <CardHeader>
-                <CardTitle>Custom Route</CardTitle>
-                <CardDescription>Need a different route?</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button 
-                  className="w-full bg-black text-white hover:bg-neutral-800"
-                  disabled={!date || !selectedTimeSlot}
-                >
-                  Create Custom Booking
-                </Button>
               </CardContent>
             </Card>
           </div>
