@@ -24,6 +24,10 @@ const Navbar = () => {
   const isMobile = useIsMobile();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // For demo purposes, let's assume the user is authenticated
+  // In a real application, you would check authentication status
+  const isAuthenticated = false;
+
   const menuItems = [
     { icon: Home, label: "Home", path: "/" },
     { icon: Car, label: "My Rides", path: "/my-rides" },
@@ -60,12 +64,21 @@ const Navbar = () => {
             <span className="text-black font-bold text-2xl tracking-tight">CampusRide</span>
           </Link>
           <div className="flex items-center space-x-2">
-            <Link to="/signin" onClick={() => setIsMenuOpen(false)}>
-              <Button variant="default" size="sm" className="bg-black text-white hover:bg-neutral-800">
-                <LogIn className="h-4 w-4 mr-1" />
-                Sign In
-              </Button>
-            </Link>
+            {isAuthenticated ? (
+              <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
+                <Button variant="default" size="sm" className="bg-black text-white hover:bg-neutral-800">
+                  <User className="h-4 w-4 mr-1" />
+                  Dashboard
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/signin" onClick={() => setIsMenuOpen(false)}>
+                <Button variant="default" size="sm" className="bg-black text-white hover:bg-neutral-800">
+                  <LogIn className="h-4 w-4 mr-1" />
+                  Sign In
+                </Button>
+              </Link>
+            )}
             <SheetClose asChild>
               <Button variant="ghost" size="icon" className="text-black hover:opacity-80 bg-transparent">
                 <X className="h-6 w-6" />
@@ -84,6 +97,16 @@ const Navbar = () => {
               </Link>
             </SheetClose>
           ))}
+          {isAuthenticated && (
+            <SheetClose asChild>
+              <Link to="/dashboard">
+                <div className="py-6 px-6 flex items-center hover:bg-gray-900">
+                  <User className="mr-5 h-7 w-7" />
+                  <span className="text-2xl font-medium">Dashboard</span>
+                </div>
+              </Link>
+            </SheetClose>
+          )}
         </div>
       </SheetContent>
     </Sheet>
@@ -113,12 +136,21 @@ const Navbar = () => {
             renderMobileMenu()
           ) : (
             <div className="flex items-center space-x-2">
-              <Link to="/signin">
-                <Button variant="default" size="sm" className="bg-neutral-600 text-white hover:bg-neutral-700">
-                  <LogIn className="h-4 w-4 mr-2" />
-                  Sign In
-                </Button>
-              </Link>
+              {isAuthenticated ? (
+                <Link to="/dashboard">
+                  <Button variant="default" size="sm" className="bg-neutral-600 text-white hover:bg-neutral-700">
+                    <User className="h-4 w-4 mr-2" />
+                    Dashboard
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/signin">
+                  <Button variant="default" size="sm" className="bg-neutral-600 text-white hover:bg-neutral-700">
+                    <LogIn className="h-4 w-4 mr-2" />
+                    Sign In
+                  </Button>
+                </Link>
+              )}
               <Button variant="ghost" size="icon" className="text-white hover:opacity-80 bg-transparent">
                 <User className="h-5 w-5" />
               </Button>

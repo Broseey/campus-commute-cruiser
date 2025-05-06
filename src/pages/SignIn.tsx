@@ -53,7 +53,8 @@ const SignIn = () => {
     // This would be replaced with actual authentication logic
     setTimeout(() => {
       setIsLoading(false);
-      navigate("/");
+      // Redirect to dashboard instead of home page
+      navigate("/dashboard");
       console.log(values);
     }, 1500);
   };
