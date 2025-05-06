@@ -10,6 +10,9 @@ import BookingConfirmation from "./pages/BookingConfirmation";
 import SignIn from "./pages/SignIn";
 import HowItWorks from "./pages/HowItWorks";
 import Dashboard from "./pages/Dashboard";
+import MyRides from "./pages/MyRides";
+import Schedule from "./pages/Schedule";
+import About from "./pages/About";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +28,9 @@ const App = () => (
           <Route path="/signin" element={<SignIn />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/my-rides" element={<MyRides />} />
+          <Route path="/schedule" element={<Schedule />} />
+          <Route path="/about" element={<About />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
