@@ -8,6 +8,7 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
+  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
@@ -66,12 +67,14 @@ const Navbar = () => {
             {isAuthenticated ? (
               <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
                 <Button variant="default" size="sm" className="bg-black text-white hover:bg-neutral-800">
+                  <User className="h-4 w-4 mr-1" />
                   Dashboard
                 </Button>
               </Link>
             ) : (
               <Link to="/signin" onClick={() => setIsMenuOpen(false)}>
                 <Button variant="default" size="sm" className="bg-black text-white hover:bg-neutral-800">
+                  <LogIn className="h-4 w-4 mr-1" />
                   Sign In
                 </Button>
               </Link>
@@ -135,17 +138,22 @@ const Navbar = () => {
             <div className="flex items-center space-x-2">
               {isAuthenticated ? (
                 <Link to="/dashboard">
-                  <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100">
+                  <Button variant="default" size="sm" className="bg-neutral-600 text-white hover:bg-neutral-700">
+                    <User className="h-4 w-4 mr-2" />
                     Dashboard
                   </Button>
                 </Link>
               ) : (
                 <Link to="/signin">
-                  <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100">
+                  <Button variant="default" size="sm" className="bg-neutral-600 text-white hover:bg-neutral-700">
+                    <LogIn className="h-4 w-4 mr-2" />
                     Sign In
                   </Button>
                 </Link>
               )}
+              <Button variant="ghost" size="icon" className="text-white hover:opacity-80 bg-transparent">
+                <User className="h-5 w-5" />
+              </Button>
             </div>
           )}
         </div>
