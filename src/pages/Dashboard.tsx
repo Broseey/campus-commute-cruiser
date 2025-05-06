@@ -19,7 +19,8 @@ import {
   CreditCard,
   MessageCircle,
   ChevronRight,
-  MapPin
+  MapPin,
+  Home
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { 
