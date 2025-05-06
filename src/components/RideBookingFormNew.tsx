@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { MapPin, Calendar, Clock, Car, Users } from "lucide-react";
+import { MapPin, Calendar, Clock, Car, Users, ArrowUpRight, ArrowDownLeft } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import RoutePreview from "@/components/RoutePreview";
 
 type BookingStep = 'location' | 'date' | 'vehicle';
 type BookingType = 'join' | 'full';
@@ -43,8 +44,8 @@ const nigerianLocations = {
     "Babcock University, Ilishan-Remo",
     "Afe Babalola University, Ado-Ekiti",
     "Redeemer's University, Ede",
-    "Covenant University, Ota",
     "Bowen University, Iwo",
+    "Covenant University, Ota",
     "Lead City University, Ibadan",
     "Pan-Atlantic University, Lagos",
     "Landmark University, Omu-Aran",
@@ -78,6 +79,7 @@ type BookingFormValues = z.infer<typeof bookingFormSchema>;
 const RideBookingFormNew = () => {
   const [currentStep, setCurrentStep] = useState<BookingStep>('location');
   const [bookingType, setBookingType] = useState<BookingType>('join');
+  const [showPreview, setShowPreview] = useState(false);
   
   // Initialize the form with React Hook Form
   const form = useForm<BookingFormValues>({
@@ -109,6 +111,11 @@ const RideBookingFormNew = () => {
     );
   };
   
+  useEffect(() => {
+    // Show preview when both from and to are selected
+    setShowPreview(watchFrom && watchTo ? true : false);
+  }, [watchFrom, watchTo]);
+
   const isDateStepValid = form.watch("date") && form.watch("time");
   
   // Navigation functions
@@ -145,35 +152,35 @@ const RideBookingFormNew = () => {
   };
 
   return (
-    <Card className="w-full max-w-md shadow-lg">
+    <Card className="w-full max-w-md shadow-lg hover:shadow-xl transition-all duration-300">
       <div className="p-6">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Book Your Campus Ride</h2>
         
         <Tabs value={bookingType} onValueChange={(v) => setBookingType(v as BookingType)} className="mb-6">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="join">Join a Ride</TabsTrigger>
-            <TabsTrigger value="full">Book Full Vehicle</TabsTrigger>
+            <TabsTrigger value="join" className="data-[state=active]:bg-black data-[state=active]:text-white hover:bg-gray-100 transition-colors">Join a Ride</TabsTrigger>
+            <TabsTrigger value="full" className="data-[state=active]:bg-black data-[state=active]:text-white hover:bg-gray-100 transition-colors">Book Entire Ride</TabsTrigger>
           </TabsList>
         </Tabs>
 
         <div className="mb-6">
           <div className="flex justify-between">
             <div className={`flex flex-col items-center ${currentStep === 'location' ? 'text-black' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'location' ? 'bg-black text-white' : 'bg-gray-200'}`}>1</div>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'location' ? 'bg-black text-white' : 'bg-gray-200'} transition-all duration-300`}>1</div>
               <span className="text-xs">Location</span>
             </div>
             <div className={`flex flex-col items-center ${currentStep === 'date' ? 'text-black' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'date' ? 'bg-black text-white' : 'bg-gray-200'}`}>2</div>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'date' ? 'bg-black text-white' : 'bg-gray-200'} transition-all duration-300`}>2</div>
               <span className="text-xs">Date & Time</span>
             </div>
             <div className={`flex flex-col items-center ${currentStep === 'vehicle' ? 'text-black' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'vehicle' ? 'bg-black text-white' : 'bg-gray-200'}`}>3</div>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'vehicle' ? 'bg-black text-white' : 'bg-gray-200'} transition-all duration-300`}>3</div>
               <span className="text-xs">Vehicle</span>
             </div>
           </div>
           <div className="mt-2 h-1 bg-gray-200 rounded-full">
             <div 
-              className="h-full bg-black rounded-full transition-all" 
+              className="h-full bg-black rounded-full transition-all duration-500" 
               style={{ width: currentStep === 'location' ? '33.3%' : currentStep === 'date' ? '66.6%' : '100%' }}
             ></div>
           </div>
@@ -186,8 +193,8 @@ const RideBookingFormNew = () => {
                 {/* From Location */}
                 <div className="space-y-3">
                   <div className="flex items-center space-x-2">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-black">
-                      <MapPin className="h-4 w-4 text-white" />
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-campusorange-600">
+                      <ArrowUpRight className="h-4 w-4 text-white" />
                     </div>
                     
                     <div className="flex-1">
@@ -201,7 +208,7 @@ const RideBookingFormNew = () => {
                           variant={watchFromType === "university" ? undefined : "outline"} 
                           size="sm"
                           onClick={() => toggleLocationType("fromType", "university")}
-                          className={`${watchFromType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white`}
+                          className={`${watchFromType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
                         >
                           University
                         </Button>
@@ -210,7 +217,7 @@ const RideBookingFormNew = () => {
                           variant={watchFromType === "state" ? undefined : "outline"} 
                           size="sm"
                           onClick={() => toggleLocationType("fromType", "state")}
-                          className={`${watchFromType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white`}
+                          className={`${watchFromType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
                         >
                           State
                         </Button>
@@ -258,7 +265,7 @@ const RideBookingFormNew = () => {
                         type="button"
                         size="sm"
                         variant="ghost"
-                        className="h-6 text-xs"
+                        className="h-6 text-xs hover:bg-gray-100 transition-colors"
                         onClick={() => form.setValue("from", "")}
                       >
                         Clear
@@ -270,8 +277,8 @@ const RideBookingFormNew = () => {
                 {/* To Location */}
                 <div className="space-y-3">
                   <div className="flex items-center space-x-2">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-800">
-                      <MapPin className="h-4 w-4 text-white" />
+                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-black">
+                      <ArrowDownLeft className="h-4 w-4 text-white" />
                     </div>
                     
                     <div className="flex-1">
@@ -285,7 +292,7 @@ const RideBookingFormNew = () => {
                           variant={watchToType === "university" ? undefined : "outline"} 
                           size="sm"
                           onClick={() => toggleLocationType("toType", "university")}
-                          className={`${watchToType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white`}
+                          className={`${watchToType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
                         >
                           University
                         </Button>
@@ -294,7 +301,7 @@ const RideBookingFormNew = () => {
                           variant={watchToType === "state" ? undefined : "outline"} 
                           size="sm"
                           onClick={() => toggleLocationType("toType", "state")}
-                          className={`${watchToType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white`}
+                          className={`${watchToType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
                         >
                           State
                         </Button>
@@ -342,7 +349,7 @@ const RideBookingFormNew = () => {
                         type="button"
                         size="sm"
                         variant="ghost"
-                        className="h-6 text-xs"
+                        className="h-6 text-xs hover:bg-gray-100 transition-colors"
                         onClick={() => form.setValue("to", "")}
                       >
                         Clear
@@ -350,6 +357,19 @@ const RideBookingFormNew = () => {
                     </div>
                   )}
                 </div>
+                
+                {/* Route Preview */}
+                {showPreview && isLocationStepValid() && (
+                  <div className="mt-4 p-3 bg-gray-50 rounded-lg border">
+                    <p className="text-sm font-medium mb-2">Route Preview</p>
+                    <RoutePreview 
+                      from={watchFrom} 
+                      to={watchTo} 
+                      fromType={watchFromType} 
+                      toType={watchToType} 
+                    />
+                  </div>
+                )}
                 
                 {(watchFrom && watchTo && !isLocationStepValid()) && (
                   <div className="text-destructive text-sm mt-2">
@@ -360,7 +380,7 @@ const RideBookingFormNew = () => {
                 <Button 
                   type="button"
                   onClick={nextStep} 
-                  className="w-full bg-black text-white hover:bg-gray-900" 
+                  className="w-full bg-black text-white hover:bg-gray-900 transform active:scale-95 transition-transform duration-200" 
                   disabled={!isLocationStepValid()}
                 >
                   Next
@@ -382,7 +402,7 @@ const RideBookingFormNew = () => {
                           <FormControl>
                             <Button
                               variant="outline"
-                              className={`w-full bg-white flex justify-between items-center pl-3 text-left font-normal ${!field.value && "text-muted-foreground"}`}
+                              className={`w-full bg-white flex justify-between items-center pl-3 text-left font-normal hover:bg-gray-50 transition-colors ${!field.value && "text-muted-foreground"}`}
                             >
                               <div className="flex items-center">
                                 <Calendar className="mr-2 h-5 w-5 text-gray-500" />
@@ -420,7 +440,7 @@ const RideBookingFormNew = () => {
                         value={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="flex items-center">
+                          <SelectTrigger className="flex items-center hover:border-black transition-colors">
                             <Clock className="mr-2 h-5 w-5 text-gray-500" />
                             <SelectValue placeholder="Select a time" />
                           </SelectTrigger>
@@ -449,7 +469,7 @@ const RideBookingFormNew = () => {
                         value={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="flex items-center">
+                          <SelectTrigger className="flex items-center hover:border-black transition-colors">
                             <Users className="mr-2 h-5 w-5 text-gray-500" />
                             <SelectValue placeholder="Select passengers" />
                           </SelectTrigger>
@@ -472,14 +492,14 @@ const RideBookingFormNew = () => {
                     type="button"
                     variant="outline" 
                     onClick={prevStep} 
-                    className="w-1/2"
+                    className="w-1/2 hover:bg-gray-100 transition-colors"
                   >
                     Back
                   </Button>
                   <Button 
                     type="button"
                     onClick={nextStep} 
-                    className="w-1/2 bg-black text-white hover:bg-gray-900" 
+                    className="w-1/2 bg-black text-white hover:bg-gray-900 transform active:scale-95 transition-transform duration-200" 
                     disabled={!isDateStepValid}
                   >
                     Next
@@ -503,7 +523,7 @@ const RideBookingFormNew = () => {
                         value={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="flex items-center">
+                          <SelectTrigger className="flex items-center hover:border-black transition-colors">
                             <Car className="mr-2 h-5 w-5 text-gray-500" />
                             <SelectValue placeholder="Select a vehicle" />
                           </SelectTrigger>
@@ -522,7 +542,7 @@ const RideBookingFormNew = () => {
                 />
 
                 {selectedVehicle && (
-                  <div className="p-4 border rounded-lg bg-gray-50">
+                  <div className="p-4 border rounded-lg bg-gray-50 hover:shadow-md transition-all duration-300">
                     <h3 className="font-semibold">{selectedVehicle.name}</h3>
                     <div className="text-sm text-gray-600 mt-1">
                       <p>Capacity: {selectedVehicle.capacity} passengers</p>
@@ -539,13 +559,13 @@ const RideBookingFormNew = () => {
                     type="button"
                     variant="outline" 
                     onClick={prevStep} 
-                    className="w-1/2"
+                    className="w-1/2 hover:bg-gray-100 transition-colors"
                   >
                     Back
                   </Button>
                   <Button 
                     type="submit" 
-                    className="w-1/2 bg-black text-white hover:bg-gray-900" 
+                    className="w-1/2 bg-black text-white hover:bg-gray-900 transform active:scale-95 transition-transform duration-200 shadow-md hover:shadow-lg" 
                     disabled={!watchVehicleId}
                   >
                     Book Now

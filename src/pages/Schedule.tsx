@@ -43,7 +43,7 @@ const Schedule = () => {
           </div>
           
           <div className="md:w-1/2">
-            <Card>
+            <Card className="hover:shadow-lg transition-all duration-300">
               <CardHeader>
                 <CardTitle>Popular Routes</CardTitle>
                 <CardDescription>
@@ -55,7 +55,7 @@ const Schedule = () => {
                   {popularRoutes.map((route, index) => (
                     <div 
                       key={index}
-                      className="flex justify-between items-center p-4 border rounded-md hover:bg-gray-50 cursor-pointer"
+                      className="flex justify-between items-center p-4 border rounded-md hover:bg-gray-50 cursor-pointer transition-all duration-200 hover:shadow-md"
                     >
                       <div className="flex items-start">
                         <MapPin className="h-5 w-5 mr-3 mt-1 text-gray-500" />
@@ -66,7 +66,7 @@ const Schedule = () => {
                       </div>
                       <Button
                         size="sm"
-                        className="bg-black text-white hover:bg-neutral-800"
+                        className="bg-black text-white hover:bg-neutral-800 transform active:scale-95 transition-transform duration-200"
                       >
                         Select
                       </Button>
