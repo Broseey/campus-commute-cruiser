@@ -5,6 +5,8 @@ import RideBookingForm from "@/components/RideBookingForm";
 import AvailableRides from "@/components/AvailableRides";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Car, Calendar, CreditCard, MapPin, Users } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("book");
@@ -19,10 +21,15 @@ const Index = () => {
           <h1 className="text-3xl md:text-5xl font-bold mb-3 tracking-tight">
             Campus Rides Made Easy
           </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-6">
             Book affordable rides to and from your university with just a few clicks.
             Join existing rides or book a full vehicle for your journey.
           </p>
+          <Link to="/how-it-works">
+            <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white">
+              Learn how it works
+            </Button>
+          </Link>
         </div>
         
         {/* Main content */}
@@ -94,6 +101,14 @@ const Index = () => {
                             Review your booking and make payment to confirm.
                           </p>
                         </div>
+                      </div>
+                      
+                      <div className="mt-4 text-center">
+                        <Link to="/how-it-works">
+                          <Button variant="outline" size="sm" className="border-black text-black hover:bg-black hover:text-white">
+                            Learn more
+                          </Button>
+                        </Link>
                       </div>
                     </div>
                   </div>

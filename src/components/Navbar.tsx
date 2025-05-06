@@ -27,7 +27,7 @@ const Navbar = () => {
     { icon: Home, label: "Home", path: "/" },
     { icon: Car, label: "My Rides", path: "/my-rides" },
     { icon: Calendar, label: "Schedule", path: "/schedule" },
-    { icon: HelpCircle, label: "Help", path: "/help" },
+    { icon: HelpCircle, label: "How It Works", path: "/how-it-works" },
     { icon: Info, label: "About", path: "/about" },
   ];
 
