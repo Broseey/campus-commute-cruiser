@@ -33,7 +33,7 @@ const RoutePreview: React.FC<RoutePreviewProps> = ({ from, to, fromType, toType 
           <svg className="w-full h-full">
             <defs>
               <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#FF9900" />
+                <stop offset="0%" stopColor="#F44E1C" />
                 <stop offset="100%" stopColor="#000000" />
               </linearGradient>
             </defs>
@@ -49,7 +49,7 @@ const RoutePreview: React.FC<RoutePreviewProps> = ({ from, to, fromType, toType 
             />
             
             {/* Origin point */}
-            <circle cx={fromCoords.x} cy={fromCoords.y} r="4" fill="#FF9900" className="animate-pulse" />
+            <circle cx={fromCoords.x} cy={fromCoords.y} r="4" fill="#F44E1C" className="animate-pulse" />
             
             {/* Destination point */}
             <circle cx={toCoords.x} cy={toCoords.y} r="4" fill="black" />
