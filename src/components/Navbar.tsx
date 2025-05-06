@@ -8,7 +8,6 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
@@ -66,14 +65,13 @@ const Navbar = () => {
           <div className="flex items-center space-x-2">
             {isAuthenticated ? (
               <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
-                <Button variant="default" size="sm" className="bg-accent text-white hover:bg-accent-dark">
+                <Button variant="default" size="sm" className="bg-black text-white hover:bg-neutral-800">
                   Dashboard
                 </Button>
               </Link>
             ) : (
               <Link to="/signin" onClick={() => setIsMenuOpen(false)}>
-                <Button variant="default" size="sm" className="bg-accent text-white hover:bg-accent-dark">
-                  <LogIn className="h-4 w-4 mr-1" />
+                <Button variant="default" size="sm" className="bg-black text-white hover:bg-neutral-800">
                   Sign In
                 </Button>
               </Link>
@@ -102,16 +100,6 @@ const Navbar = () => {
                 <div className="py-6 px-6 flex items-center hover:bg-gray-900">
                   <User className="mr-5 h-7 w-7" />
                   <span className="text-2xl font-medium">Dashboard</span>
-                </div>
-              </Link>
-            </SheetClose>
-          )}
-          {!isAuthenticated && (
-            <SheetClose asChild>
-              <Link to="/signin">
-                <div className="py-6 px-6 flex items-center hover:bg-gray-900 mt-auto border-t border-gray-800">
-                  <LogIn className="mr-5 h-7 w-7" />
-                  <span className="text-2xl font-medium">Sign In</span>
                 </div>
               </Link>
             </SheetClose>
@@ -154,7 +142,6 @@ const Navbar = () => {
               ) : (
                 <Link to="/signin">
                   <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100">
-                    <LogIn className="h-4 w-4 mr-2" />
                     Sign In
                   </Button>
                 </Link>

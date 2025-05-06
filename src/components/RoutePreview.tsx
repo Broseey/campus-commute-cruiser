@@ -11,7 +11,7 @@ interface RoutePreviewProps {
 const RoutePreview: React.FC<RoutePreviewProps> = ({ from, to, fromType, toType }) => {
   // Simplified coordinates for Nigerian locations (for illustration purposes)
   const getCoordinates = (location: string, type: string) => {
-    // These are placeholder coordinates - in a real app, you'd use geocoding
+    // These are placeholder coordinates - in a real app, you'd use geocoding API
     // or a predefined mapping of locations to coordinates
     return { x: Math.random() * 80 + 10, y: Math.random() * 80 + 10 };
   };
@@ -33,7 +33,7 @@ const RoutePreview: React.FC<RoutePreviewProps> = ({ from, to, fromType, toType 
           <svg className="w-full h-full">
             <defs>
               <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#f44E1C" />
+                <stop offset="0%" stopColor="#FF9900" />
                 <stop offset="100%" stopColor="#000000" />
               </linearGradient>
             </defs>
@@ -45,11 +45,11 @@ const RoutePreview: React.FC<RoutePreviewProps> = ({ from, to, fromType, toType 
               strokeWidth="2"
               fill="none"
               strokeDasharray="5,3"
-              className="animate-dash"
+              className="animate-[dash_3s_linear_infinite]"
             />
             
             {/* Origin point */}
-            <circle cx={fromCoords.x} cy={fromCoords.y} r="4" fill="#f44E1C" className="animate-pulse" />
+            <circle cx={fromCoords.x} cy={fromCoords.y} r="4" fill="#FF9900" className="animate-pulse" />
             
             {/* Destination point */}
             <circle cx={toCoords.x} cy={toCoords.y} r="4" fill="black" />

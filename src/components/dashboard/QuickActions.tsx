@@ -8,13 +8,13 @@ const QuickActions = () => {
   return (
     <div className="grid grid-cols-2 gap-3">
       <Link to="/book" className="w-full">
-        <Button className="w-full bg-accent text-white hover:bg-accent-dark h-14 text-base">
+        <Button className="w-full bg-black text-white hover:bg-neutral-800 h-14 text-base">
           <Car className="mr-2 h-5 w-5" />
           Book a Ride
         </Button>
       </Link>
       <Link to="/schedule" className="w-full">
-        <Button variant="outline" className="w-full border-accent text-accent hover:bg-accent hover:text-white h-14 text-base">
+        <Button variant="outline" className="w-full border-black text-black hover:bg-black hover:text-white h-14 text-base">
           <Calendar className="mr-2 h-5 w-5" />
           Schedule Ride
         </Button>
