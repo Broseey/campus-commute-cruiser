@@ -11,7 +11,7 @@ interface RoutePreviewProps {
 const RoutePreview: React.FC<RoutePreviewProps> = ({ from, to, fromType, toType }) => {
   // Simplified coordinates for Nigerian locations (for illustration purposes)
   const getCoordinates = (location: string, type: string) => {
-    // These are placeholder coordinates - in a real app, you'd use geocoding API
+    // These are placeholder coordinates - in a real app, you'd use geocoding
     // or a predefined mapping of locations to coordinates
     return { x: Math.random() * 80 + 10, y: Math.random() * 80 + 10 };
   };
