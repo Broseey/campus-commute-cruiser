@@ -58,7 +58,7 @@ const Schedule = () => {
                       className="flex justify-between items-center p-4 border rounded-md hover:bg-gray-50 cursor-pointer transition-all duration-200 hover:shadow-md"
                     >
                       <div className="flex items-start">
-                        <MapPin className="h-5 w-5 mr-3 mt-1 text-gray-500" />
+                        <MapPin className="h-5 w-5 mr-3 mt-1 text-accent" />
                         <div>
                           <p className="font-medium">{route.from} → {route.to}</p>
                           <p className="text-sm text-gray-500">Starting from {route.price}</p>
@@ -66,7 +66,7 @@ const Schedule = () => {
                       </div>
                       <Button
                         size="sm"
-                        className="bg-black text-white hover:bg-neutral-800 transform active:scale-95 transition-transform duration-200"
+                        className="bg-accent text-white hover:bg-accent-dark transform active:scale-95 transition-transform duration-200"
                       >
                         Select
                       </Button>

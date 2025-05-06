@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -43,6 +44,12 @@ export default {
                     800: '#0f0f0f',  // Deeper black
                     900: '#000000',  // Darkest black
                 },
+                accent: {
+					DEFAULT: '#f44E1C',
+					light: '#ff6d42',
+					dark: '#d43c10',
+					foreground: 'hsl(var(--accent-foreground))'
+				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
 					foreground: 'hsl(var(--secondary-foreground))'
@@ -54,10 +61,6 @@ export default {
 				muted: {
 					DEFAULT: 'hsl(var(--muted))',
 					foreground: 'hsl(var(--muted-foreground))'
-				},
-				accent: {
-					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -99,11 +102,23 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'dash': {
+					to: {
+						strokeDashoffset: '-16'
+					}
+				},
+				'glow': {
+					'0%': { boxShadow: '0 0 0 rgba(244, 78, 28, 0.4)' },
+					'50%': { boxShadow: '0 0 10px rgba(244, 78, 28, 0.7)' },
+					'100%': { boxShadow: '0 0 0 rgba(244, 78, 28, 0.4)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'dash': 'dash 3s linear infinite',
+				'glow': 'glow 2s infinite'
 			}
 		}
 	},
