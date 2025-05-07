@@ -7,6 +7,10 @@
   html {
     scroll-behavior: smooth;
   }
+  
+  ::selection {
+    @apply bg-black/10 text-black;
+  }
 }
 
 @layer components {
@@ -30,5 +34,15 @@
 
   .animate-pulse-gentle {
     animation: pulse-gentle 2s ease-in-out infinite;
+  }
+  
+  /* Form selection styling */
+  .form-field {
+    @apply focus-within:ring-2 focus-within:ring-black/10 focus-within:ring-offset-1 rounded-md;
+  }
+  
+  .form-field input:focus,
+  .form-field select:focus {
+    @apply bg-white outline-none;
   }
 }
