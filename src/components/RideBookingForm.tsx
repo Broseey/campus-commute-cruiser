@@ -16,15 +16,9 @@ import {
   TabsList, 
   TabsTrigger 
 } from "@/components/ui/tabs";
-import { MapPin, Calendar as CalendarIcon, Clock, Car, Users } from "lucide-react";
-import { format } from "date-fns";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import DirectionToggle from "./DirectionToggle";
+import { MapPin, Calendar, Car, Users } from "lucide-react";
 
 type BookingStep = 'location' | 'date' | 'vehicle';
-type LocationType = "university" | "state" | "city" | null;
-type Direction = 'to-university' | 'from-university';
 
 const vehicles = [
   { id: 'sienna', name: 'Sienna', capacity: 6, price: 5000 },
@@ -33,7 +27,7 @@ const vehicles = [
   { id: 'corolla', name: 'Corolla', capacity: 4, price: 3500 },
 ];
 
-const getLocationType = (value: string): "university" | "state" | "city" | null => {
+const getLocationType = (value: string): "university" | "state" | null => {
   const universities = [
     "Babcock University, Ilishan-Remo",
     "Afe Babalola University, Ado-Ekiti",
@@ -54,41 +48,18 @@ const getLocationType = (value: string): "university" | "state" | "city" | null 
     "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara"
   ];
   
-  const cities = [
-    "Lagos City", "Abuja", "Ibadan", "Kano", "Port Harcourt", "Benin City", 
-    "Kaduna", "Enugu", "Aba", "Onitsha", "Warri", "Ilorin", "Jos", "Maiduguri"
-  ];
-  
   if (universities.includes(value)) return "university";
   if (states.includes(value)) return "state";
-  if (cities.includes(value)) return "city";
   return null;
-};
-
-const isValidLocationCombination = (fromType: LocationType, toType: LocationType, direction: Direction) => {
-  if (!fromType || !toType) return false;
-  
-  // For to-university direction: fromType should be state/city, toType should be university
-  if (direction === 'to-university') {
-    return (fromType === "state" || fromType === "city") && toType === "university";
-  }
-  
-  // For from-university direction: fromType should be university, toType should be state/city
-  if (direction === 'from-university') {
-    return fromType === "university" && (toType === "state" || toType === "city");
-  }
-  
-  return false;
 };
 
 const RideBookingForm = () => {
   const [currentStep, setCurrentStep] = useState<BookingStep>('location');
   const [bookingType, setBookingType] = useState<'join' | 'full'>('join');
-  const [direction, setDirection] = useState<Direction>('to-university');
   const [formData, setFormData] = useState({
     from: '',
     to: '',
-    date: null as Date | null,
+    date: '',
     time: '',
     passengers: '1',
     vehicleId: ''
@@ -102,18 +73,8 @@ const RideBookingForm = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSelectChange = (name: string, value: string | Date | null) => {
+  const handleSelectChange = (name: string, value: string) => {
     setFormData({ ...formData, [name]: value });
-  };
-
-  const handleDateChange = (date: Date | null) => {
-    setFormData({ ...formData, date });
-  };
-
-  const handleDirectionChange = (newDirection: Direction) => {
-    setDirection(newDirection);
-    // Clear location selections when direction changes
-    setFormData({ ...formData, from: '', to: '' });
   };
 
   const nextStep = () => {
@@ -127,28 +88,29 @@ const RideBookingForm = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Booking submitted:', { bookingType, direction, ...formData });
+    console.log('Booking submitted:', { bookingType, ...formData });
     window.location.href = '/booking-confirmation';
   };
 
   const selectedVehicle = vehicles.find(v => v.id === formData.vehicleId);
 
-  // Check if location step is valid based on direction
-  const isLocationStepValid = formData.from && formData.to && isValidLocationCombination(fromLocationType, toLocationType, direction);
+  const isLocationStepValid = (
+    formData.from && formData.to && 
+    ((fromLocationType === 'university' && toLocationType === 'state') || 
+     (fromLocationType === 'state' && toLocationType === 'university'))
+  );
 
   return (
-    <Card className="w-full max-w-md shadow-lg transition-all duration-500 form-booking-card">
+    <Card className="w-full max-w-md shadow-lg">
       <div className="p-6">
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-4">Book Your Transport</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Book Your Campus Ride</h2>
         
-        <Tabs value={bookingType} onValueChange={(v) => setBookingType(v as 'join' | 'full')} className="mb-4">
+        <Tabs value={bookingType} onValueChange={(v) => setBookingType(v as 'join' | 'full')} className="mb-6">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="join">Join a Ride</TabsTrigger>
             <TabsTrigger value="full">Book Full Vehicle</TabsTrigger>
           </TabsList>
         </Tabs>
-        
-        <DirectionToggle direction={direction} onChange={handleDirectionChange} />
 
         <div className="mb-6">
           <div className="flex justify-between">
@@ -175,29 +137,22 @@ const RideBookingForm = () => {
 
         {currentStep === 'location' && (
           <div className="space-y-6">
-            <div className="form-field">
-              <LocationSearch
-                type="from"
-                value={formData.from}
-                otherLocationType={toLocationType}
-                onChange={(value) => handleSelectChange('from', value)}
-              />
-            </div>
-            
-            <div className="form-field">
-              <LocationSearch
-                type="to"
-                value={formData.to}
-                otherLocationType={fromLocationType}
-                onChange={(value) => handleSelectChange('to', value)}
-              />
-            </div>
+            <LocationSearch
+              type="from"
+              value={formData.from}
+              otherLocationType={toLocationType}
+              onChange={(value) => handleSelectChange('from', value)}
+            />
+            <LocationSearch
+              type="to"
+              value={formData.to}
+              otherLocationType={fromLocationType}
+              onChange={(value) => handleSelectChange('to', value)}
+            />
             
             {(formData.from && formData.to && !isLocationStepValid) && (
               <div className="text-destructive text-sm mt-2">
-                {direction === 'to-university' ? 
-                  'For going to university, select a city or state as departure and a university as destination.' : 
-                  'For coming from university, select a university as departure and a city or state as destination.'}
+                You must select a university for one location and a state for the other.
               </div>
             )}
             
@@ -213,94 +168,50 @@ const RideBookingForm = () => {
 
         {currentStep === 'date' && (
           <div className="space-y-4">
-            <div className="form-field">
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">Select Date</label>
-              </div>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="w-full pl-3 text-left font-normal flex justify-between items-center"
-                  >
-                    <div className="flex items-center">
-                      <CalendarIcon className="mr-2 h-4 w-4 text-gray-500" />
-                      {formData.date ? (
-                        format(formData.date, "PPP")
-                      ) : (
-                        <span className="text-gray-500">Select a date</span>
-                      )}
-                    </div>
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar
-                    mode="single"
-                    selected={formData.date || undefined}
-                    onSelect={handleDateChange}
-                    disabled={(date) => date < new Date()}
-                    initialFocus
-                    className="p-3 pointer-events-auto"
-                  />
-                </PopoverContent>
-              </Popover>
+            <div className="relative">
+              <Calendar className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+              <Input
+                name="date"
+                type="date"
+                value={formData.date}
+                onChange={handleInputChange}
+                className="pl-10"
+              />
             </div>
-
-            <div className="form-field relative">
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">Select Time</label>
-              </div>
-              <div className="relative">
-                <Clock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Select 
-                  value={formData.time} 
-                  onValueChange={(value) => handleSelectChange('time', value)}
-                >
-                  <SelectTrigger className="pl-10">
-                    <SelectValue placeholder="Select a time" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {["06:00", "07:00", "08:00", "09:00", "10:00", "12:00", "14:00", "16:00", "18:00"].map(time => (
-                      <SelectItem key={time} value={time}>
-                        {time}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="relative">
+              <Input
+                name="time"
+                type="time"
+                value={formData.time}
+                onChange={handleInputChange}
+                className="pl-3"
+              />
             </div>
-
-            <div className="form-field relative">
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">Number of Passengers</label>
-              </div>
-              <div className="relative">
-                <Users className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Select 
-                  value={formData.passengers} 
-                  onValueChange={(value) => handleSelectChange('passengers', value)}
-                >
-                  <SelectTrigger className="pl-10">
-                    <SelectValue placeholder="Number of passengers" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {[1, 2, 3, 4, 5, 6].map(num => (
-                      <SelectItem key={num} value={num.toString()}>
-                        {num} {num === 1 ? 'passenger' : 'passengers'}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="relative">
+              <Users className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+              <Select 
+                value={formData.passengers} 
+                onValueChange={(value) => handleSelectChange('passengers', value)}
+              >
+                <SelectTrigger className="pl-10">
+                  <SelectValue placeholder="Number of passengers" />
+                </SelectTrigger>
+                <SelectContent>
+                  {[1, 2, 3, 4, 5, 6].map(num => (
+                    <SelectItem key={num} value={num.toString()}>
+                      {num} {num === 1 ? 'passenger' : 'passengers'}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
-
             <div className="flex gap-2">
               <Button variant="outline" onClick={prevStep} className="w-1/2">
                 Back
               </Button>
               <Button 
                 onClick={nextStep} 
-                className="w-1/2 bg-black text-white" 
+                className="w-1/2" 
                 disabled={!formData.date || !formData.time}
               >
                 Next
@@ -311,28 +222,23 @@ const RideBookingForm = () => {
 
         {currentStep === 'vehicle' && (
           <div className="space-y-4">
-            <div className="form-field relative">
-              <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700">Select Vehicle</label>
-              </div>
-              <div className="relative">
-                <Car className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <Select 
-                  value={formData.vehicleId} 
-                  onValueChange={(value) => handleSelectChange('vehicleId', value)}
-                >
-                  <SelectTrigger className="pl-10">
-                    <SelectValue placeholder="Select a vehicle" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {vehicles.map(vehicle => (
-                      <SelectItem key={vehicle.id} value={vehicle.id}>
-                        {vehicle.name} - {vehicle.capacity} seats
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="relative">
+              <Car className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+              <Select 
+                value={formData.vehicleId} 
+                onValueChange={(value) => handleSelectChange('vehicleId', value)}
+              >
+                <SelectTrigger className="pl-10">
+                  <SelectValue placeholder="Select a vehicle" />
+                </SelectTrigger>
+                <SelectContent>
+                  {vehicles.map(vehicle => (
+                    <SelectItem key={vehicle.id} value={vehicle.id}>
+                      {vehicle.name} - {vehicle.capacity} seats
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {selectedVehicle && (

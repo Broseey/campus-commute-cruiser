@@ -33,40 +33,16 @@ export default {
 					foreground: 'hsl(var(--primary-foreground))'
 				},
                 campusorange: {
-                    50: '#f8f8f8',   // Lightest black
-                    100: '#e8e8e8',  // Very light black
-                    200: '#d3d3d3',  // Light black
-                    300: '#a9a9a9',  // Soft black
-                    400: '#666666',  // Medium light black
-                    500: '#333333',  // Primary black
-                    600: '#222222',  // Dark medium black
-                    700: '#1a1a1a',  // Dark black
-                    800: '#0f0f0f',  // Deeper black
-                    900: '#000000',  // Darkest black
-                },
-                sunshine: {
-                    50: '#FFFDF7',
-                    100: '#FFF8E1',
-                    200: '#FFECB3',
-                    300: '#FFE082',
-                    400: '#FFD54F',
-                    500: '#FFCA28',
-                    600: '#FFC107',
-                    700: '#FFB300',
-                    800: '#FFA000',
-                    900: '#FF8F00',
-                },
-                coral: {
-                    50: '#FFF0ED',
-                    100: '#FFE0DA',
-                    200: '#FFC2B6',
-                    300: '#FFA391',
-                    400: '#FF856D',
-                    500: '#FF6648',
-                    600: '#FF4824',
-                    700: '#FF2900',
-                    800: '#CC2100',
-                    900: '#991800',
+                    50: '#FFF5F2',   // Lightest orange
+                    100: '#FFECE5',  // Very light orange
+                    200: '#FFDACB',  // Light orange
+                    300: '#FFC1A8',  // Soft orange
+                    400: '#FF9975',  // Medium light orange
+                    500: '#F44E1C',  // Primary orange
+                    600: '#E6380D',  // Dark medium orange
+                    700: '#BF2F0A',  // Dark orange
+                    800: '#992608',  // Deeper orange
+                    900: '#7A1E06',  // Darkest orange
                 },
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -125,31 +101,21 @@ export default {
 						height: '0'
 					}
 				},
-                'float': {
-                    '0%, 100%': { transform: 'translateY(0)' },
-                    '50%': { transform: 'translateY(-10px)' }
-                },
-                'pulse-gentle': {
-                    '0%, 100%': { opacity: 1 },
-                    '50%': { opacity: 0.8 }
-                },
-                'wave': {
-                    '0%': { transform: 'rotate(0.0deg)' },
-                    '10%': { transform: 'rotate(14.0deg)' },
-                    '20%': { transform: 'rotate(-8.0deg)' },
-                    '30%': { transform: 'rotate(14.0deg)' },
-                    '40%': { transform: 'rotate(-4.0deg)' },
-                    '50%': { transform: 'rotate(10.0deg)' },
-                    '60%': { transform: 'rotate(0.0deg)' },
-                    '100%': { transform: 'rotate(0.0deg)' }
-                }
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-                'float': 'float 6s ease-in-out infinite',
-                'pulse-gentle': 'pulse-gentle 3s ease-in-out infinite',
-                'wave': 'wave 2.5s ease-in-out infinite'
+				'fade-in': 'fade-in 0.6s ease-out forwards'
 			}
 		}
 	},
