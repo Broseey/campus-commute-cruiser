@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import AvailableRides from "@/components/AvailableRides";
@@ -383,7 +382,8 @@ const Index = () => {
       
       <Footer />
       
-      <style jsx>{`
+      <style>
+        {`
         @keyframes float {
           0%, 100% {
             transform: translateY(0);
@@ -392,7 +392,8 @@ const Index = () => {
             transform: translateY(-10px);
           }
         }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };
