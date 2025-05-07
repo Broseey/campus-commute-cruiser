@@ -1,3 +1,4 @@
+
 import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -19,6 +20,7 @@ import {
 import { MapPin, Calendar, Car, Users } from "lucide-react";
 
 type BookingStep = 'location' | 'date' | 'vehicle';
+type LocationType = "university" | "state" | "city" | null;
 
 const vehicles = [
   { id: 'sienna', name: 'Sienna', capacity: 6, price: 5000 },
@@ -27,7 +29,7 @@ const vehicles = [
   { id: 'corolla', name: 'Corolla', capacity: 4, price: 3500 },
 ];
 
-const getLocationType = (value: string): "university" | "state" | null => {
+const getLocationType = (value: string): "university" | "state" | "city" | null => {
   const universities = [
     "Babcock University, Ilishan-Remo",
     "Afe Babalola University, Ado-Ekiti",
@@ -48,9 +50,27 @@ const getLocationType = (value: string): "university" | "state" | null => {
     "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara"
   ];
   
+  const cities = [
+    "Lagos City", "Abuja", "Ibadan", "Kano", "Port Harcourt", "Benin City", 
+    "Kaduna", "Enugu", "Aba", "Onitsha", "Warri", "Ilorin", "Jos", "Maiduguri"
+  ];
+  
   if (universities.includes(value)) return "university";
   if (states.includes(value)) return "state";
+  if (cities.includes(value)) return "city";
   return null;
+};
+
+const isValidLocationCombination = (fromType: LocationType, toType: LocationType) => {
+  if (!fromType || !toType) return false;
+  
+  // Allow any combination where at least one location is a university
+  if (fromType === "university" || toType === "university") return true;
+  
+  // Allow state to city and city to state combinations
+  if ((fromType === "state" && toType === "city") || (fromType === "city" && toType === "state")) return true;
+  
+  return false;
 };
 
 const RideBookingForm = () => {
@@ -94,16 +114,12 @@ const RideBookingForm = () => {
 
   const selectedVehicle = vehicles.find(v => v.id === formData.vehicleId);
 
-  const isLocationStepValid = (
-    formData.from && formData.to && 
-    ((fromLocationType === 'university' && toLocationType === 'state') || 
-     (fromLocationType === 'state' && toLocationType === 'university'))
-  );
+  const isLocationStepValid = formData.from && formData.to && isValidLocationCombination(fromLocationType, toLocationType);
 
   return (
-    <Card className="w-full max-w-md shadow-lg">
+    <Card className="w-full max-w-md shadow-lg transition-all duration-500 form-booking-card">
       <div className="p-6">
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Book Your Campus Ride</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Book Your Transport</h2>
         
         <Tabs value={bookingType} onValueChange={(v) => setBookingType(v as 'join' | 'full')} className="mb-6">
           <TabsList className="grid w-full grid-cols-2">
@@ -152,7 +168,7 @@ const RideBookingForm = () => {
             
             {(formData.from && formData.to && !isLocationStepValid) && (
               <div className="text-destructive text-sm mt-2">
-                You must select a university for one location and a state for the other.
+                You must select valid locations. At least one must be a university, or select a city-state combination.
               </div>
             )}
             
@@ -176,6 +192,7 @@ const RideBookingForm = () => {
                 value={formData.date}
                 onChange={handleInputChange}
                 className="pl-10"
+                min={new Date().toISOString().split('T')[0]}
               />
             </div>
             <div className="relative">

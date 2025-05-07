@@ -1,18 +1,28 @@
 
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import React, { useEffect, useState } from "react";
 import { 
-  Select,
-  SelectContent,
-  SelectItem,
+  Select, 
+  SelectContent, 
+  SelectItem, 
   SelectTrigger,
-  SelectValue
+  SelectValue 
 } from "@/components/ui/select";
-import { MapPin, ArrowRight, ArrowLeft, University, Flag } from "lucide-react";
+import { MapPin } from "lucide-react";
 
-// List of Nigerian universities and states that we operate from
-const nigerianLocations = {
-  universities: [
+type LocationType = "university" | "state" | "city" | null;
+
+interface LocationSearchProps {
+  type: "from" | "to";
+  value: string;
+  onChange: (value: string) => void;
+  otherLocationType: LocationType;
+}
+
+const LocationSearch: React.FC<LocationSearchProps> = ({ type, value, onChange, otherLocationType }) => {
+  const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
+  
+  // Sample location data
+  const universities = [
     "Babcock University, Ilishan-Remo",
     "Afe Babalola University, Ado-Ekiti",
     "Redeemer's University, Ede",
@@ -22,169 +32,62 @@ const nigerianLocations = {
     "Pan-Atlantic University, Lagos",
     "Landmark University, Omu-Aran",
     "American University of Nigeria, Yola"
-  ],
-  states: [
-    "Abia",
-    "Adamawa",
-    "Akwa Ibom",
-    "Anambra",
-    "Bauchi",
-    "Bayelsa",
-    "Benue",
-    "Borno",
-    "Cross River",
-    "Delta",
-    "Ebonyi",
-    "Edo",
-    "Ekiti",
-    "Enugu",
-    "FCT - Abuja",
-    "Gombe",
-    "Imo",
-    "Jigawa",
-    "Kaduna",
-    "Kano",
-    "Katsina",
-    "Kebbi",
-    "Kogi",
-    "Kwara",
-    "Lagos",
-    "Nasarawa",
-    "Niger",
-    "Ogun",
-    "Ondo",
-    "Osun",
-    "Oyo",
-    "Plateau",
-    "Rivers",
-    "Sokoto",
-    "Taraba",
-    "Yobe",
-    "Zamfara"
-  ]
-};
-
-interface LocationSearchProps {
-  type: "from" | "to";
-  value: string;
-  onChange: (value: string) => void;
-  otherLocationType?: "university" | "state" | null;
-}
-
-const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSearchProps) => {
-  const [locationType, setLocationType] = useState<"university" | "state">(
-    otherLocationType ? (otherLocationType === "university" ? "state" : "university") : "university"
-  );
+  ];
   
-  // Effect to ensure the location types are complementary (one university, one state)
+  const states = [
+    "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", 
+    "Borno", "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", 
+    "FCT - Abuja", "Gombe", "Imo", "Jigawa", "Kaduna", "Kano", "Katsina", 
+    "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", "Ogun", "Ondo", 
+    "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara"
+  ];
+  
+  const cities = [
+    "Lagos City", "Abuja", "Ibadan", "Kano", "Port Harcourt", "Benin City", 
+    "Kaduna", "Enugu", "Aba", "Onitsha", "Warri", "Ilorin", "Jos", "Maiduguri"
+  ];
+  
+  // Helper function to get all available locations
+  const getAllLocations = () => {
+    return [...universities, ...states, ...cities];
+  };
+
+  // Update filtered locations based on other location type
   useEffect(() => {
-    if (otherLocationType) {
-      setLocationType(otherLocationType === "university" ? "state" : "university");
-    }
+    // By default, show all locations
+    let availableLocations = getAllLocations();
+    
+    setFilteredLocations(availableLocations);
   }, [otherLocationType]);
 
-  // Get the location type from a value
-  const getLocationType = (val: string): "university" | "state" | null => {
-    if (nigerianLocations.universities.includes(val)) return "university";
-    if (nigerianLocations.states.includes(val)) return "state";
-    return null;
-  };
-  
-  // When the user selects a value, update the parent
-  const handleValueChange = (val: string) => {
-    onChange(val);
-  };
-  
   return (
-    <div className="relative space-y-3">
-      <div className="flex items-center space-x-2">
-        <div className={`flex items-center justify-center w-8 h-8 rounded-full ${type === "from" ? "bg-black" : "bg-gray-800"}`}>
-          {type === "from" ? (
-            <ArrowRight className="h-4 w-4 text-white" />
-          ) : (
-            <ArrowLeft className="h-4 w-4 text-gray-300" />
-          )}
-        </div>
-        
-        <div className="flex-1">
-          <label htmlFor={`location-${type}`} className="block text-sm font-medium text-gray-900 mb-1">
-            {type === "from" ? "Departing From" : "Going To"}
-          </label>
-          
-          <div className="flex items-center gap-2 mb-2">
-            <Button 
-              variant={locationType === "university" ? undefined : "outline"} 
-              size="sm"
-              onClick={() => {
-                if (otherLocationType !== "university") {
-                  setLocationType("university");
-                  onChange(""); // Clear the selection when changing type
-                }
-              }}
-              disabled={otherLocationType === "university"}
-              className={`${locationType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed`}
-            >
-              <University className={`h-4 w-4 mr-1 ${locationType === "university" ? "text-white" : "text-black"}`} />
-              University
-            </Button>
-            <Button 
-              variant={locationType === "state" ? undefined : "outline"} 
-              size="sm"
-              onClick={() => {
-                if (otherLocationType !== "state") {
-                  setLocationType("state");
-                  onChange(""); // Clear the selection when changing type
-                }
-              }}
-              disabled={otherLocationType === "state"}
-              className={`${locationType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed`}
-            >
-              <Flag className={`h-4 w-4 mr-1 ${locationType === "state" ? "text-white" : "text-black"}`} />
-              State
-            </Button>
+    <div>
+      <Select value={value} onValueChange={onChange}>
+        <SelectTrigger className="w-full">
+          <div className="flex items-center">
+            <MapPin className="mr-2 h-4 w-4" />
+            <SelectValue placeholder={type === "from" ? "Select origin" : "Select destination"} />
           </div>
+        </SelectTrigger>
+        <SelectContent>
+          <div className="mb-2 px-2 py-1 bg-gray-100 text-sm font-medium">Universities</div>
+          {universities.map((loc) => (
+            <SelectItem key={`uni-${loc}`} value={loc}>{loc}</SelectItem>
+          ))}
           
-          <Select value={value} onValueChange={handleValueChange}>
-            <SelectTrigger id={`location-${type}`} className="w-full">
-              <div className="flex items-center">
-                <MapPin className="h-4 w-4 mr-2 text-gray-600" />
-                <SelectValue placeholder={type === "from" ? `Select departure ${locationType}` : `Select destination ${locationType}`} />
-              </div>
-            </SelectTrigger>
-            <SelectContent>
-              {locationType === "university" ? (
-                nigerianLocations.universities.map((university) => (
-                  <SelectItem key={university} value={university}>
-                    {university}
-                  </SelectItem>
-                ))
-              ) : (
-                nigerianLocations.states.map((state) => (
-                  <SelectItem key={state} value={state}>
-                    {state}
-                  </SelectItem>
-                ))
-              )}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-      
-      {value && (
-        <div className="flex justify-end">
-          <Button
-            size="sm"
-            variant="ghost"
-            className="h-6 text-xs"
-            onClick={() => onChange("")}
-          >
-            Clear
-          </Button>
-        </div>
-      )}
+          <div className="mb-2 mt-3 px-2 py-1 bg-gray-100 text-sm font-medium">States</div>
+          {states.map((loc) => (
+            <SelectItem key={`state-${loc}`} value={loc}>{loc}</SelectItem>
+          ))}
+          
+          <div className="mb-2 mt-3 px-2 py-1 bg-gray-100 text-sm font-medium">Cities</div>
+          {cities.map((loc) => (
+            <SelectItem key={`city-${loc}`} value={loc}>{loc}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   );
 };
 
 export default LocationSearch;
-

@@ -1,8 +1,9 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import AvailableRides from "@/components/AvailableRides";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Car, Calendar, CreditCard, MapPin, Users, Star, Heart } from "lucide-react";
+import { Car, Calendar, CreditCard, MapPin, Users, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import SimpleBookingForm from "@/components/SimpleBookingForm";
@@ -10,48 +11,69 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("book");
+  const [scrollPosition, setScrollPosition] = useState(0);
+  
+  // Track scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  
+  // Calculate form scale based on scroll position
+  const formScale = Math.max(0.95, 1 - (scrollPosition * 0.0003));
+  const formOpacity = Math.max(0.85, 1 - (scrollPosition * 0.001));
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sunshine-50 to-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
       <Navbar />
       
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 z-0">
-            <div className="absolute top-20 left-10 w-24 h-24 bg-sunshine-200 rounded-full opacity-60 animate-float"></div>
-            <div className="absolute top-40 right-20 w-32 h-32 bg-coral-100 rounded-full opacity-40 animate-float" style={{ animationDelay: '2s' }}></div>
-            <div className="absolute bottom-10 left-1/3 w-16 h-16 bg-primary/20 rounded-full opacity-70 animate-float" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute top-20 left-10 w-24 h-24 bg-gray-100 rounded-full opacity-60 animate-float"></div>
+            <div className="absolute top-40 right-20 w-32 h-32 bg-gray-100 rounded-full opacity-40 animate-float" style={{ animationDelay: '2s' }}></div>
+            <div className="absolute bottom-10 left-1/3 w-16 h-16 bg-gray-100 rounded-full opacity-70 animate-float" style={{ animationDelay: '1s' }}></div>
           </div>
           
-          <div className="max-w-7xl mx-auto px-4 md:px-6 pt-12 pb-20 md:pt-24 md:pb-32 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 pt-12 pb-16 md:pt-24 md:pb-32 relative z-10">
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               {/* Left side - Hero text */}
               <div className="w-full md:w-1/2 text-center md:text-left">
-                <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight text-gray-900">
-                  <span className="inline-block animate-wave origin-[70%_70%]">👋</span> Hello, Campus Traveler!
+                <h1 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight text-gray-900">
+                  Campus Travel Made Simple
                 </h1>
                 <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-                  Easy, affordable rides connecting universities to cities across Nigeria.
+                  Reliable transport connecting universities to cities across Nigeria.
                 </p>
                 <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                  <div className="flex items-center bg-white py-1.5 px-4 rounded-full shadow-sm border border-gray-100">
-                    <Star className="h-4 w-4 text-sunshine-500 fill-sunshine-500" />
+                  <div className="flex items-center bg-white py-1.5 px-4 rounded-full shadow-sm border border-gray-200">
+                    <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
                     <span className="ml-1.5 text-sm font-medium">User Rated 4.9/5</span>
                   </div>
-                  <div className="flex items-center bg-white py-1.5 px-4 rounded-full shadow-sm border border-gray-100">
-                    <Users className="h-4 w-4 text-coral-500" />
+                  <div className="flex items-center bg-white py-1.5 px-4 rounded-full shadow-sm border border-gray-200">
+                    <Users className="h-4 w-4 text-gray-600" />
                     <span className="ml-1.5 text-sm font-medium">10,000+ Students</span>
                   </div>
-                  <div className="flex items-center bg-white py-1.5 px-4 rounded-full shadow-sm border border-gray-100">
-                    <Car className="h-4 w-4 text-primary" />
+                  <div className="flex items-center bg-white py-1.5 px-4 rounded-full shadow-sm border border-gray-200">
+                    <Car className="h-4 w-4 text-gray-600" />
                     <span className="ml-1.5 text-sm font-medium">Safe Travels</span>
                   </div>
                 </div>
               </div>
               
               {/* Right side - Simple Booking Form */}
-              <div className="w-full md:w-5/12">
+              <div 
+                className="w-full md:w-5/12 transition-all duration-300 sticky-form"
+                style={{
+                  transform: `scale(${formScale})`,
+                  opacity: formOpacity
+                }}
+              >
                 <SimpleBookingForm />
               </div>
             </div>
@@ -59,7 +81,7 @@ const Index = () => {
         </section>
         
         {/* How It Works Section */}
-        <section className="bg-gradient-to-br from-gray-50 to-white py-16 md:py-20">
+        <section className="bg-gradient-to-br from-gray-50 to-white py-16 md:py-20 relative z-10">
           <div className="max-w-7xl mx-auto px-4 md:px-6">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-gray-900 mb-3">How CampusRide Works</h2>
@@ -68,24 +90,24 @@ const Index = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center">
-                <div className="w-16 h-16 mx-auto bg-coral-100 rounded-full flex items-center justify-center mb-4">
-                  <MapPin className="h-8 w-8 text-coral-500" />
+                <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                  <MapPin className="h-8 w-8 text-gray-700" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Choose Your Route</h3>
                 <p className="text-gray-600">Select from popular university-to-city routes all across Nigeria.</p>
               </div>
               
               <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center">
-                <div className="w-16 h-16 mx-auto bg-sunshine-100 rounded-full flex items-center justify-center mb-4">
-                  <Users className="h-8 w-8 text-sunshine-600" />
+                <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                  <Users className="h-8 w-8 text-gray-700" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Join or Book</h3>
                 <p className="text-gray-600">Share a ride with others or book the entire vehicle for your group.</p>
               </div>
               
               <div className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center">
-                <div className="w-16 h-16 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                  <Car className="h-8 w-8 text-primary" />
+                <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                  <Car className="h-8 w-8 text-gray-700" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Enjoy the Ride</h3>
                 <p className="text-gray-600">Relax in comfortable vehicles driven by verified, professional drivers.</p>
@@ -94,7 +116,7 @@ const Index = () => {
             
             <div className="text-center mt-10">
               <Link to="/how-it-works">
-                <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-white transform hover:scale-105 transition-all duration-200">
+                <Button variant="outline" size="lg" className="border-gray-400 text-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-200">
                   Learn More About How It Works
                 </Button>
               </Link>
@@ -111,10 +133,10 @@ const Index = () => {
                 <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-6">
                   <Tabs value={activeTab} onValueChange={setActiveTab}>
                     <TabsList className="grid w-full grid-cols-2">
-                      <TabsTrigger value="book" className="data-[state=active]:bg-primary data-[state=active]:text-white">
+                      <TabsTrigger value="book" className="data-[state=active]:bg-gray-900 data-[state=active]:text-white">
                         Available Rides
                       </TabsTrigger>
-                      <TabsTrigger value="schedule" className="data-[state=active]:bg-primary data-[state=active]:text-white">
+                      <TabsTrigger value="schedule" className="data-[state=active]:bg-gray-900 data-[state=active]:text-white">
                         How It Works
                       </TabsTrigger>
                     </TabsList>
@@ -127,8 +149,8 @@ const Index = () => {
                         
                         <div className="grid grid-cols-1 gap-4">
                           <div className="flex items-start">
-                            <div className="bg-coral-100 rounded-full p-3 mr-4 transition-all duration-300">
-                              <MapPin className="h-6 w-6 text-coral-600" />
+                            <div className="bg-gray-100 rounded-full p-3 mr-4 transition-all duration-300">
+                              <MapPin className="h-6 w-6 text-gray-600" />
                             </div>
                             <div>
                               <h4 className="font-medium">1. Choose Your Route</h4>
@@ -139,8 +161,8 @@ const Index = () => {
                           </div>
                           
                           <div className="flex items-start">
-                            <div className="bg-sunshine-100 rounded-full p-3 mr-4 transition-all duration-300">
-                              <Calendar className="h-6 w-6 text-sunshine-600" />
+                            <div className="bg-gray-100 rounded-full p-3 mr-4 transition-all duration-300">
+                              <Calendar className="h-6 w-6 text-gray-600" />
                             </div>
                             <div>
                               <h4 className="font-medium">2. Pick Date & Time</h4>
@@ -151,8 +173,8 @@ const Index = () => {
                           </div>
                           
                           <div className="flex items-start">
-                            <div className="bg-primary/10 rounded-full p-3 mr-4 transition-all duration-300">
-                              <Car className="h-6 w-6 text-primary" />
+                            <div className="bg-gray-100 rounded-full p-3 mr-4 transition-all duration-300">
+                              <Car className="h-6 w-6 text-gray-600" />
                             </div>
                             <div>
                               <h4 className="font-medium">3. Select Vehicle</h4>
@@ -163,8 +185,8 @@ const Index = () => {
                           </div>
                           
                           <div className="flex items-start">
-                            <div className="bg-green-100 rounded-full p-3 mr-4 transition-all duration-300">
-                              <CreditCard className="h-6 w-6 text-green-600" />
+                            <div className="bg-gray-100 rounded-full p-3 mr-4 transition-all duration-300">
+                              <CreditCard className="h-6 w-6 text-gray-600" />
                             </div>
                             <div>
                               <h4 className="font-medium">4. Confirm & Pay</h4>
@@ -188,8 +210,8 @@ const Index = () => {
                   <div className="space-y-4">
                     <div className="bg-gray-50 rounded-lg p-4">
                       <div className="flex items-center mb-2">
-                        <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center mr-3">
-                          <span className="text-primary font-medium">AO</span>
+                        <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                          <span className="text-gray-700 font-medium">AO</span>
                         </div>
                         <div>
                           <p className="font-medium">Adewale O.</p>
@@ -199,15 +221,15 @@ const Index = () => {
                       <p className="text-gray-700 italic">"CampusRide has made traveling home for holidays so much easier. No more stressful bus stations!"</p>
                       <div className="flex mt-2">
                         {[1, 2, 3, 4, 5].map((star) => (
-                          <Star key={star} className="h-4 w-4 text-sunshine-500 fill-sunshine-500" />
+                          <Star key={star} className="h-4 w-4 text-amber-500 fill-amber-500" />
                         ))}
                       </div>
                     </div>
                     
                     <div className="bg-gray-50 rounded-lg p-4">
                       <div className="flex items-center mb-2">
-                        <div className="h-10 w-10 rounded-full bg-coral-100 flex items-center justify-center mr-3">
-                          <span className="text-coral-600 font-medium">CU</span>
+                        <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                          <span className="text-gray-700 font-medium">CU</span>
                         </div>
                         <div>
                           <p className="font-medium">Chioma U.</p>
@@ -217,7 +239,7 @@ const Index = () => {
                       <p className="text-gray-700 italic">"I've met so many interesting people from other schools while sharing rides. Safe, affordable and on time!"</p>
                       <div className="flex mt-2">
                         {[1, 2, 3, 4, 5].map((star) => (
-                          <Star key={star} className="h-4 w-4 text-sunshine-500 fill-sunshine-500" />
+                          <Star key={star} className="h-4 w-4 text-amber-500 fill-amber-500" />
                         ))}
                       </div>
                     </div>
@@ -225,7 +247,7 @@ const Index = () => {
                   
                   <div className="mt-4 text-center">
                     <Link to="/testimonials">
-                      <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/10">
+                      <Button variant="ghost" size="sm" className="text-gray-700 hover:bg-gray-100">
                         Read More Reviews
                       </Button>
                     </Link>
@@ -246,8 +268,8 @@ const Index = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl hover:bg-white/20 transition-all duration-300">
-                <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
-                  <Users className="h-6 w-6 text-primary" />
+                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
+                  <Users className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="font-bold text-xl mb-2">Shared Rides</h3>
                 <p className="text-gray-300 text-sm">
@@ -256,8 +278,8 @@ const Index = () => {
               </div>
               
               <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl hover:bg-white/20 transition-all duration-300">
-                <div className="w-12 h-12 bg-coral-500/20 rounded-lg flex items-center justify-center mb-4">
-                  <Car className="h-6 w-6 text-coral-500" />
+                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
+                  <Car className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="font-bold text-xl mb-2">Full Vehicle</h3>
                 <p className="text-gray-300 text-sm">
@@ -266,8 +288,8 @@ const Index = () => {
               </div>
               
               <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl hover:bg-white/20 transition-all duration-300">
-                <div className="w-12 h-12 bg-sunshine-500/20 rounded-lg flex items-center justify-center mb-4">
-                  <Calendar className="h-6 w-6 text-sunshine-500" />
+                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
+                  <Calendar className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="font-bold text-xl mb-2">Scheduled Trips</h3>
                 <p className="text-gray-300 text-sm">
@@ -276,8 +298,8 @@ const Index = () => {
               </div>
               
               <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl hover:bg-white/20 transition-all duration-300">
-                <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mb-4">
-                  <Star className="h-6 w-6 text-green-400" />
+                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
+                  <Star className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="font-bold text-xl mb-2">Rent & Drive</h3>
                 <p className="text-gray-300 text-sm">
@@ -339,7 +361,7 @@ const Index = () => {
                   </li>
                 </ul>
                 
-                <Button className="bg-primary hover:bg-primary/90 text-white py-6 px-8 rounded-lg">
+                <Button className="bg-gray-900 hover:bg-gray-800 text-white py-6 px-8 rounded-lg">
                   Register As A Driver
                 </Button>
               </div>
@@ -358,7 +380,7 @@ const Index = () => {
         </section>
         
         {/* CTA Section */}
-        <section className="py-16 bg-sunshine-50">
+        <section className="py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
             <h2 className="text-3xl font-bold mb-4">Ready for your next trip?</h2>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -366,7 +388,7 @@ const Index = () => {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link to="/book">
-                <Button className="bg-primary hover:bg-primary/90 text-white py-6 px-8 rounded-lg">
+                <Button className="bg-gray-900 hover:bg-gray-800 text-white py-6 px-8 rounded-lg">
                   Book a Ride Now
                 </Button>
               </Link>
@@ -390,6 +412,22 @@ const Index = () => {
           }
           50% {
             transform: translateY(-10px);
+          }
+        }
+        
+        html {
+          scroll-behavior: smooth;
+        }
+        
+        .sticky-form {
+          position: relative;
+          z-index: 10;
+        }
+        
+        @media (min-width: 768px) {
+          .sticky-form {
+            position: sticky;
+            top: 20px;
           }
         }
         `}
