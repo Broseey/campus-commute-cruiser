@@ -16,18 +16,21 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
       
-      <div className="flex-1 px-4 py-6 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        {/* Hero section with new left-right layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+      <div className="flex-1 px-4 py-10 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        {/* Hero section with enhanced positioning */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 mb-20 mt-8">
           <div className="flex flex-col justify-center">
-            {/* Left column - Heading and form */}
-            <div className="text-left mb-8 max-w-xl">
-              <h1 className="text-4xl md:text-5xl font-bold mb-3 tracking-tight leading-tight">
+            {/* Left column - Heading and form with better spacing */}
+            <div className="text-left mb-10 max-w-xl">
+              <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight leading-none">
                 Campus Rides Made Easy
               </h1>
-              <p className="text-gray-600 text-lg mb-8">
+              <p className="text-gray-600 text-lg md:text-xl mb-6 leading-relaxed max-w-lg">
                 Book affordable rides to and from your university with just a few clicks.
                 Join existing rides or book a full vehicle for your journey.
+              </p>
+              <p className="text-campusorange-600 font-medium text-lg mb-8">
+                Safe and reliable transport for students
               </p>
               <Link to="/how-it-works">
                 <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200">
@@ -36,12 +39,14 @@ const Index = () => {
               </Link>
             </div>
             
-            {/* Booking form below the heading */}
-            <RideBookingFormNew />
+            {/* Booking form with added spacing */}
+            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+              <RideBookingFormNew />
+            </div>
           </div>
           
-          {/* Right column - Image space (only visible on lg screens and above) */}
-          <div className="hidden lg:flex items-center justify-center">
+          {/* Right column - Image space (only visible on xl screens and above) */}
+          <div className="hidden xl:flex items-center justify-center">
             <HeroImage />
           </div>
         </div>
