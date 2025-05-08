@@ -18,14 +18,14 @@ const Index = () => {
       
       <div className="flex-1 px-4 py-6 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         {/* Hero section with new left-right layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          <div className="flex flex-col justify-center">
             {/* Left column - Heading and form */}
-            <div className="text-left mb-8">
-              <h1 className="text-3xl md:text-5xl font-bold mb-3 tracking-tight">
+            <div className="text-left mb-8 max-w-xl">
+              <h1 className="text-4xl md:text-5xl font-bold mb-3 tracking-tight leading-tight">
                 Campus Rides Made Easy
               </h1>
-              <p className="text-gray-600 max-w-2xl text-lg mb-6">
+              <p className="text-gray-600 text-lg mb-8">
                 Book affordable rides to and from your university with just a few clicks.
                 Join existing rides or book a full vehicle for your journey.
               </p>
@@ -40,8 +40,8 @@ const Index = () => {
             <RideBookingFormNew />
           </div>
           
-          {/* Right column - Image space */}
-          <div className="hidden md:flex items-center justify-center">
+          {/* Right column - Image space (only visible on lg screens and above) */}
+          <div className="hidden lg:flex items-center justify-center">
             <HeroImage />
           </div>
         </div>
