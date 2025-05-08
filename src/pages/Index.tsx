@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import RideBookingFormNew from "@/components/RideBookingFormNew";
 import HeroImage from "@/components/HeroImage";
+import { Separator } from "@/components/ui/separator";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("book");
@@ -18,41 +19,44 @@ const Index = () => {
       
       <div className="flex-1 px-4 py-10 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         {/* Hero section with enhanced positioning */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 mb-20 mt-8">
-          <div className="flex flex-col justify-center">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 mb-16 mt-8">
+          {/* Right column - Image space now on top for mobile and left for xl screens */}
+          <div className="xl:flex items-center justify-center order-first">
+            <HeroImage />
+          </div>
+          
+          <div className="flex flex-col justify-center order-last xl:order-first">
             {/* Left column - Heading and form with better spacing */}
-            <div className="text-left mb-10 max-w-xl">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight leading-none">
+            <div className="text-left mb-8 max-w-xl">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-none">
                 Campus Rides Made Easy
               </h1>
               <p className="text-gray-600 text-lg md:text-xl mb-6 leading-relaxed max-w-lg">
                 Book affordable rides to and from your university with just a few clicks.
                 Join existing rides or book a full vehicle for your journey.
               </p>
-              <p className="text-campusorange-600 font-medium text-lg mb-8">
+              <p className="text-campusorange-600 font-medium text-lg mb-6">
                 Safe and reliable transport for students
               </p>
-              <Link to="/how-it-works">
-                <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200">
-                  Learn how it works
-                </Button>
-              </Link>
             </div>
             
-            {/* Booking form with added spacing */}
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+            {/* Booking form with added spacing and width */}
+            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 w-full">
               <RideBookingFormNew />
+              
+              {/* How it works link as text with separator */}
+              <div className="mt-6">
+                <Separator className="mb-4" />
+                <Link to="/how-it-works" className="text-campusorange-600 hover:text-campusorange-700 text-sm font-medium">
+                  Learn how it works →
+                </Link>
+              </div>
             </div>
-          </div>
-          
-          {/* Right column - Image space (only visible on xl screens and above) */}
-          <div className="hidden xl:flex items-center justify-center">
-            <HeroImage />
           </div>
         </div>
         
-        {/* Available rides section */}
-        <div className="mb-16">
+        {/* Available rides section - centered on larger screens */}
+        <div className="mb-16 max-w-4xl mx-auto">
           <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="grid w-full grid-cols-2">
@@ -129,8 +133,8 @@ const Index = () => {
           </div>
         </div>
         
-        {/* Features section */}
-        <div className="mt-16">
+        {/* Features section - centered */}
+        <div className="mt-16 max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-center mb-8 text-campusorange-700">Why Choose CampusRide?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-all duration-300">
