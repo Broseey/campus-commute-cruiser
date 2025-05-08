@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -33,16 +32,16 @@ export default {
 					foreground: 'hsl(var(--primary-foreground))'
 				},
                 campusorange: {
-                    50: '#FFF5F2',   // Lightest orange
-                    100: '#FFECE5',  // Very light orange
-                    200: '#FFDACB',  // Light orange
-                    300: '#FFC1A8',  // Soft orange
-                    400: '#FF9975',  // Medium light orange
-                    500: '#F44E1C',  // Primary orange
-                    600: '#E6380D',  // Dark medium orange
-                    700: '#BF2F0A',  // Dark orange
-                    800: '#992608',  // Deeper orange
-                    900: '#7A1E06',  // Darkest orange
+                    50: '#f8f8f8',   // Lightest black
+                    100: '#e8e8e8',  // Very light black
+                    200: '#d3d3d3',  // Light black
+                    300: '#a9a9a9',  // Soft black
+                    400: '#666666',  // Medium light black
+                    500: '#333333',  // Primary black
+                    600: '#222222',  // Dark medium black
+                    700: '#1a1a1a',  // Dark black
+                    800: '#0f0f0f',  // Deeper black
+                    900: '#000000',  // Darkest black
                 },
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -100,22 +99,11 @@ export default {
 					to: {
 						height: '0'
 					}
-				},
-				'fade-in': {
-					'0%': {
-						opacity: '0',
-						transform: 'translateY(10px)'
-					},
-					'100%': {
-						opacity: '1',
-						transform: 'translateY(0)'
-					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-in': 'fade-in 0.6s ease-out forwards'
+				'accordion-up': 'accordion-up 0.2s ease-out'
 			}
 		}
 	},
