@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import AvailableRides from "@/components/AvailableRides";
@@ -16,13 +15,14 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
       
-      <div className="bg-black relative overflow-hidden pb-16">
+      <div className="bg-white relative overflow-hidden pb-16">
         <div className="max-w-7xl mx-auto px-4 pt-16 pb-32 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex flex-col justify-center">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 text-black leading-tight">
                 Campus Travel <br />Made Easy
               </h1>
+              <p className="text-lg text-gray-600 mb-6">Safe and affordable rides for students</p>
               <div className="bg-white rounded-lg p-6 shadow-lg w-full">
                 <RideBookingFormNew />
               </div>
@@ -32,10 +32,6 @@ const Index = () => {
               <HeroImage />
             </div>
           </div>
-        </div>
-        
-        <div className="absolute inset-0 bg-black opacity-90">
-          <div className="absolute inset-0 bg-gradient-to-r from-black to-transparent"></div>
         </div>
       </div>
       
