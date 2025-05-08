@@ -110,7 +110,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-black py-4 px-6">
+    <nav className="bg-black py-3 px-6 shadow-md">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <Link to="/">
