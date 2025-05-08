@@ -7,6 +7,7 @@ import { Car, Calendar, CreditCard, MapPin, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import RideBookingFormNew from "@/components/RideBookingFormNew";
+import HeroImage from "@/components/HeroImage";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("book");
@@ -16,105 +17,110 @@ const Index = () => {
       <Navbar />
       
       <div className="flex-1 px-4 py-6 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        {/* Header section with Uber-like styling */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-5xl font-bold mb-3 tracking-tight">
-            Campus Rides Made Easy
-          </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-6">
-            Book affordable rides to and from your university with just a few clicks.
-            Join existing rides or book a full vehicle for your journey.
-          </p>
-          <Link to="/how-it-works">
-            <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200">
-              Learn how it works
-            </Button>
-          </Link>
-        </div>
-        
-        {/* Main content */}
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* Left column - Booking form */}
-          <div className="w-full md:w-1/2 flex justify-center">
+        {/* Hero section with new left-right layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <div>
+            {/* Left column - Heading and form */}
+            <div className="text-left mb-8">
+              <h1 className="text-3xl md:text-5xl font-bold mb-3 tracking-tight">
+                Campus Rides Made Easy
+              </h1>
+              <p className="text-gray-600 max-w-2xl text-lg mb-6">
+                Book affordable rides to and from your university with just a few clicks.
+                Join existing rides or book a full vehicle for your journey.
+              </p>
+              <Link to="/how-it-works">
+                <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200">
+                  Learn how it works
+                </Button>
+              </Link>
+            </div>
+            
+            {/* Booking form below the heading */}
             <RideBookingFormNew />
           </div>
           
-          {/* Right column - Available rides */}
-          <div className="w-full md:w-1/2">
-            <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6">
-              <Tabs value={activeTab} onValueChange={setActiveTab}>
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="book" className="data-[state=active]:bg-black data-[state=active]:text-white">Available Rides</TabsTrigger>
-                  <TabsTrigger value="schedule" className="data-[state=active]:bg-black data-[state=active]:text-white">How It Works</TabsTrigger>
-                </TabsList>
-                <TabsContent value="book" className="mt-4">
-                  <AvailableRides />
-                </TabsContent>
-                <TabsContent value="schedule" className="mt-4">
-                  <div className="space-y-6">
-                    <h2 className="text-xl font-semibold">How to Book Your Ride</h2>
-                    
-                    <div className="grid grid-cols-1 gap-4">
-                      <div className="flex items-start">
-                        <div className="bg-campusorange-100 rounded-full p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
-                          <MapPin className="h-6 w-6 text-campusorange-600" />
-                        </div>
-                        <div>
-                          <h3 className="font-medium">1. Choose Your Route</h3>
-                          <p className="text-sm text-gray-600">
-                            Select your departure and destination locations.
-                          </p>
-                        </div>
+          {/* Right column - Image space */}
+          <div className="hidden md:flex items-center justify-center">
+            <HeroImage />
+          </div>
+        </div>
+        
+        {/* Available rides section */}
+        <div className="mb-16">
+          <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6">
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="book" className="data-[state=active]:bg-black data-[state=active]:text-white">Available Rides</TabsTrigger>
+                <TabsTrigger value="schedule" className="data-[state=active]:bg-black data-[state=active]:text-white">How It Works</TabsTrigger>
+              </TabsList>
+              <TabsContent value="book" className="mt-4">
+                <AvailableRides />
+              </TabsContent>
+              <TabsContent value="schedule" className="mt-4">
+                <div className="space-y-6">
+                  <h2 className="text-xl font-semibold">How to Book Your Ride</h2>
+                  
+                  <div className="grid grid-cols-1 gap-4">
+                    <div className="flex items-start">
+                      <div className="bg-campusorange-100 rounded-full p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
+                        <MapPin className="h-6 w-6 text-campusorange-600" />
                       </div>
-                      
-                      <div className="flex items-start">
-                        <div className="bg-campusorange-100 rounded-full p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
-                          <Calendar className="h-6 w-6 text-campusorange-600" />
-                        </div>
-                        <div>
-                          <h3 className="font-medium">2. Pick Date & Time</h3>
-                          <p className="text-sm text-gray-600">
-                            Choose when you want to travel.
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-start">
-                        <div className="bg-campusorange-100 rounded-full p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
-                          <Car className="h-6 w-6 text-campusorange-600" />
-                        </div>
-                        <div>
-                          <h3 className="font-medium">3. Select Vehicle</h3>
-                          <p className="text-sm text-gray-600">
-                            Choose from available vehicles or join an existing ride.
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-start">
-                        <div className="bg-campusorange-100 rounded-full p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
-                          <CreditCard className="h-6 w-6 text-campusorange-600" />
-                        </div>
-                        <div>
-                          <h3 className="font-medium">4. Confirm & Pay</h3>
-                          <p className="text-sm text-gray-600">
-                            Review your booking and make payment to confirm.
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <div className="mt-4 text-center">
-                        <Link to="/how-it-works">
-                          <Button variant="outline" size="sm" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200">
-                            Learn more
-                          </Button>
-                        </Link>
+                      <div>
+                        <h3 className="font-medium">1. Choose Your Route</h3>
+                        <p className="text-sm text-gray-600">
+                          Select your departure and destination locations.
+                        </p>
                       </div>
                     </div>
+                    
+                    <div className="flex items-start">
+                      <div className="bg-campusorange-100 rounded-full p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
+                        <Calendar className="h-6 w-6 text-campusorange-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium">2. Pick Date & Time</h3>
+                        <p className="text-sm text-gray-600">
+                          Choose when you want to travel.
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="bg-campusorange-100 rounded-full p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
+                        <Car className="h-6 w-6 text-campusorange-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium">3. Select Vehicle</h3>
+                        <p className="text-sm text-gray-600">
+                          Choose from available vehicles or join an existing ride.
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <div className="bg-campusorange-100 rounded-full p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
+                        <CreditCard className="h-6 w-6 text-campusorange-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium">4. Confirm & Pay</h3>
+                        <p className="text-sm text-gray-600">
+                          Review your booking and make payment to confirm.
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-4 text-center">
+                      <Link to="/how-it-works">
+                        <Button variant="outline" size="sm" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200">
+                          Learn more
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
-                </TabsContent>
-              </Tabs>
-            </div>
+                </div>
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
         
