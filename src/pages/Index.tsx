@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import AvailableRides from "@/components/AvailableRides";
@@ -18,29 +17,25 @@ const Index = () => {
       
       <div className="flex-1 px-4 py-6 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         {/* Hero section with new left-right layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 bg-white p-6 rounded-lg">
+          <div className="flex flex-col justify-center">
             {/* Left column - Heading and form */}
-            <div className="text-left mb-8">
+            <div className="text-left mb-6">
               <h1 className="text-3xl md:text-5xl font-bold mb-3 tracking-tight">
                 Campus Rides Made Easy
               </h1>
-              <p className="text-gray-600 max-w-2xl text-lg mb-6">
-                Book affordable rides to and from your university with just a few clicks.
-                Join existing rides or book a full vehicle for your journey.
+              <p className="text-gray-600 text-lg">
+                Safe and affordable rides for students
               </p>
-              <Link to="/how-it-works">
-                <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200">
-                  Learn how it works
-                </Button>
-              </Link>
             </div>
             
             {/* Booking form below the heading */}
-            <RideBookingFormNew />
+            <div className="w-full">
+              <RideBookingFormNew />
+            </div>
           </div>
           
-          {/* Right column - Image space */}
+          {/* Right column - Image space only visible on desktop */}
           <div className="hidden md:flex items-center justify-center">
             <HeroImage />
           </div>
