@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -152,431 +151,429 @@ const RideBookingFormNew = () => {
   };
 
   return (
-    <Card className="w-full max-w-md shadow-lg hover:shadow-xl transition-all duration-300">
-      <div className="p-6">
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Book Your Campus Ride</h2>
-        
-        <Tabs value={bookingType} onValueChange={(v) => setBookingType(v as BookingType)} className="mb-6">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="join" className="data-[state=active]:bg-black data-[state=active]:text-white hover:bg-gray-100 transition-colors">Join a Ride</TabsTrigger>
-            <TabsTrigger value="full" className="data-[state=active]:bg-black data-[state=active]:text-white hover:bg-gray-100 transition-colors">Book Entire Ride</TabsTrigger>
-          </TabsList>
-        </Tabs>
+    <div className="w-full">
+      <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Book Your Campus Ride</h2>
+      
+      <Tabs value={bookingType} onValueChange={(v) => setBookingType(v as BookingType)} className="mb-6">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="join" className="data-[state=active]:bg-black data-[state=active]:text-white hover:bg-gray-100 transition-colors">Join a Ride</TabsTrigger>
+          <TabsTrigger value="full" className="data-[state=active]:bg-black data-[state=active]:text-white hover:bg-gray-100 transition-colors">Book Entire Ride</TabsTrigger>
+        </TabsList>
+      </Tabs>
 
-        <div className="mb-6">
-          <div className="flex justify-between">
-            <div className={`flex flex-col items-center ${currentStep === 'location' ? 'text-black' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'location' ? 'bg-black text-white' : 'bg-gray-200'} transition-all duration-300`}>1</div>
-              <span className="text-xs">Location</span>
-            </div>
-            <div className={`flex flex-col items-center ${currentStep === 'date' ? 'text-black' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'date' ? 'bg-black text-white' : 'bg-gray-200'} transition-all duration-300`}>2</div>
-              <span className="text-xs">Date & Time</span>
-            </div>
-            <div className={`flex flex-col items-center ${currentStep === 'vehicle' ? 'text-black' : 'text-gray-400'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'vehicle' ? 'bg-black text-white' : 'bg-gray-200'} transition-all duration-300`}>3</div>
-              <span className="text-xs">Vehicle</span>
-            </div>
+      <div className="mb-6">
+        <div className="flex justify-between">
+          <div className={`flex flex-col items-center ${currentStep === 'location' ? 'text-black' : 'text-gray-400'}`}>
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'location' ? 'bg-black text-white' : 'bg-gray-200'} transition-all duration-300`}>1</div>
+            <span className="text-xs">Location</span>
           </div>
-          <div className="mt-2 h-1 bg-gray-200 rounded-full">
-            <div 
-              className="h-full bg-black rounded-full transition-all duration-500" 
-              style={{ width: currentStep === 'location' ? '33.3%' : currentStep === 'date' ? '66.6%' : '100%' }}
-            ></div>
+          <div className={`flex flex-col items-center ${currentStep === 'date' ? 'text-black' : 'text-gray-400'}`}>
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'date' ? 'bg-black text-white' : 'bg-gray-200'} transition-all duration-300`}>2</div>
+            <span className="text-xs">Date & Time</span>
+          </div>
+          <div className={`flex flex-col items-center ${currentStep === 'vehicle' ? 'text-black' : 'text-gray-400'}`}>
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${currentStep === 'vehicle' ? 'bg-black text-white' : 'bg-gray-200'} transition-all duration-300`}>3</div>
+            <span className="text-xs">Vehicle</span>
           </div>
         </div>
+        <div className="mt-2 h-1 bg-gray-200 rounded-full">
+          <div 
+            className="h-full bg-black rounded-full transition-all duration-500" 
+            style={{ width: currentStep === 'location' ? '33.3%' : currentStep === 'date' ? '66.6%' : '100%' }}
+          ></div>
+        </div>
+      </div>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            {currentStep === 'location' && (
-              <div className="space-y-6">
-                {/* From Location */}
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-campusorange-600">
-                      <ArrowUpRight className="h-4 w-4 text-white" />
-                    </div>
-                    
-                    <div className="flex-1">
-                      <label className="block text-sm font-medium text-gray-900 mb-1">
-                        Departing From
-                      </label>
-                      
-                      <div className="flex items-center gap-2 mb-2">
-                        <Button 
-                          type="button"
-                          variant={watchFromType === "university" ? undefined : "outline"} 
-                          size="sm"
-                          onClick={() => toggleLocationType("fromType", "university")}
-                          className={`${watchFromType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
-                        >
-                          University
-                        </Button>
-                        <Button 
-                          type="button"
-                          variant={watchFromType === "state" ? undefined : "outline"} 
-                          size="sm"
-                          onClick={() => toggleLocationType("fromType", "state")}
-                          className={`${watchFromType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
-                        >
-                          State
-                        </Button>
-                      </div>
-                      
-                      <FormField
-                        control={form.control}
-                        name="from"
-                        render={({ field }) => (
-                          <FormItem>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                              value={field.value}
-                            >
-                              <FormControl>
-                                <SelectTrigger>
-                                  <div className="flex items-center">
-                                    <MapPin className="h-4 w-4 mr-2 text-gray-600" />
-                                    <SelectValue placeholder={`Select departure ${watchFromType}`} />
-                                  </div>
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {watchFromType === "university"
-                                  ? nigerianLocations.universities.map((loc) => (
-                                      <SelectItem key={loc} value={loc}>{loc}</SelectItem>
-                                    ))
-                                  : nigerianLocations.states.map((loc) => (
-                                      <SelectItem key={loc} value={loc}>{loc}</SelectItem>
-                                    ))
-                                }
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          {currentStep === 'location' && (
+            <div className="space-y-6">
+              {/* From Location */}
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-campusorange-600">
+                    <ArrowUpRight className="h-4 w-4 text-white" />
                   </div>
                   
-                  {watchFrom && (
-                    <div className="flex justify-end">
-                      <Button
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-gray-900 mb-1">
+                      Departing From
+                    </label>
+                    
+                    <div className="flex items-center gap-2 mb-2">
+                      <Button 
                         type="button"
+                        variant={watchFromType === "university" ? undefined : "outline"} 
                         size="sm"
-                        variant="ghost"
-                        className="h-6 text-xs hover:bg-gray-100 transition-colors"
-                        onClick={() => form.setValue("from", "")}
+                        onClick={() => toggleLocationType("fromType", "university")}
+                        className={`${watchFromType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
                       >
-                        Clear
+                        University
                       </Button>
-                    </div>
-                  )}
-                </div>
-
-                {/* To Location */}
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <div className="flex items-center justify-center w-8 h-8 rounded-full bg-black">
-                      <ArrowDownLeft className="h-4 w-4 text-white" />
+                      <Button 
+                        type="button"
+                        variant={watchFromType === "state" ? undefined : "outline"} 
+                        size="sm"
+                        onClick={() => toggleLocationType("fromType", "state")}
+                        className={`${watchFromType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
+                      >
+                        State
+                      </Button>
                     </div>
                     
-                    <div className="flex-1">
-                      <label className="block text-sm font-medium text-gray-900 mb-1">
-                        Going To
-                      </label>
-                      
-                      <div className="flex items-center gap-2 mb-2">
-                        <Button 
-                          type="button"
-                          variant={watchToType === "university" ? undefined : "outline"} 
-                          size="sm"
-                          onClick={() => toggleLocationType("toType", "university")}
-                          className={`${watchToType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
-                        >
-                          University
-                        </Button>
-                        <Button 
-                          type="button"
-                          variant={watchToType === "state" ? undefined : "outline"} 
-                          size="sm"
-                          onClick={() => toggleLocationType("toType", "state")}
-                          className={`${watchToType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
-                        >
-                          State
-                        </Button>
-                      </div>
-                      
-                      <FormField
-                        control={form.control}
-                        name="to"
-                        render={({ field }) => (
-                          <FormItem>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                              value={field.value}
-                            >
-                              <FormControl>
-                                <SelectTrigger>
-                                  <div className="flex items-center">
-                                    <MapPin className="h-4 w-4 mr-2 text-gray-600" />
-                                    <SelectValue placeholder={`Select destination ${watchToType}`} />
-                                  </div>
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {watchToType === "university"
-                                  ? nigerianLocations.universities.map((loc) => (
-                                      <SelectItem key={loc} value={loc}>{loc}</SelectItem>
-                                    ))
-                                  : nigerianLocations.states.map((loc) => (
-                                      <SelectItem key={loc} value={loc}>{loc}</SelectItem>
-                                    ))
-                                }
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  
-                  {watchTo && (
-                    <div className="flex justify-end">
-                      <Button
-                        type="button"
-                        size="sm"
-                        variant="ghost"
-                        className="h-6 text-xs hover:bg-gray-100 transition-colors"
-                        onClick={() => form.setValue("to", "")}
-                      >
-                        Clear
-                      </Button>
-                    </div>
-                  )}
-                </div>
-                
-                {/* Route Preview */}
-                {showPreview && isLocationStepValid() && (
-                  <div className="mt-4 p-3 bg-gray-50 rounded-lg border">
-                    <p className="text-sm font-medium mb-2">Route Preview</p>
-                    <RoutePreview 
-                      from={watchFrom} 
-                      to={watchTo} 
-                      fromType={watchFromType} 
-                      toType={watchToType} 
+                    <FormField
+                      control={form.control}
+                      name="from"
+                      render={({ field }) => (
+                        <FormItem>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            value={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <div className="flex items-center">
+                                  <MapPin className="h-4 w-4 mr-2 text-gray-600" />
+                                  <SelectValue placeholder={`Select departure ${watchFromType}`} />
+                                </div>
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {watchFromType === "university"
+                                ? nigerianLocations.universities.map((loc) => (
+                                    <SelectItem key={loc} value={loc}>{loc}</SelectItem>
+                                  ))
+                                : nigerianLocations.states.map((loc) => (
+                                    <SelectItem key={loc} value={loc}>{loc}</SelectItem>
+                                  ))
+                              }
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
                   </div>
-                )}
+                </div>
                 
-                {(watchFrom && watchTo && !isLocationStepValid()) && (
-                  <div className="text-destructive text-sm mt-2">
-                    You must select a university for one location and a state for the other.
+                {watchFrom && (
+                  <div className="flex justify-end">
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="ghost"
+                      className="h-6 text-xs hover:bg-gray-100 transition-colors"
+                      onClick={() => form.setValue("from", "")}
+                    >
+                      Clear
+                    </Button>
                   </div>
                 )}
+              </div>
+              
+              {/* To Location */}
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-black">
+                    <ArrowDownLeft className="h-4 w-4 text-white" />
+                  </div>
+                  
+                  <div className="flex-1">
+                    <label className="block text-sm font-medium text-gray-900 mb-1">
+                      Going To
+                    </label>
+                    
+                    <div className="flex items-center gap-2 mb-2">
+                      <Button 
+                        type="button"
+                        variant={watchToType === "university" ? undefined : "outline"} 
+                        size="sm"
+                        onClick={() => toggleLocationType("toType", "university")}
+                        className={`${watchToType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
+                      >
+                        University
+                      </Button>
+                      <Button 
+                        type="button"
+                        variant={watchToType === "state" ? undefined : "outline"} 
+                        size="sm"
+                        onClick={() => toggleLocationType("toType", "state")}
+                        className={`${watchToType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
+                      >
+                        State
+                      </Button>
+                    </div>
+                    
+                    <FormField
+                      control={form.control}
+                      name="to"
+                      render={({ field }) => (
+                        <FormItem>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                            value={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <div className="flex items-center">
+                                  <MapPin className="h-4 w-4 mr-2 text-gray-600" />
+                                  <SelectValue placeholder={`Select destination ${watchToType}`} />
+                                </div>
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {watchToType === "university"
+                                ? nigerianLocations.universities.map((loc) => (
+                                    <SelectItem key={loc} value={loc}>{loc}</SelectItem>
+                                  ))
+                                : nigerianLocations.states.map((loc) => (
+                                    <SelectItem key={loc} value={loc}>{loc}</SelectItem>
+                                  ))
+                              }
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
                 
+                {watchTo && (
+                  <div className="flex justify-end">
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="ghost"
+                      className="h-6 text-xs hover:bg-gray-100 transition-colors"
+                      onClick={() => form.setValue("to", "")}
+                    >
+                      Clear
+                    </Button>
+                  </div>
+                )}
+              </div>
+              
+              {/* Route Preview */}
+              {showPreview && isLocationStepValid() && (
+                <div className="mt-4 p-3 bg-gray-50 rounded-lg border">
+                  <p className="text-sm font-medium mb-2">Route Preview</p>
+                  <RoutePreview 
+                    from={watchFrom} 
+                    to={watchTo} 
+                    fromType={watchFromType} 
+                    toType={watchToType} 
+                  />
+                </div>
+              )}
+              
+              {(watchFrom && watchTo && !isLocationStepValid()) && (
+                <div className="text-destructive text-sm mt-2">
+                  You must select a university for one location and a state for the other.
+                </div>
+              )}
+              
+              <Button 
+                type="button"
+                onClick={nextStep} 
+                className="w-full bg-black text-white hover:bg-gray-900 transform active:scale-95 transition-transform duration-200" 
+                disabled={!isLocationStepValid()}
+              >
+                Next
+              </Button>
+            </div>
+          )}
+
+          {currentStep === 'date' && (
+            <div className="space-y-4">
+              {/* Date Selection */}
+              <FormField
+                control={form.control}
+                name="date"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <FormLabel>Travel Date</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            className={`w-full bg-white flex justify-between items-center pl-3 text-left font-normal hover:bg-gray-50 transition-colors ${!field.value && "text-muted-foreground"}`}
+                          >
+                            <div className="flex items-center">
+                              <Calendar className="mr-2 h-5 w-5 text-gray-500" />
+                              {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
+                            </div>
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <CalendarComponent
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          initialFocus
+                          disabled={(date) => date < new Date()}
+                          className="p-3 pointer-events-auto"
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              {/* Time Selection */}
+              <FormField
+                control={form.control}
+                name="time"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Travel Time</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      value={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="flex items-center hover:border-black transition-colors">
+                          <Clock className="mr-2 h-5 w-5 text-gray-500" />
+                          <SelectValue placeholder="Select a time" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {["06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00"].map((time) => (
+                          <SelectItem key={time} value={time}>{time}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              {/* Passengers */}
+              <FormField
+                control={form.control}
+                name="passengers"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Number of Passengers</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      value={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="flex items-center hover:border-black transition-colors">
+                          <Users className="mr-2 h-5 w-5 text-gray-500" />
+                          <SelectValue placeholder="Select passengers" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {[1, 2, 3, 4, 5, 6].map(num => (
+                          <SelectItem key={num} value={num.toString()}>
+                            {num} {num === 1 ? 'passenger' : 'passengers'}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              <div className="flex gap-2">
+                <Button 
+                  type="button"
+                  variant="outline" 
+                  onClick={prevStep} 
+                  className="w-1/2 hover:bg-gray-100 transition-colors"
+                >
+                  Back
+                </Button>
                 <Button 
                   type="button"
                   onClick={nextStep} 
-                  className="w-full bg-black text-white hover:bg-gray-900 transform active:scale-95 transition-transform duration-200" 
-                  disabled={!isLocationStepValid()}
+                  className="w-1/2 bg-black text-white hover:bg-gray-900 transform active:scale-95 transition-transform duration-200" 
+                  disabled={!isDateStepValid}
                 >
                   Next
                 </Button>
               </div>
-            )}
+            </div>
+          )}
 
-            {currentStep === 'date' && (
-              <div className="space-y-4">
-                {/* Date Selection */}
-                <FormField
-                  control={form.control}
-                  name="date"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col">
-                      <FormLabel>Travel Date</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant="outline"
-                              className={`w-full bg-white flex justify-between items-center pl-3 text-left font-normal hover:bg-gray-50 transition-colors ${!field.value && "text-muted-foreground"}`}
-                            >
-                              <div className="flex items-center">
-                                <Calendar className="mr-2 h-5 w-5 text-gray-500" />
-                                {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
-                              </div>
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <CalendarComponent
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            initialFocus
-                            disabled={(date) => date < new Date()}
-                            className="p-3 pointer-events-auto"
-                          />
-                        </PopoverContent>
-                      </Popover>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                {/* Time Selection */}
-                <FormField
-                  control={form.control}
-                  name="time"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Travel Time</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                        value={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="flex items-center hover:border-black transition-colors">
-                            <Clock className="mr-2 h-5 w-5 text-gray-500" />
-                            <SelectValue placeholder="Select a time" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {["06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00"].map((time) => (
-                            <SelectItem key={time} value={time}>{time}</SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                {/* Passengers */}
-                <FormField
-                  control={form.control}
-                  name="passengers"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Number of Passengers</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                        value={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="flex items-center hover:border-black transition-colors">
-                            <Users className="mr-2 h-5 w-5 text-gray-500" />
-                            <SelectValue placeholder="Select passengers" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {[1, 2, 3, 4, 5, 6].map(num => (
-                            <SelectItem key={num} value={num.toString()}>
-                              {num} {num === 1 ? 'passenger' : 'passengers'}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <div className="flex gap-2">
-                  <Button 
-                    type="button"
-                    variant="outline" 
-                    onClick={prevStep} 
-                    className="w-1/2 hover:bg-gray-100 transition-colors"
-                  >
-                    Back
-                  </Button>
-                  <Button 
-                    type="button"
-                    onClick={nextStep} 
-                    className="w-1/2 bg-black text-white hover:bg-gray-900 transform active:scale-95 transition-transform duration-200" 
-                    disabled={!isDateStepValid}
-                  >
-                    Next
-                  </Button>
-                </div>
-              </div>
-            )}
-
-            {currentStep === 'vehicle' && (
-              <div className="space-y-4">
-                {/* Vehicle Selection */}
-                <FormField
-                  control={form.control}
-                  name="vehicleId"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Select Vehicle</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                        value={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="flex items-center hover:border-black transition-colors">
-                            <Car className="mr-2 h-5 w-5 text-gray-500" />
-                            <SelectValue placeholder="Select a vehicle" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {vehicles.map(vehicle => (
-                            <SelectItem key={vehicle.id} value={vehicle.id}>
-                              {vehicle.name} - {vehicle.capacity} seats
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                {selectedVehicle && (
-                  <div className="p-4 border rounded-lg bg-gray-50 hover:shadow-md transition-all duration-300">
-                    <h3 className="font-semibold">{selectedVehicle.name}</h3>
-                    <div className="text-sm text-gray-600 mt-1">
-                      <p>Capacity: {selectedVehicle.capacity} passengers</p>
-                      <p>Price: ₦{selectedVehicle.price.toLocaleString()}</p>
-                      {bookingType === 'join' && (
-                        <p>Your Price: ₦{Math.round(selectedVehicle.price / selectedVehicle.capacity).toLocaleString()} per person</p>
-                      )}
-                    </div>
-                  </div>
+          {currentStep === 'vehicle' && (
+            <div className="space-y-4">
+              {/* Vehicle Selection */}
+              <FormField
+                control={form.control}
+                name="vehicleId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Select Vehicle</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      value={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="flex items-center hover:border-black transition-colors">
+                          <Car className="mr-2 h-5 w-5 text-gray-500" />
+                          <SelectValue placeholder="Select a vehicle" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {vehicles.map(vehicle => (
+                          <SelectItem key={vehicle.id} value={vehicle.id}>
+                            {vehicle.name} - {vehicle.capacity} seats
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
                 )}
+              />
 
-                <div className="flex gap-2">
-                  <Button 
-                    type="button"
-                    variant="outline" 
-                    onClick={prevStep} 
-                    className="w-1/2 hover:bg-gray-100 transition-colors"
-                  >
-                    Back
-                  </Button>
-                  <Button 
-                    type="submit" 
-                    className="w-1/2 bg-black text-white hover:bg-gray-900 transform active:scale-95 transition-transform duration-200 shadow-md hover:shadow-lg" 
-                    disabled={!watchVehicleId}
-                  >
-                    Book Now
-                  </Button>
+              {selectedVehicle && (
+                <div className="p-4 border rounded-lg bg-gray-50 hover:shadow-md transition-all duration-300">
+                  <h3 className="font-semibold">{selectedVehicle.name}</h3>
+                  <div className="text-sm text-gray-600 mt-1">
+                    <p>Capacity: {selectedVehicle.capacity} passengers</p>
+                    <p>Price: ₦{selectedVehicle.price.toLocaleString()}</p>
+                    {bookingType === 'join' && (
+                      <p>Your Price: ₦{Math.round(selectedVehicle.price / selectedVehicle.capacity).toLocaleString()} per person</p>
+                    )}
+                  </div>
                 </div>
+              )}
+
+              <div className="flex gap-2">
+                <Button 
+                  type="button"
+                  variant="outline" 
+                  onClick={prevStep} 
+                  className="w-1/2 hover:bg-gray-100 transition-colors"
+                >
+                  Back
+                </Button>
+                <Button 
+                  type="submit" 
+                  className="w-1/2 bg-black text-white hover:bg-gray-900 transform active:scale-95 transition-transform duration-200 shadow-md hover:shadow-lg" 
+                  disabled={!watchVehicleId}
+                >
+                  Book Now
+                </Button>
               </div>
-            )}
-          </form>
-        </Form>
-      </div>
-    </Card>
+            </div>
+          )}
+        </form>
+      </Form>
+    </div>
   );
 };
 

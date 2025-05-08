@@ -40,7 +40,7 @@ const Navbar = () => {
       {menuItems.map((item) => (
         <NavigationMenuItem key={item.label}>
           <Link to={item.path}>
-            <div className="flex items-center gap-2 px-4 py-2 text-white hover:bg-black/20 rounded-md transition-all duration-200">
+            <div className="flex items-center gap-2 px-4 py-2 text-black hover:bg-gray-100 rounded-md transition-all duration-200">
               <item.icon className="h-4 w-4" />
               <span>{item.label}</span>
             </div>
@@ -53,17 +53,17 @@ const Navbar = () => {
   const renderMobileMenu = () => (
     <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="text-white hover:bg-black/20 md:hidden">
+        <Button variant="ghost" size="icon" className="text-black hover:bg-gray-100 md:hidden">
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-full h-full p-0 m-0 max-w-full bg-black text-white border-none">
-        <div className="flex justify-between items-center py-4 px-6 border-b border-gray-800">
+      <SheetContent side="right" className="w-full h-full p-0 m-0 max-w-full bg-white text-black border-none">
+        <div className="flex justify-between items-center py-4 px-6 border-b border-gray-200">
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
-            <span className="text-white font-bold text-2xl tracking-tight">CampusRide</span>
+            <span className="text-black font-bold text-2xl tracking-tight">CampusRide</span>
           </Link>
           <SheetClose asChild>
-            <Button variant="ghost" size="icon" className="text-white hover:bg-gray-800">
+            <Button variant="ghost" size="icon" className="text-black hover:bg-gray-100">
               <X className="h-6 w-6" />
             </Button>
           </SheetClose>
@@ -72,7 +72,7 @@ const Navbar = () => {
           {menuItems.map((item) => (
             <SheetClose asChild key={item.label}>
               <Link to={item.path}>
-                <div className="py-6 px-6 flex items-center hover:bg-gray-900 transition-colors">
+                <div className="py-6 px-6 flex items-center hover:bg-gray-100 transition-colors">
                   <item.icon className="mr-5 h-7 w-7" />
                   <span className="text-2xl font-medium">{item.label}</span>
                 </div>
@@ -82,7 +82,7 @@ const Navbar = () => {
           {isAuthenticated && (
             <SheetClose asChild>
               <Link to="/dashboard">
-                <div className="py-6 px-6 flex items-center hover:bg-gray-900 transition-colors">
+                <div className="py-6 px-6 flex items-center hover:bg-gray-100 transition-colors">
                   <User className="mr-5 h-7 w-7" />
                   <span className="text-2xl font-medium">Dashboard</span>
                 </div>
@@ -95,11 +95,11 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-black py-3 px-6 sticky top-0 z-50">
+    <nav className="bg-white py-3 px-6 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <Link to="/">
-            <span className="text-white font-bold text-2xl tracking-tight">CampusRide</span>
+            <span className="text-black font-bold text-2xl tracking-tight">CampusRide</span>
           </Link>
         </div>
         
@@ -120,13 +120,13 @@ const Navbar = () => {
             <div className="flex items-center space-x-2">
               {isAuthenticated ? (
                 <Link to="/dashboard">
-                  <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100 transition-colors">
+                  <Button variant="default" size="sm" className="bg-black text-white hover:bg-gray-800 transition-colors">
                     Dashboard
                   </Button>
                 </Link>
               ) : (
                 <Link to="/signin">
-                  <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100 transition-colors">
+                  <Button variant="default" size="sm" className="bg-black text-white hover:bg-gray-800 transition-colors">
                     Sign In
                   </Button>
                 </Link>

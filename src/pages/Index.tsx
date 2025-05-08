@@ -23,11 +23,7 @@ const Index = () => {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
                 Campus Travel <br />Made Easy
               </h1>
-              <p className="text-xl text-gray-300 max-w-2xl mb-8">
-                Book affordable rides to and from your university with just a few clicks.
-                Join existing rides or book a full vehicle for your journey.
-              </p>
-              <div className="bg-white rounded-lg p-6 shadow-lg">
+              <div className="bg-white rounded-lg p-6 shadow-lg w-full">
                 <RideBookingFormNew />
               </div>
             </div>
