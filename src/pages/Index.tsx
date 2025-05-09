@@ -29,14 +29,14 @@ const Index = () => {
                 Safe and reliable transport for students
               </p>
               <Link to="/how-it-works">
-                <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200 rounded-[3.5rem] md:rounded-[5.5rem]">
+                <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200 rounded-md md:rounded-[3.5rem]">
                   Learn how it works
                 </Button>
               </Link>
             </div>
             
-            {/* Booking form with added spacing */}
-            <div className="bg-white p-6 rounded-[3.5rem] md:rounded-[5.5rem] shadow-sm hover:shadow-md transition-all duration-300">
+            {/* Booking form with added spacing - rounded corners only on non-mobile */}
+            <div className="bg-white rounded-lg md:rounded-[5.5rem] shadow-sm hover:shadow-md transition-all duration-300 p-6">
               <RideBookingFormNew />
             </div>
           </div>
@@ -49,11 +49,11 @@ const Index = () => {
         
         {/* Available rides section */}
         <div className="mb-16">
-          <div className="bg-white rounded-[3.5rem] md:rounded-[5.5rem] shadow-sm hover:shadow-md transition-all duration-300 p-6">
+          <div className="bg-white rounded-lg md:rounded-[5.5rem] shadow-sm hover:shadow-md transition-all duration-300 p-6">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="book" className="data-[state=active]:bg-black data-[state=active]:text-white rounded-[3rem]">Available Rides</TabsTrigger>
-                <TabsTrigger value="schedule" className="data-[state=active]:bg-black data-[state=active]:text-white rounded-[3rem]">How It Works</TabsTrigger>
+                <TabsTrigger value="book" className="data-[state=active]:bg-black data-[state=active]:text-white rounded-md md:rounded-[3rem]">Available Rides</TabsTrigger>
+                <TabsTrigger value="schedule" className="data-[state=active]:bg-black data-[state=active]:text-white rounded-md md:rounded-[3rem]">How It Works</TabsTrigger>
               </TabsList>
               <TabsContent value="book" className="mt-4">
                 <AvailableRides />
@@ -64,7 +64,7 @@ const Index = () => {
                   
                   <div className="grid grid-cols-1 gap-4">
                     <div className="flex items-start">
-                      <div className="bg-campusorange-100 rounded-[3rem] p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
+                      <div className="bg-campusorange-100 rounded-full md:rounded-[3rem] p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
                         <MapPin className="h-6 w-6 text-campusorange-600" />
                       </div>
                       <div>
@@ -76,7 +76,7 @@ const Index = () => {
                     </div>
                     
                     <div className="flex items-start">
-                      <div className="bg-campusorange-100 rounded-[3rem] p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
+                      <div className="bg-campusorange-100 rounded-full md:rounded-[3rem] p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
                         <Calendar className="h-6 w-6 text-campusorange-600" />
                       </div>
                       <div>
@@ -88,7 +88,7 @@ const Index = () => {
                     </div>
                     
                     <div className="flex items-start">
-                      <div className="bg-campusorange-100 rounded-[3rem] p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
+                      <div className="bg-campusorange-100 rounded-full md:rounded-[3rem] p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
                         <Car className="h-6 w-6 text-campusorange-600" />
                       </div>
                       <div>
@@ -100,7 +100,7 @@ const Index = () => {
                     </div>
                     
                     <div className="flex items-start">
-                      <div className="bg-campusorange-100 rounded-[3rem] p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
+                      <div className="bg-campusorange-100 rounded-full md:rounded-[3rem] p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
                         <CreditCard className="h-6 w-6 text-campusorange-600" />
                       </div>
                       <div>
@@ -113,7 +113,7 @@ const Index = () => {
                     
                     <div className="mt-4 text-center">
                       <Link to="/how-it-works">
-                        <Button variant="outline" size="sm" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200 rounded-[3rem]">
+                        <Button variant="outline" size="sm" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200 rounded-md md:rounded-[3rem]">
                           Learn more
                         </Button>
                       </Link>
@@ -129,8 +129,8 @@ const Index = () => {
         <div className="mt-16">
           <h2 className="text-2xl font-bold text-center mb-8 text-campusorange-700">Why Choose CampusRide?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-[3.5rem] md:rounded-[5.5rem] shadow-sm hover:shadow-lg transition-all duration-300">
-              <div className="bg-campusorange-100 w-12 h-12 rounded-[3rem] flex items-center justify-center mb-4 hover:shadow-glow-orange transition-all duration-300">
+            <div className="bg-white p-6 rounded-lg md:rounded-[5.5rem] shadow-sm hover:shadow-lg transition-all duration-300">
+              <div className="bg-campusorange-100 w-12 h-12 rounded-full md:rounded-[3rem] flex items-center justify-center mb-4 hover:shadow-glow-orange transition-all duration-300">
                 <Users className="h-6 w-6 text-campusorange-600" />
               </div>
               <h3 className="font-bold text-lg mb-2">Share & Save</h3>
@@ -139,8 +139,8 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="bg-white p-6 rounded-[3.5rem] md:rounded-[5.5rem] shadow-sm hover:shadow-lg transition-all duration-300">
-              <div className="bg-campusorange-100 w-12 h-12 rounded-[3rem] flex items-center justify-center mb-4 hover:shadow-glow-orange transition-all duration-300">
+            <div className="bg-white p-6 rounded-lg md:rounded-[5.5rem] shadow-sm hover:shadow-lg transition-all duration-300">
+              <div className="bg-campusorange-100 w-12 h-12 rounded-full md:rounded-[3rem] flex items-center justify-center mb-4 hover:shadow-glow-orange transition-all duration-300">
                 <Car className="h-6 w-6 text-campusorange-600" />
               </div>
               <h3 className="font-bold text-lg mb-2">Vehicle Options</h3>
@@ -149,8 +149,8 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="bg-white p-6 rounded-[3.5rem] md:rounded-[5.5rem] shadow-sm hover:shadow-lg transition-all duration-300">
-              <div className="bg-campusorange-100 w-12 h-12 rounded-[3rem] flex items-center justify-center mb-4 hover:shadow-glow-orange transition-all duration-300">
+            <div className="bg-white p-6 rounded-lg md:rounded-[5.5rem] shadow-sm hover:shadow-lg transition-all duration-300">
+              <div className="bg-campusorange-100 w-12 h-12 rounded-full md:rounded-[3rem] flex items-center justify-center mb-4 hover:shadow-glow-orange transition-all duration-300">
                 <MapPin className="h-6 w-6 text-campusorange-600" />
               </div>
               <h3 className="font-bold text-lg mb-2">Campus Focused</h3>
