@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { 
@@ -98,7 +97,7 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
   return (
     <div className="relative space-y-3">
       <div className="flex items-center space-x-2">
-        <div className={`flex items-center justify-center w-8 h-8 rounded-full ${type === "from" ? "bg-black" : "bg-gray-800"}`}>
+        <div className={`flex items-center justify-center w-8 h-8 rounded-[3rem] ${type === "from" ? "bg-black" : "bg-gray-800"}`}>
           {type === "from" ? (
             <ArrowRight className="h-4 w-4 text-white" />
           ) : (
@@ -122,7 +121,7 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
                 }
               }}
               disabled={otherLocationType === "university"}
-              className={`${locationType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed`}
+              className={`${locationType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-[3rem] hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               <University className={`h-4 w-4 mr-1 ${locationType === "university" ? "text-white" : "text-black"}`} />
               University
@@ -137,7 +136,7 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
                 }
               }}
               disabled={otherLocationType === "state"}
-              className={`${locationType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed`}
+              className={`${locationType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-[3rem] hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               <Flag className={`h-4 w-4 mr-1 ${locationType === "state" ? "text-white" : "text-black"}`} />
               State
@@ -187,4 +186,3 @@ const LocationSearch = ({ type, value, onChange, otherLocationType }: LocationSe
 };
 
 export default LocationSearch;
-
