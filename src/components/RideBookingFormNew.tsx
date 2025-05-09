@@ -152,7 +152,7 @@ const RideBookingFormNew = () => {
   };
 
   return (
-    <Card className="w-full max-w-md shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg md:rounded-[5.5rem]">
+    <Card className="w-full max-w-md shadow-lg hover:shadow-xl transition-all duration-300">
       <div className="p-6">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Book Your Campus Ride</h2>
         
