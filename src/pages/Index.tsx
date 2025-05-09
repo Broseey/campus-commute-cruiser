@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import AvailableRides from "@/components/AvailableRides";
@@ -22,14 +21,10 @@ const Index = () => {
           <div className="flex flex-col justify-center">
             {/* Left column - Heading and form with better spacing */}
             <div className="text-left mb-10 max-w-xl">
-              <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight leading-none">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-none">
                 Campus Rides Made Easy
               </h1>
-              <p className="text-gray-600 text-lg md:text-xl mb-6 leading-relaxed max-w-lg">
-                Book affordable rides to and from your university with just a few clicks.
-                Join existing rides or book a full vehicle for your journey.
-              </p>
-              <p className="text-campusorange-600 font-medium text-lg mb-8">
+              <p className="text-campusorange-600 font-medium text-base mb-8">
                 Safe and reliable transport for students
               </p>
               <Link to="/how-it-works">
@@ -40,7 +35,7 @@ const Index = () => {
             </div>
             
             {/* Booking form with added spacing */}
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="bg-white p-6 rounded-[3.5rem] md:rounded-[5.5rem] shadow-sm hover:shadow-md transition-all duration-300">
               <RideBookingFormNew />
             </div>
           </div>
@@ -53,7 +48,7 @@ const Index = () => {
         
         {/* Available rides section */}
         <div className="mb-16">
-          <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-6">
+          <div className="bg-white rounded-[3.5rem] md:rounded-[5.5rem] shadow-sm hover:shadow-md transition-all duration-300 p-6">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="book" className="data-[state=active]:bg-black data-[state=active]:text-white">Available Rides</TabsTrigger>
@@ -133,7 +128,7 @@ const Index = () => {
         <div className="mt-16">
           <h2 className="text-2xl font-bold text-center mb-8 text-campusorange-700">Why Choose CampusRide?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-all duration-300">
+            <div className="bg-white p-6 rounded-[3.5rem] md:rounded-[5.5rem] shadow-sm hover:shadow-lg transition-all duration-300">
               <div className="bg-campusorange-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4 hover:shadow-glow-orange transition-all duration-300">
                 <Users className="h-6 w-6 text-campusorange-600" />
               </div>
@@ -143,7 +138,7 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-all duration-300">
+            <div className="bg-white p-6 rounded-[3.5rem] md:rounded-[5.5rem] shadow-sm hover:shadow-lg transition-all duration-300">
               <div className="bg-campusorange-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4 hover:shadow-glow-orange transition-all duration-300">
                 <Car className="h-6 w-6 text-campusorange-600" />
               </div>
@@ -153,7 +148,7 @@ const Index = () => {
               </p>
             </div>
             
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-all duration-300">
+            <div className="bg-white p-6 rounded-[3.5rem] md:rounded-[5.5rem] shadow-sm hover:shadow-lg transition-all duration-300">
               <div className="bg-campusorange-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4 hover:shadow-glow-orange transition-all duration-300">
                 <MapPin className="h-6 w-6 text-campusorange-600" />
               </div>
