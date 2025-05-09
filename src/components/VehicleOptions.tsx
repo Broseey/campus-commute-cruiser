@@ -58,7 +58,7 @@ const VehicleOptions = ({ selectedVehicle, onSelect }: VehicleOptionsProps) => {
       {vehicles.map((vehicle) => (
         <Card 
           key={vehicle.id}
-          className={`p-4 cursor-pointer transition-all ${
+          className={`p-4 cursor-pointer transition-all rounded-[3.5rem] md:rounded-[5.5rem] ${
             selectedVehicle === vehicle.id 
               ? "border-purple-600 bg-purple-50"
               : "hover:border-gray-300"

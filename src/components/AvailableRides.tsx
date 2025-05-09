@@ -51,7 +51,7 @@ const AvailableRides = () => {
       <h2 className="text-xl font-semibold mb-4">Available Rides</h2>
       <div className="space-y-4">
         {sampleRides.map(ride => (
-          <Card key={ride.id} className="p-4 hover:shadow-md transition-shadow">
+          <Card key={ride.id} className="p-4 hover:shadow-md transition-shadow rounded-[3.5rem] md:rounded-[5.5rem]">
             <div className="flex flex-col md:flex-row md:items-center justify-between">
               <div className="flex-1">
                 <div className="flex items-center text-lg font-medium mb-2">
@@ -90,7 +90,7 @@ const AvailableRides = () => {
                 <Link to="/signin">
                   <Button 
                     size="sm" 
-                    className="bg-campusorange-700 hover:bg-campusorange-800"
+                    className="bg-campusorange-700 hover:bg-campusorange-800 rounded-[3rem]"
                   >
                     Book Seat
                   </Button>
