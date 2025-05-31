@@ -36,7 +36,7 @@ const Index = () => {
             </div>
             
             {/* Booking form with added spacing */}
-            <div className="bg-white rounded-[3.5rem] md:rounded-[5.5rem] shadow-sm hover:shadow-md transition-all duration-300">
+            <div className="bg-transparent rounded-[3.5rem] md:rounded-[5.5rem] shadow-sm hover:shadow-md transition-all duration-300">
               <RideBookingFormNew />
             </div>
           </div>
