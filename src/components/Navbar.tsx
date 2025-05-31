@@ -28,7 +28,7 @@ const Navbar = () => {
   const isAuthenticated = false;
 
   const menuItems = [
-    { icon: Home, label: "Home", path: "/" },
+    // { icon: Home, label: "Home", path: "/" },
     { icon: Car, label: "My Rides", path: "/my-rides" },
     { icon: Calendar, label: "Schedule", path: "/schedule" },
     { icon: HelpCircle, label: "How It Works", path: "/how-it-works" },
