@@ -54,7 +54,7 @@ const Navbar = () => {
     <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="text-white hover:opacity-80 md:hidden">
-          <Menu className="h-7 w-7" />
+          <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="w-full h-full p-0 m-0 max-w-full bg-black text-black border-none">
@@ -78,7 +78,7 @@ const Navbar = () => {
             )}
             <SheetClose asChild>
               <Button variant="ghost" size="icon" className="text-black hover:opacity-80 bg-transparent">
-                <X className="h-7 w-7" />
+                <X className="h-6 w-6" />
               </Button>
             </SheetClose>
           </div>
