@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const QuickActions = () => {
   return (
     <div className="grid grid-cols-2 gap-3">
-      <Link to="/" className="w-full">
+      <Link to="/book" className="w-full">
         <Button className="w-full bg-black text-white hover:bg-neutral-800 h-14 text-base rounded-[3.5rem] md:rounded-[5.5rem]">
           <Car className="mr-2 h-5 w-5" />
           Book a Ride

@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { User, Menu, Car, Calendar, HelpCircle, Info, LogIn, X, ChevronDown, LogOut, Settings } from "lucide-react";
@@ -29,8 +30,9 @@ const Navbar = () => {
   const isMobile = useIsMobile();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Changed to false so it shows the regular menu by default
-  const isAuthenticated = false;
+  // For demo purposes - in a real app, this would come from authentication context
+  // Set to true to test the logged-in state, false for logged-out state
+  const isAuthenticated = true;
   const currentUser = {
     name: "John Doe",
     email: "john.doe@unilag.edu.ng",
