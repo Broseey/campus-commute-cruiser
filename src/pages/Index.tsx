@@ -127,7 +127,7 @@ const Index = () => {
         
         {/* Features section */}
         <div className="mt-16">
-          <h2 className="text-2xl font-bold text-center mb-8 text-campusorange-700">Why Choose CampusRide?</h2>
+          <h2 className="text-2xl font-bold text-center mb-8 text-campusorange-700">Why Choose Uniride?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-[3.5rem] md:rounded-[5.5rem] shadow-sm hover:shadow-lg transition-all duration-300">
               <div className="bg-campusorange-100 w-12 h-12 rounded-[3rem] flex items-center justify-center mb-4 hover:shadow-glow-orange transition-all duration-300">
@@ -165,7 +165,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-white py-6 mt-16">
         <div className="max-w-7xl mx-auto px-4 text-center text-gray-500">
-          <p>© 2023 CampusRide. All rights reserved.</p>
+          <p>© 2023 Uniride. All rights reserved.</p>
         </div>
       </footer>
       

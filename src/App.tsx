@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import HowItWorks from "./pages/HowItWorks";
 import Dashboard from "./pages/Dashboard";
 import MyRides from "./pages/MyRides";
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/booking-confirmation" element={<BookingConfirmation />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/my-rides" element={<MyRides />} />

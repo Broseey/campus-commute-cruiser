@@ -77,7 +77,7 @@ const Navbar = () => {
           {/* Header with close button */}
           <div className="flex justify-between items-center py-4 px-6 border-b border-gray-700">
             <Link to="/" onClick={() => setIsMenuOpen(false)}>
-              <span className="text-white font-bold text-2xl tracking-tight">CampusRide</span>
+              <span className="text-white font-bold text-2xl tracking-tight">Uniride</span>
             </Link>
             <SheetClose asChild>
               <Button variant="ghost" size="icon" className="text-white hover:opacity-80 bg-transparent">
@@ -119,7 +119,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <Link to="/">
-            <span className="text-white font-bold text-2xl tracking-tight">CampusRide</span>
+            <span className="text-white font-bold text-2xl tracking-tight">Uniride</span>
           </Link>
         </div>
         
@@ -136,20 +136,27 @@ const Navbar = () => {
         
         {/* Mobile menu and auth buttons - shows when screen width < 900px */}
         {isMobileMenu ? (
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2">
             {/* Auth buttons next to hamburger menu */}
             {isAuthenticated ? (
               <Link to="/dashboard">
-                <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100 text-sm px-3 py-1">
+                <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100 text-sm px-3 py-1 font-medium">
                   Dashboard
                 </Button>
               </Link>
             ) : (
-              <Link to="/signin">
-                <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100 text-sm px-3 py-1">
-                  Sign In
-                </Button>
-              </Link>
+              <div className="flex items-center space-x-2">
+                <Link to="/signin">
+                  <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 text-sm px-3 py-1 font-medium border-none">
+                    Log in
+                  </Button>
+                </Link>
+                <Link to="/signup">
+                  <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100 text-sm px-3 py-1 font-medium">
+                    Sign up
+                  </Button>
+                </Link>
+              </div>
             )}
             {renderMobileMenu()}
           </div>
@@ -158,16 +165,23 @@ const Navbar = () => {
           <div className="flex items-center space-x-2">
             {isAuthenticated ? (
               <Link to="/dashboard">
-                <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100">
+                <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100 font-medium">
                   Dashboard
                 </Button>
               </Link>
             ) : (
-              <Link to="/signin">
-                <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100">
-                  Sign In
-                </Button>
-              </Link>
+              <div className="flex items-center space-x-2">
+                <Link to="/signin">
+                  <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 font-medium border-none">
+                    Log in
+                  </Button>
+                </Link>
+                <Link to="/signup">
+                  <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100 font-medium">
+                    Sign up
+                  </Button>
+                </Link>
+              </div>
             )}
           </div>
         )}
