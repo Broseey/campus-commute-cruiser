@@ -4,10 +4,10 @@ import Navbar from "@/components/Navbar";
 import AvailableRides from "@/components/AvailableRides";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Car, Calendar, CreditCard, MapPin, Users } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import RideBookingFormNew from "@/components/RideBookingFormNew";
 import HeroImage from "@/components/HeroImage";
+import ProtectedLink from "@/components/ProtectedLink";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("book");
@@ -28,14 +28,14 @@ const Index = () => {
               <p className="text-campusorange-600 font-medium text-base mb-8">
                 Safe and reliable transport for students
               </p>
-              <Link to="/how-it-works">
+              <ProtectedLink to="/how-it-works" requireAuth={false}>
                 <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200 rounded-[3.5rem] md:rounded-[5.5rem]">
                   Learn how it works
                 </Button>
-              </Link>
+              </ProtectedLink>
             </div>
             
-            {/* Booking form with added spacing */}
+            {/* Booking form with added spacing - This will be protected through the form itself */}
             <div className="bg-transparent rounded-[3.5rem] md:rounded-[5.5rem] transition-all duration-300">
               <RideBookingFormNew />
             </div>
@@ -112,11 +112,11 @@ const Index = () => {
                     </div>
                     
                     <div className="mt-4 text-center">
-                      <Link to="/how-it-works">
+                      <ProtectedLink to="/how-it-works" requireAuth={false}>
                         <Button variant="outline" size="sm" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200 rounded-[3rem]">
                           Learn more
                         </Button>
-                      </Link>
+                      </ProtectedLink>
                     </div>
                   </div>
                 </div>

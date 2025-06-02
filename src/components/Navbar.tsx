@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { User, Menu, Car, Calendar, HelpCircle, Info, LogIn, X, ChevronDown, LogOut, Settings } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -28,11 +28,12 @@ import {
 
 const Navbar = () => {
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // For demo purposes - in a real app, this would come from authentication context
-  // Set to true to test the logged-in state, false for logged-out state
-  const isAuthenticated = true;
+  // Set to false to show the regular menu, true for logged-in state
+  const isAuthenticated = false;
   const currentUser = {
     name: "John Doe",
     email: "john.doe@unilag.edu.ng",
@@ -53,23 +54,50 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  const menuItems = [
-    { icon: Car, label: "My Rides", path: "/my-rides" },
-    { icon: Calendar, label: "Schedule", path: "/schedule" },
-    { icon: HelpCircle, label: "Help", path: "/help" },
-    { icon: Info, label: "About", path: "/about" },
+  // Protected route handler
+  const handleProtectedRoute = (path: string) => {
+    if (!isAuthenticated) {
+      navigate('/signin');
+      return;
+    }
+    navigate(path);
+  };
+
+  // Menu items for authenticated users
+  const authenticatedMenuItems = [
+    { icon: Car, label: "My Rides", path: "/my-rides", protected: true },
+    { icon: Calendar, label: "Schedule", path: "/schedule", protected: true },
+    { icon: HelpCircle, label: "Help", path: "/help", protected: false },
+    { icon: Info, label: "About", path: "/about", protected: false },
   ];
+
+  // Menu items for non-authenticated users (only public pages)
+  const publicMenuItems = [
+    { icon: HelpCircle, label: "Help", path: "/help", protected: false },
+    { icon: Info, label: "About", path: "/about", protected: false },
+  ];
+
+  const menuItems = isAuthenticated ? authenticatedMenuItems : publicMenuItems;
+
+  const handleMenuItemClick = (item: typeof menuItems[0]) => {
+    if (item.protected && !isAuthenticated) {
+      navigate('/signin');
+    } else {
+      navigate(item.path);
+    }
+  };
 
   const renderDesktopMenuItems = () => (
     <>
       {menuItems.map((item) => (
         <NavigationMenuItem key={item.label}>
-          <Link to={item.path}>
-            <div className="flex items-center gap-2 px-4 py-2 text-white hover:opacity-80 transition-opacity">
-              <item.icon className="h-4 w-4" />
-              <span>{item.label}</span>
-            </div>
-          </Link>
+          <div 
+            onClick={() => handleMenuItemClick(item)}
+            className="flex items-center gap-2 px-4 py-2 text-white hover:opacity-80 transition-opacity cursor-pointer"
+          >
+            <item.icon className="h-4 w-4" />
+            <span>{item.label}</span>
+          </div>
         </NavigationMenuItem>
       ))}
     </>
@@ -100,22 +128,24 @@ const Navbar = () => {
           <div className="flex-1 pt-8">
             {menuItems.map((item) => (
               <SheetClose asChild key={item.label}>
-                <Link to={item.path}>
-                  <div className="py-6 px-6 flex items-center hover:bg-gray-900">
-                    <item.icon className="mr-5 h-6 w-6" />
-                    <span className="text-xl font-medium">{item.label}</span>
-                  </div>
-                </Link>
+                <div 
+                  onClick={() => handleMenuItemClick(item)}
+                  className="py-6 px-6 flex items-center hover:bg-gray-900 cursor-pointer"
+                >
+                  <item.icon className="mr-5 h-6 w-6" />
+                  <span className="text-xl font-medium">{item.label}</span>
+                </div>
               </SheetClose>
             ))}
             {isAuthenticated && (
               <SheetClose asChild>
-                <Link to="/dashboard">
-                  <div className="py-6 px-6 flex items-center hover:bg-gray-900">
-                    <User className="mr-5 h-6 w-6" />
-                    <span className="text-xl font-medium">Dashboard</span>
-                  </div>
-                </Link>
+                <div 
+                  onClick={() => navigate('/dashboard')}
+                  className="py-6 px-6 flex items-center hover:bg-gray-900 cursor-pointer"
+                >
+                  <User className="mr-5 h-6 w-6" />
+                  <span className="text-xl font-medium">Dashboard</span>
+                </div>
               </SheetClose>
             )}
           </div>
@@ -142,17 +172,13 @@ const Navbar = () => {
           <p className="font-medium">{currentUser.name}</p>
           <p className="text-sm text-gray-500">{currentUser.email}</p>
         </div>
-        <DropdownMenuItem asChild>
-          <Link to="/dashboard" className="cursor-pointer">
-            <User className="mr-2 h-4 w-4" />
-            Dashboard
-          </Link>
+        <DropdownMenuItem onClick={() => navigate('/dashboard')}>
+          <User className="mr-2 h-4 w-4" />
+          Dashboard
         </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link to="/my-rides" className="cursor-pointer">
-            <Car className="mr-2 h-4 w-4" />
-            My Rides
-          </Link>
+        <DropdownMenuItem onClick={() => navigate('/my-rides')}>
+          <Car className="mr-2 h-4 w-4" />
+          My Rides
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Settings className="mr-2 h-4 w-4" />
