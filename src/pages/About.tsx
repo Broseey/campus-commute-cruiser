@@ -2,124 +2,161 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { Car, Users, Shield, Mail, Phone, MapPin } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Car, Users, Shield, Globe, Zap, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-black text-white">
       <Navbar />
       
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">About CampusRide</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Connecting students with safe, affordable transportation between universities and major cities across Nigeria.
+      {/* Hero Section */}
+      <div className="relative py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            We reimagine the way the world moves for the better
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            Movement is what we power. It's our lifeblood. It runs through our veins. 
+            It's what gets us out of bed each morning. It pushes us to constantly reimagine 
+            how we can move better.
           </p>
         </div>
-        
-        {/* Our Story Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-center">Our Story</h2>
-          <div className="bg-white rounded-lg shadow-sm p-8">
-            <p className="text-lg mb-4">
-              CampusRide was founded in 2021 by a group of university graduates who experienced firsthand the challenges of finding reliable and affordable transportation to and from campus.
-            </p>
-            <p className="text-lg mb-4">
-              What started as a small carpool coordination effort among friends has grown into a comprehensive ride-sharing platform serving multiple universities across Nigeria.
-            </p>
-            <p className="text-lg">
-              Today, CampusRide connects thousands of students with drivers offering rides between campuses and major cities, making travel more accessible, affordable, and environmentally friendly.
-            </p>
+      </div>
+
+      {/* Stats Section */}
+      <div className="bg-white text-black py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-4xl font-bold mb-2">1M+</div>
+              <div className="text-gray-600">Rides completed</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2">50+</div>
+              <div className="text-gray-600">Universities</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2">100K+</div>
+              <div className="text-gray-600">Active users</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2">15+</div>
+              <div className="text-gray-600">Cities</div>
+            </div>
           </div>
         </div>
-        
-        {/* Our Mission Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-center">Our Mission</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-              <div className="bg-black text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Car className="h-8 w-8" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Accessibility</h3>
-              <p className="text-gray-600">
-                Make transportation accessible to all students regardless of their budget or location.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-              <div className="bg-black text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Community</h3>
-              <p className="text-gray-600">
-                Build a trusted community of students and drivers to make travel safer and more social.
-              </p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg shadow-sm text-center">
-              <div className="bg-black text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+      </div>
+
+      {/* Our Mission */}
+      <div className="py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Our mission</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              We ignite opportunity by setting the world in motion. We take on big problems 
+              to help drivers, riders, eaters, and cities go further.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="bg-gray-900 border-gray-800">
+              <CardContent className="p-8 text-center">
+                <div className="bg-white text-black w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Car className="h-8 w-8" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-white">For Students</h3>
+                <p className="text-gray-300">
+                  Safe, reliable, and affordable transportation to get you where you need to go.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gray-900 border-gray-800">
+              <CardContent className="p-8 text-center">
+                <div className="bg-white text-black w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Users className="h-8 w-8" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-white">For Drivers</h3>
+                <p className="text-gray-300">
+                  Flexible earning opportunities that work around your schedule.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-gray-900 border-gray-800">
+              <CardContent className="p-8 text-center">
+                <div className="bg-white text-black w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Globe className="h-8 w-8" />
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-white">For Cities</h3>
+                <p className="text-gray-300">
+                  Reducing traffic congestion and environmental impact through shared rides.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+
+      {/* Our Values */}
+      <div className="bg-gray-900 py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">Our values</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="bg-white text-black w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Shield className="h-8 w-8" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Safety</h3>
-              <p className="text-gray-600">
-                Prioritize safety through driver verification, ratings, and community feedback.
+              <h3 className="text-xl font-bold mb-4">Safety First</h3>
+              <p className="text-gray-300">
+                We never compromise on safety. Every driver is verified and every ride is tracked.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="bg-white text-black w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Zap className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Innovation</h3>
+              <p className="text-gray-300">
+                We're constantly improving our platform to serve you better.
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="bg-white text-black w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Heart className="h-8 w-8" />
+              </div>
+              <h3 className="text-xl font-bold mb-4">Community</h3>
+              <p className="text-gray-300">
+                Building connections and trust within the student community.
               </p>
             </div>
           </div>
         </div>
-        
-        {/* Team Section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-center">Our Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {["Emmanuel Oladele", "Sarah Musa", "David Kalu"].map((name, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-sm text-center">
-                <div className="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4"></div>
-                <h3 className="text-xl font-semibold">{name}</h3>
-                <p className="text-gray-600 mb-2">Co-Founder</p>
-                <p className="text-sm text-gray-500">
-                  Graduate of University of {index === 0 ? "Lagos" : index === 1 ? "Abuja" : "Port Harcourt"}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-        
-        {/* Contact Section */}
-        <div>
-          <h2 className="text-3xl font-bold mb-6 text-center">Contact Us</h2>
-          <div className="bg-white rounded-lg shadow-sm p-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Get in Touch</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <Mail className="h-5 w-5 mr-3 text-gray-500" />
-                    <p>hello@campusride.com</p>
-                  </div>
-                  <div className="flex items-center">
-                    <Phone className="h-5 w-5 mr-3 text-gray-500" />
-                    <p>+234 800 123 4567</p>
-                  </div>
-                  <div className="flex items-center">
-                    <MapPin className="h-5 w-5 mr-3 text-gray-500" />
-                    <p>123 Innovation Hub, Yaba, Lagos</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Partner With Us</h3>
-                <p className="text-gray-600 mb-4">
-                  Are you a university administrator or a transportation company? 
-                  Partner with CampusRide to provide better transportation options for students.
-                </p>
-                <Button className="bg-black text-white hover:bg-neutral-800">
-                  Become a Partner
-                </Button>
-              </div>
-            </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="bg-white text-black py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to get moving?</h2>
+          <p className="text-xl text-gray-600 mb-8">
+            Join thousands of students already using Uniride for their transportation needs.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/signup">
+              <Button size="lg" className="bg-black text-white hover:bg-gray-800">
+                Get started
+              </Button>
+            </Link>
+            <Link to="/how-it-works">
+              <Button size="lg" variant="outline" className="border-black text-black hover:bg-gray-100">
+                Learn more
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

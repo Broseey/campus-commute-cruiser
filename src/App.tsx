@@ -14,6 +14,9 @@ import Dashboard from "./pages/Dashboard";
 import MyRides from "./pages/MyRides";
 import Schedule from "./pages/Schedule";
 import About from "./pages/About";
+import Help from "./pages/Help";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +36,9 @@ const App = () => (
           <Route path="/my-rides" element={<MyRides />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/about" element={<About />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

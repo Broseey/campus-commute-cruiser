@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { User, Menu, Home, Car, Calendar, HelpCircle, Info, LogIn, X } from "lucide-react";
+import { User, Menu, Car, Calendar, HelpCircle, Info, LogIn, X, ChevronDown, LogOut, Settings } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 import {
@@ -18,15 +18,26 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const isMobile = useIsMobile();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  // For demo purposes, let's assume the user is authenticated
-  // In a real application, you would check authentication status
-  const isAuthenticated = false;
+  // For demo purposes - in a real app, this would come from authentication context
+  // Set to true to test the logged-in state, false for logged-out state
+  const isAuthenticated = true;
+  const currentUser = {
+    name: "John Doe",
+    email: "john.doe@unilag.edu.ng",
+    avatar: null
+  };
 
   // Custom hook to check if screen width is less than 900px
   const [isMobileMenu, setIsMobileMenu] = useState(false);
@@ -43,10 +54,9 @@ const Navbar = () => {
   }, []);
 
   const menuItems = [
-    // { icon: Home, label: "Home", path: "/" },
     { icon: Car, label: "My Rides", path: "/my-rides" },
     { icon: Calendar, label: "Schedule", path: "/schedule" },
-    { icon: HelpCircle, label: "How It Works", path: "/how-it-works" },
+    { icon: HelpCircle, label: "Help", path: "/help" },
     { icon: Info, label: "About", path: "/about" },
   ];
 
@@ -114,6 +124,49 @@ const Navbar = () => {
     </Sheet>
   );
 
+  const UserMenu = () => (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="text-white hover:bg-white/10 border-none">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+              <User className="h-4 w-4" />
+            </div>
+            <span className="font-medium">{currentUser.name}</span>
+            <ChevronDown className="h-4 w-4" />
+          </div>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        <div className="px-3 py-2 border-b">
+          <p className="font-medium">{currentUser.name}</p>
+          <p className="text-sm text-gray-500">{currentUser.email}</p>
+        </div>
+        <DropdownMenuItem asChild>
+          <Link to="/dashboard" className="cursor-pointer">
+            <User className="mr-2 h-4 w-4" />
+            Dashboard
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link to="/my-rides" className="cursor-pointer">
+            <Car className="mr-2 h-4 w-4" />
+            My Rides
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Settings className="mr-2 h-4 w-4" />
+          Settings
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <LogOut className="mr-2 h-4 w-4" />
+          Sign Out
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+
   return (
     <nav className="bg-black py-4 px-6">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -139,11 +192,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-2">
             {/* Auth buttons next to hamburger menu */}
             {isAuthenticated ? (
-              <Link to="/dashboard">
-                <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100 text-sm px-3 py-1 font-medium">
-                  Dashboard
-                </Button>
-              </Link>
+              <UserMenu />
             ) : (
               <div className="flex items-center space-x-2">
                 <Link to="/signin">
@@ -164,11 +213,7 @@ const Navbar = () => {
           /* Desktop auth buttons */
           <div className="flex items-center space-x-2">
             {isAuthenticated ? (
-              <Link to="/dashboard">
-                <Button variant="default" size="sm" className="bg-white text-black hover:bg-gray-100 font-medium">
-                  Dashboard
-                </Button>
-              </Link>
+              <UserMenu />
             ) : (
               <div className="flex items-center space-x-2">
                 <Link to="/signin">
