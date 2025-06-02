@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { User, Menu, Car, Calendar, HelpCircle, Info, LogIn, X, ChevronDown, LogOut, Settings } from "lucide-react";
+import { User, Menu, Car, Calendar, HelpCircle, Info, LogIn, X, ChevronDown, LogOut, Settings, Truck } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 import {
@@ -32,7 +32,7 @@ const Navbar = () => {
 
   // For demo purposes - in a real app, this would come from authentication context
   // Set to true to test the logged-in state, false for logged-out state
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   const currentUser = {
     name: "John Doe",
     email: "john.doe@unilag.edu.ng",
@@ -60,9 +60,15 @@ const Navbar = () => {
     { icon: Info, label: "About", path: "/about" },
   ];
 
+  const publicMenuItems = [
+    { icon: Truck, label: "Drive", path: "/drive" },
+    { icon: HelpCircle, label: "Help", path: "/help" },
+    { icon: Info, label: "About", path: "/about" },
+  ];
+
   const renderDesktopMenuItems = () => (
     <>
-      {menuItems.map((item) => (
+      {(isAuthenticated ? menuItems : publicMenuItems).map((item) => (
         <NavigationMenuItem key={item.label}>
           <Link to={item.path}>
             <div className="flex items-center gap-2 px-4 py-2 text-white hover:opacity-80 transition-opacity">
@@ -98,7 +104,7 @@ const Navbar = () => {
           
           {/* Menu items */}
           <div className="flex-1 pt-8">
-            {menuItems.map((item) => (
+            {(isAuthenticated ? menuItems : publicMenuItems).map((item) => (
               <SheetClose asChild key={item.label}>
                 <Link to={item.path}>
                   <div className="py-6 px-6 flex items-center hover:bg-gray-900">
