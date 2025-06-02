@@ -4,13 +4,17 @@ import Navbar from "@/components/Navbar";
 import AvailableRides from "@/components/AvailableRides";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Car, Calendar, CreditCard, MapPin, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import RideBookingFormNew from "@/components/RideBookingFormNew";
 import HeroImage from "@/components/HeroImage";
-import ProtectedLink from "@/components/ProtectedLink";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("book");
+
+  const handleScheduleRide = () => {
+    setActiveTab("schedule");
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -28,14 +32,23 @@ const Index = () => {
               <p className="text-campusorange-600 font-medium text-base mb-8">
                 Safe and reliable transport for students
               </p>
-              <ProtectedLink to="/how-it-works" requireAuth={false}>
-                <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200 rounded-[3.5rem] md:rounded-[5.5rem]">
-                  Learn how it works
+              <div className="flex gap-3">
+                <Link to="/how-it-works">
+                  <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200 rounded-[3.5rem] md:rounded-[5.5rem]">
+                    Learn how it works
+                  </Button>
+                </Link>
+                <Button 
+                  onClick={handleScheduleRide}
+                  className="bg-black text-white hover:bg-neutral-800 transform hover:scale-105 transition-all duration-200 rounded-[3.5rem] md:rounded-[5.5rem]"
+                >
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Schedule Ride
                 </Button>
-              </ProtectedLink>
+              </div>
             </div>
             
-            {/* Booking form with added spacing - This will be protected through the form itself */}
+            {/* Booking form with added spacing */}
             <div className="bg-transparent rounded-[3.5rem] md:rounded-[5.5rem] transition-all duration-300">
               <RideBookingFormNew />
             </div>
@@ -53,16 +66,20 @@ const Index = () => {
             <Tabs value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="book" className="data-[state=active]:bg-black data-[state=active]:text-white rounded-[3rem]">Available Rides</TabsTrigger>
-                <TabsTrigger value="schedule" className="data-[state=active]:bg-black data-[state=active]:text-white rounded-[3rem]">How It Works</TabsTrigger>
+                <TabsTrigger value="schedule" className="data-[state=active]:bg-black data-[state=active]:text-white rounded-[3rem]">Schedule a Ride</TabsTrigger>
               </TabsList>
               <TabsContent value="book" className="mt-4">
                 <AvailableRides />
               </TabsContent>
               <TabsContent value="schedule" className="mt-4">
                 <div className="space-y-6">
-                  <h2 className="text-xl font-semibold">How to Book Your Ride</h2>
+                  <h2 className="text-xl font-semibold">Schedule Your Ride</h2>
                   
-                  <div className="grid grid-cols-1 gap-4">
+                  <div className="bg-gray-50 p-6 rounded-[2rem]">
+                    <RideBookingFormNew />
+                  </div>
+                  
+                  <div className="grid grid-cols-1 gap-4 mt-6">
                     <div className="flex items-start">
                       <div className="bg-campusorange-100 rounded-[3rem] p-3 mr-4 hover:shadow-glow-orange transition-all duration-300">
                         <MapPin className="h-6 w-6 text-campusorange-600" />
@@ -109,14 +126,6 @@ const Index = () => {
                           Review your booking and make payment to confirm.
                         </p>
                       </div>
-                    </div>
-                    
-                    <div className="mt-4 text-center">
-                      <ProtectedLink to="/how-it-works" requireAuth={false}>
-                        <Button variant="outline" size="sm" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200 rounded-[3rem]">
-                          Learn more
-                        </Button>
-                      </ProtectedLink>
                     </div>
                   </div>
                 </div>
