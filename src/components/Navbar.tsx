@@ -53,14 +53,17 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  const menuItems = [
-    { icon: Car, label: "My Rides", path: "/my-rides" },
-    { icon: Calendar, label: "Schedule", path: "/schedule" },
+  // Standard menu items shown to all users (including non-authenticated)
+  const standardMenuItems = [
+    { icon: Truck, label: "Drive", path: "/drive" },
     { icon: HelpCircle, label: "Help", path: "/help" },
     { icon: Info, label: "About", path: "/about" },
   ];
 
-  const publicMenuItems = [
+  // Additional menu items only shown to authenticated users
+  const authenticatedMenuItems = [
+    { icon: Car, label: "My Rides", path: "/my-rides" },
+    { icon: Calendar, label: "Schedule", path: "/schedule" },
     { icon: Truck, label: "Drive", path: "/drive" },
     { icon: HelpCircle, label: "Help", path: "/help" },
     { icon: Info, label: "About", path: "/about" },
@@ -68,7 +71,7 @@ const Navbar = () => {
 
   const renderDesktopMenuItems = () => (
     <>
-      {(isAuthenticated ? menuItems : publicMenuItems).map((item) => (
+      {(isAuthenticated ? authenticatedMenuItems : standardMenuItems).map((item) => (
         <NavigationMenuItem key={item.label}>
           <Link to={item.path}>
             <div className="flex items-center gap-2 px-4 py-2 text-white hover:opacity-80 transition-opacity">
@@ -104,7 +107,7 @@ const Navbar = () => {
           
           {/* Menu items */}
           <div className="flex-1 pt-8">
-            {(isAuthenticated ? menuItems : publicMenuItems).map((item) => (
+            {(isAuthenticated ? authenticatedMenuItems : standardMenuItems).map((item) => (
               <SheetClose asChild key={item.label}>
                 <Link to={item.path}>
                   <div className="py-6 px-6 flex items-center hover:bg-gray-900">
