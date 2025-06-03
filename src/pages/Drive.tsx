@@ -24,14 +24,16 @@ const Drive = () => {
                 You can use your own car or choose a rental through Uniride.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/signup">
+                <Link to="/driver-signup">
                   <Button className="bg-white text-black hover:bg-gray-100 px-8 py-3 text-lg font-semibold w-full sm:w-auto">
-                    Get started
+                    Get started as Driver
                   </Button>
                 </Link>
-                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-3 text-lg font-semibold w-full sm:w-auto">
-                  Already have an account? Sign in
-                </Button>
+                <Link to="/driver-signin">
+                  <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-3 text-lg font-semibold w-full sm:w-auto">
+                    Driver Sign in
+                  </Button>
+                </Link>
               </div>
             </div>
             <div className="flex justify-center">
@@ -196,14 +198,16 @@ const Drive = () => {
             Join thousands of drivers who are already earning with Uniride
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/signup">
+            <Link to="/driver-signup">
               <Button className="bg-white text-black hover:bg-gray-100 px-8 py-3 text-lg font-semibold w-full sm:w-auto">
                 Sign up to drive
               </Button>
             </Link>
-            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-3 text-lg font-semibold w-full sm:w-auto">
-              Learn more
-            </Button>
+            <Link to="/driver-signin">
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black px-8 py-3 text-lg font-semibold w-full sm:w-auto">
+                Driver Sign in
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

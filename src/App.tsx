@@ -9,6 +9,10 @@ import NotFound from "./pages/NotFound";
 import BookingConfirmation from "./pages/BookingConfirmation";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import DriverSignIn from "./pages/DriverSignIn";
+import DriverSignUp from "./pages/DriverSignUp";
+import DriverDashboard from "./pages/DriverDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 import HowItWorks from "./pages/HowItWorks";
 import Dashboard from "./pages/Dashboard";
 import MyRides from "./pages/MyRides";
@@ -32,6 +36,10 @@ const App = () => (
           <Route path="/booking-confirmation" element={<BookingConfirmation />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/driver-signin" element={<DriverSignIn />} />
+          <Route path="/driver-signup" element={<DriverSignUp />} />
+          <Route path="/driver-dashboard" element={<DriverDashboard />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/my-rides" element={<MyRides />} />
