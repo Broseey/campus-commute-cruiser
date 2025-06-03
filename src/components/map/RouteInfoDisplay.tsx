@@ -23,7 +23,7 @@ const RouteInfoDisplay: React.FC<RouteInfoDisplayProps> = ({
       </div>
       <div className="text-right">
         <div className="font-medium">{distance}</div>
-        <div className="text-gray-500">{travelTime}</div>
+        <div className="text-gray-500">Est. {travelTime}</div>
       </div>
     </div>
   );

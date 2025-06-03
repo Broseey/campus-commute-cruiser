@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import AvailableRides from "@/components/AvailableRides";
@@ -11,7 +12,6 @@ import IllustrationPlaceholder from "@/components/IllustrationPlaceholder";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("book");
-  const currentYear = new Date().getFullYear();
   
   const mobileFeatures = [
     { icon: <Users className="h-8 w-8 text-campusorange-600" />, title: "Share Rides" },
@@ -26,9 +26,9 @@ const Index = () => {
       <Navbar />
       
       <div className="flex-1 px-4 py-6 md:py-10 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        {/* Hero section with enhanced mobile layout and updated breakpoint */}
-        <div className="grid grid-cols-1 hero-breakpoint:grid-cols-2 gap-8 md:gap-12 mb-12 md:mb-20 mt-4 md:mt-8 min-h-[600px] hero-breakpoint:min-h-[700px]">
-          <div className="flex flex-col justify-center hero-breakpoint:order-1">
+        {/* Hero section with enhanced mobile layout and improved breakpoints */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 md:gap-12 mb-12 md:mb-20 mt-4 md:mt-8 min-h-[600px] xl:min-h-[700px]">
+          <div className="flex flex-col justify-center xl:order-1">
             {/* Left column - Heading and form */}
             <div className="text-left mb-2 max-w-xl">
               <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-none">
@@ -40,13 +40,13 @@ const Index = () => {
             </div>
             
             {/* Booking form */}
-            <div className="bg-transparent rounded-[2rem] md:rounded-[3.5rem] hero-breakpoint:rounded-[5.5rem] transition-all duration-300">
+            <div className="bg-transparent rounded-[2rem] md:rounded-[3.5rem] xl:rounded-[5.5rem] transition-all duration-300">
               <RideBookingFormNew />
             </div>
           </div>
           
-          {/* Right column - Hero Image for large screens with 1135px breakpoint */}
-          <div className="hidden hero-breakpoint:flex hero-breakpoint:order-2 hero-breakpoint:items-center hero-breakpoint:justify-center">
+          {/* Right column - Hero Image for large screens with proper alignment */}
+          <div className="hidden xl:flex xl:order-2 xl:items-center xl:justify-center">
             <div className="w-full max-w-[600px] h-full flex items-center justify-center">
               <HeroImage />
             </div>
@@ -185,12 +185,12 @@ const Index = () => {
           </div>
         </div>
         
-        {/* Mobile call-to-action section with fixed links */}
+        {/* Mobile call-to-action section */}
         <div className="block md:hidden mt-12 bg-white p-6 rounded-[2rem] shadow-sm">
           <div className="text-center">
             <h3 className="text-lg font-bold mb-4">Ready to ride?</h3>
             <div className="space-y-3">
-              <Link to="/signup" className="block">
+              <Link to="/signin" className="block">
                 <Button className="w-full bg-black text-white hover:bg-gray-800 rounded-[2rem]">
                   <Car className="mr-2 h-4 w-4" />
                   Book Your First Ride
@@ -206,14 +206,14 @@ const Index = () => {
         </div>
       </div>
       
-      {/* Footer with dynamic copyright year */}
+      {/* Footer */}
       <footer className="bg-white py-4 md:py-6 mt-12 md:mt-16">
         <div className="max-w-7xl mx-auto px-4 text-center text-gray-500">
-          <p className="text-sm md:text-base">© {currentYear} Uniride. All rights reserved.</p>
+          <p className="text-sm md:text-base">© 2024 Uniride. All rights reserved.</p>
         </div>
       </footer>
       
-      {/* Add global styles for special effects and new breakpoint */}
+      {/* Add global styles for special effects */}
       <style>
         {`
           @keyframes glow {
@@ -233,33 +233,6 @@ const Index = () => {
           
           .animate-slide-infinite {
             animation: slide-infinite 20s linear infinite;
-          }
-
-          @media (min-width: 1135px) {
-            .hero-breakpoint\\:grid-cols-2 {
-              grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-            .hero-breakpoint\\:order-1 {
-              order: 1;
-            }
-            .hero-breakpoint\\:order-2 {
-              order: 2;
-            }
-            .hero-breakpoint\\:flex {
-              display: flex;
-            }
-            .hero-breakpoint\\:items-center {
-              align-items: center;
-            }
-            .hero-breakpoint\\:justify-center {
-              justify-content: center;
-            }
-            .hero-breakpoint\\:min-h-\\[700px\\] {
-              min-height: 700px;
-            }
-            .hero-breakpoint\\:rounded-\\[5\\.5rem\\] {
-              border-radius: 5.5rem;
-            }
           }
         `}
       </style>
