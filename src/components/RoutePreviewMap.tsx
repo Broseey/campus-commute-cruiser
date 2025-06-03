@@ -15,6 +15,8 @@ const RoutePreviewMap: React.FC<RoutePreviewMapProps> = ({ from, to, fromType, t
   const map = useRef<mapboxgl.Map | null>(null);
   const [travelTime, setTravelTime] = useState('Calculating...');
   const [distance, setDistance] = useState('');
+  const [mapboxToken, setMapboxToken] = useState('');
+  const [showTokenInput, setShowTokenInput] = useState(false);
 
   // Enhanced Nigerian coordinates with more precise locations
   const locationCoordinates: Record<string, [number, number]> = {
@@ -55,7 +57,9 @@ const RoutePreviewMap: React.FC<RoutePreviewMapProps> = ({ from, to, fromType, t
   };
 
   const getCoordinates = (location: string): [number, number] => {
-    return locationCoordinates[location] || [3.3792, 6.5244]; // Default to Lagos
+    // Extract the base location name (before comma for universities)
+    const baseName = location.includes(',') ? location.split(',')[0].trim() : location;
+    return locationCoordinates[baseName] || locationCoordinates[location] || [3.3792, 6.5244]; // Default to Lagos
   };
 
   const calculateDistance = (coord1: [number, number], coord2: [number, number]) => {
@@ -91,8 +95,9 @@ const RoutePreviewMap: React.FC<RoutePreviewMapProps> = ({ from, to, fromType, t
     return `${Math.round(km)}km`;
   };
 
+  // Initialize map when token is available
   useEffect(() => {
-    if (!mapContainer.current) return;
+    if (!mapContainer.current || !mapboxToken) return;
 
     const fromCoords = getCoordinates(from);
     const toCoords = getCoordinates(to);
@@ -102,109 +107,168 @@ const RoutePreviewMap: React.FC<RoutePreviewMapProps> = ({ from, to, fromType, t
     setDistance(formatDistance(distanceKm));
     setTravelTime(estimateTravelTime(distanceKm));
 
-    // Use your Mapbox token
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYnJvc2VleSIsImEiOiJjbWJnN3R1YWgxZWtoMm1xbmR6bm11bWY5In0.gLsCXIOidwX7evIAUbhIqg';
+    // Set Mapbox token
+    mapboxgl.accessToken = mapboxToken;
 
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/light-v11',
-      center: [
-        (fromCoords[0] + toCoords[0]) / 2,
-        (fromCoords[1] + toCoords[1]) / 2
-      ],
-      zoom: 6
-    });
+    try {
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/light-v11',
+        center: [
+          (fromCoords[0] + toCoords[0]) / 2,
+          (fromCoords[1] + toCoords[1]) / 2
+        ],
+        zoom: 6
+      });
 
-    map.current.on('load', () => {
-      if (!map.current) return;
+      map.current.on('load', () => {
+        if (!map.current) return;
 
-      // Add source markers with custom styling
-      new mapboxgl.Marker({ 
-        color: '#FF9900',
-        scale: 1.2
-      })
-        .setLngLat(fromCoords)
-        .setPopup(new mapboxgl.Popup().setHTML(`
-          <div class="p-2">
-            <strong>${from}</strong>
-            <br/>
-            <small class="text-gray-600">${fromType === 'university' ? 'University' : 'State/City'}</small>
-          </div>
-        `))
-        .addTo(map.current);
+        // Add source markers with custom styling
+        new mapboxgl.Marker({ 
+          color: '#FF9900',
+          scale: 1.2
+        })
+          .setLngLat(fromCoords)
+          .setPopup(new mapboxgl.Popup().setHTML(`
+            <div class="p-2">
+              <strong>${from}</strong>
+              <br/>
+              <small class="text-gray-600">${fromType === 'university' ? 'University' : 'State/City'}</small>
+            </div>
+          `))
+          .addTo(map.current);
 
-      new mapboxgl.Marker({ 
-        color: '#000000',
-        scale: 1.2
-      })
-        .setLngLat(toCoords)
-        .setPopup(new mapboxgl.Popup().setHTML(`
-          <div class="p-2">
-            <strong>${to}</strong>
-            <br/>
-            <small class="text-gray-600">${toType === 'university' ? 'University' : 'State/City'}</small>
-          </div>
-        `))
-        .addTo(map.current);
+        new mapboxgl.Marker({ 
+          color: '#000000',
+          scale: 1.2
+        })
+          .setLngLat(toCoords)
+          .setPopup(new mapboxgl.Popup().setHTML(`
+            <div class="p-2">
+              <strong>${to}</strong>
+              <br/>
+              <small class="text-gray-600">${toType === 'university' ? 'University' : 'State/City'}</small>
+            </div>
+          `))
+          .addTo(map.current);
 
-      // Add route line with animation
-      map.current.addSource('route', {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'LineString',
-            coordinates: [fromCoords, toCoords]
+        // Add route line
+        map.current.addSource('route', {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: [fromCoords, toCoords]
+            }
           }
-        }
+        });
+
+        map.current.addLayer({
+          id: 'route',
+          type: 'line',
+          source: 'route',
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#FF9900',
+            'line-width': 4,
+            'line-opacity': 0.8
+          }
+        });
+
+        // Fit map to show both points with padding
+        const bounds = new mapboxgl.LngLatBounds();
+        bounds.extend(fromCoords);
+        bounds.extend(toCoords);
+        map.current.fitBounds(bounds, { 
+          padding: 80,
+          maxZoom: 10
+        });
       });
 
-      map.current.addLayer({
-        id: 'route',
-        type: 'line',
-        source: 'route',
-        layout: {
-          'line-join': 'round',
-          'line-cap': 'round'
-        },
-        paint: {
-          'line-color': '#FF9900',
-          'line-width': 4,
-          'line-opacity': 0.8
-        }
+      map.current.on('error', (e) => {
+        console.error('Mapbox error:', e);
+        setShowTokenInput(true);
       });
 
-      // Add animated route line
-      map.current.addLayer({
-        id: 'route-animated',
-        type: 'line',
-        source: 'route',
-        layout: {
-          'line-join': 'round',
-          'line-cap': 'round'
-        },
-        paint: {
-          'line-color': '#FF9900',
-          'line-width': 2,
-          'line-dasharray': [0, 4, 3]
-        }
-      });
-
-      // Fit map to show both points with padding
-      const bounds = new mapboxgl.LngLatBounds();
-      bounds.extend(fromCoords);
-      bounds.extend(toCoords);
-      map.current.fitBounds(bounds, { 
-        padding: 80,
-        maxZoom: 10
-      });
-    });
+    } catch (error) {
+      console.error('Failed to initialize map:', error);
+      setShowTokenInput(true);
+    }
 
     return () => {
       map.current?.remove();
     };
-  }, [from, to, fromType, toType]);
+  }, [from, to, fromType, toType, mapboxToken]);
+
+  // Check for valid token on component mount
+  useEffect(() => {
+    // Try to use a default token first, if it fails, show input
+    const defaultToken = 'pk.eyJ1IjoiYnJvc2VleSIsImEiOiJjbWJnN3R1YWgxZWtoMm1xbmR6bm11bWY5In0.gLsCXIOidwX7evIAUbhIqg';
+    setMapboxToken(defaultToken);
+  }, []);
+
+  const handleTokenSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const token = formData.get('token') as string;
+    if (token) {
+      setMapboxToken(token);
+      setShowTokenInput(false);
+    }
+  };
+
+  if (showTokenInput) {
+    return (
+      <div className="w-full">
+        <div className="h-48 rounded-md mb-3 border border-gray-200 flex items-center justify-center bg-gray-50">
+          <div className="text-center p-4">
+            <p className="text-sm text-gray-600 mb-3">
+              Please enter your Mapbox public token to view the map
+            </p>
+            <form onSubmit={handleTokenSubmit} className="space-y-2">
+              <input
+                type="text"
+                name="token"
+                placeholder="pk.eyJ..."
+                className="w-full px-3 py-2 border rounded text-sm"
+                required
+              />
+              <button
+                type="submit"
+                className="px-4 py-2 bg-black text-white rounded text-sm hover:bg-gray-800"
+              >
+                Load Map
+              </button>
+            </form>
+            <p className="text-xs text-gray-500 mt-2">
+              Get your token at{' '}
+              <a href="https://mapbox.com" target="_blank" rel="noopener noreferrer" className="text-blue-500">
+                mapbox.com
+              </a>
+            </p>
+          </div>
+        </div>
+        
+        <div className="flex justify-between items-center text-xs text-gray-700 bg-gray-50 p-2 rounded-md">
+          <div className="flex items-center">
+            <span className="font-semibold">{from.split(',')[0]}</span>
+            <span className="mx-2 text-campusorange-600">→</span>
+            <span className="font-semibold">{to.split(',')[0]}</span>
+          </div>
+          <div className="text-right">
+            <div className="font-medium">{distance}</div>
+            <div className="text-gray-500">Est. {travelTime}</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full">
