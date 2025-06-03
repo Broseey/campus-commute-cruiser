@@ -26,17 +26,17 @@ const Index = () => {
               <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-none">
                 Campus Rides Made Easy
               </h1>
-              {/* <p className="text-campusorange-600 font-medium text-base mb-8">
+              <p className="text-campusorange-600 font-medium text-base mb-8">
                 Safe and reliable transport for students
-              </p> */}
-              <Link to="/how-it-works">
+              </p>
+              {/* <Link to="/how-it-works">
                 <Button
                   variant="outline"
                   className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200 rounded-[3.5rem] md:rounded-[5.5rem]"
                 >
                   Learn how it works
                 </Button>
-              </Link>
+              </Link> */}
             </div>
             
             {/* Booking form */}
