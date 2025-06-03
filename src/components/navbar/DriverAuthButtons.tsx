@@ -3,17 +3,17 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import DriverUserMenu from "./DriverUserMenu";
-import { User } from "./NavbarTypes";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface DriverAuthButtonsProps {
-  isAuthenticated: boolean;
-  currentUser: User;
   isMobile?: boolean;
 }
 
-const DriverAuthButtons = ({ isAuthenticated, currentUser, isMobile = false }: DriverAuthButtonsProps) => {
-  if (isAuthenticated) {
-    return <DriverUserMenu currentUser={currentUser} />;
+const DriverAuthButtons = ({ isMobile = false }: DriverAuthButtonsProps) => {
+  const { user, driverProfile } = useAuth();
+
+  if (user && driverProfile) {
+    return <DriverUserMenu currentUser={driverProfile} />;
   }
 
   const buttonSize = isMobile ? "sm" : "sm";

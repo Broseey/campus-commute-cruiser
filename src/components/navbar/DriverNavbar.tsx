@@ -5,19 +5,13 @@ import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
 import DriverAuthButtons from "./DriverAuthButtons";
 import { useMenuItems } from "./useMenuItems";
-import { User } from "./NavbarTypes";
+import { useAuth } from "@/contexts/AuthContext";
 
 const DriverNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, driverProfile } = useAuth();
 
-  // For demo purposes - in a real app, this would come from authentication context
-  // Set to true to test the logged-in state, false for logged-out state
-  const isAuthenticated = false;
-  const currentUser: User = {
-    name: "Driver John",
-    email: "driver.john@unilag.edu.ng",
-    avatar: null
-  };
+  const isAuthenticated = !!(user && driverProfile);
 
   // Custom hook to check if screen width is less than 900px
   const [isMobileMenu, setIsMobileMenu] = useState(false);
@@ -55,11 +49,7 @@ const DriverNavbar = () => {
         {isMobileMenu ? (
           <div className="flex items-center space-x-2">
             {/* Driver auth buttons next to hamburger menu */}
-            <DriverAuthButtons 
-              isAuthenticated={isAuthenticated} 
-              currentUser={currentUser} 
-              isMobile={true} 
-            />
+            <DriverAuthButtons isMobile={true} />
             <MobileMenu 
               menuItems={menuItems}
               isAuthenticated={isAuthenticated}
@@ -70,11 +60,7 @@ const DriverNavbar = () => {
         ) : (
           /* Desktop driver auth buttons */
           <div className="flex items-center space-x-2">
-            <DriverAuthButtons 
-              isAuthenticated={isAuthenticated} 
-              currentUser={currentUser} 
-              isMobile={false} 
-            />
+            <DriverAuthButtons isMobile={false} />
           </div>
         )}
       </div>

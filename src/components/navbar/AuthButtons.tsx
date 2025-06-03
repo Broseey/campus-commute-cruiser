@@ -3,17 +3,17 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import UserMenu from "./UserMenu";
-import { User } from "./NavbarTypes";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface AuthButtonsProps {
-  isAuthenticated: boolean;
-  currentUser: User;
   isMobile?: boolean;
 }
 
-const AuthButtons = ({ isAuthenticated, currentUser, isMobile = false }: AuthButtonsProps) => {
-  if (isAuthenticated) {
-    return <UserMenu currentUser={currentUser} />;
+const AuthButtons = ({ isMobile = false }: AuthButtonsProps) => {
+  const { user, userProfile } = useAuth();
+
+  if (user && userProfile) {
+    return <UserMenu currentUser={userProfile} />;
   }
 
   const buttonSize = isMobile ? "sm" : "sm";

@@ -10,6 +10,7 @@ import RecentRides from "@/components/dashboard/RecentRides";
 import AccountLinks from "@/components/dashboard/AccountLinks";
 import MobileNavigation from "@/components/dashboard/MobileNavigation";
 import Footer from "@/components/dashboard/Footer";
+import { useAuth } from "@/contexts/AuthContext";
 
 // Sample upcoming ride
 const upcomingRide = {
@@ -76,13 +77,16 @@ const quickRoutes = [
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("home");
   const isMobile = useIsMobile();
+  const { userProfile } = useAuth();
+
+  const userName = userProfile?.full_name?.split(' ')[0] || 'User';
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
       
       <div className="flex-1 px-4 py-6 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <WelcomeHeader name="John" />
+        <WelcomeHeader name={userName} />
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left column - Main actions and upcoming ride */}
