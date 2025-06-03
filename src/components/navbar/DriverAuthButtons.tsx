@@ -36,7 +36,7 @@ const DriverAuthButtons = ({ isAuthenticated, currentUser, isMobile = false }: D
           size={buttonSize} 
           className={`bg-white text-black hover:bg-gray-100 font-medium ${buttonClasses}`}
         >
-          Become a Driver
+          Signup
         </Button>
       </Link>
     </div>

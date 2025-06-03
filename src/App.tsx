@@ -22,6 +22,9 @@ import Help from "./pages/Help";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Drive from "./pages/Drive";
+import DriverRequirements from "./pages/DriverRequirements";
+import DriverHelp from "./pages/DriverHelp";
+import DriverEarnings from "./pages/DriverEarnings";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +42,9 @@ const App = () => (
           <Route path="/driver-signin" element={<DriverSignIn />} />
           <Route path="/driver-signup" element={<DriverSignUp />} />
           <Route path="/driver-dashboard" element={<DriverDashboard />} />
+          <Route path="/driver-earnings" element={<DriverEarnings />} />
+          <Route path="/driver-requirements" element={<DriverRequirements />} />
+          <Route path="/driver-help" element={<DriverHelp />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/dashboard" element={<Dashboard />} />
