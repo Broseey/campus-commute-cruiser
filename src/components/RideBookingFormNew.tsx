@@ -469,7 +469,7 @@ const RideBookingFormNew = () => {
                         value={field.value}
                       >
                         <FormControl>
-                          <SelectTrigger className="flex items-center hover:border-black transition-colors rounded-2rem">
+                          <SelectTrigger className="flex items-center hover:border-black transition-colors rounded-[2rem]">
                             <Users className="mr-2 h-5 w-5 text-gray-500" />
                             <SelectValue placeholder="Select passengers" />
                           </SelectTrigger>
