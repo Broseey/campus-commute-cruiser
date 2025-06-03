@@ -318,7 +318,7 @@ const RideBookingFormNew = () => {
                               value={field.value}
                             >
                               <FormControl>
-                                <SelectTrigger>
+                                <SelectTrigger className="rounded-[2rem]">
                                   <div className="flex items-center">
                                     <MapPin className="h-4 w-4 mr-2 text-gray-600" />
                                     <SelectValue placeholder={`Select destination ${watchToType}`} />
