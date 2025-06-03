@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import AvailableRides from "@/components/AvailableRides";
@@ -9,12 +8,9 @@ import { Button } from "@/components/ui/button";
 import RideBookingFormNew from "@/components/RideBookingFormNew";
 import HeroImage from "@/components/HeroImage";
 import IllustrationPlaceholder from "@/components/IllustrationPlaceholder";
-
 const Index = () => {
   const [activeTab, setActiveTab] = useState("book");
-
-  return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+  return <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
       
       <div className="flex-1 px-4 py-6 md:py-10 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
@@ -36,7 +32,7 @@ const Index = () => {
                 >
                   Learn how it works
                 </Button>
-              </Link> */}
+               </Link> */}
             </div>
             
             {/* Booking form */}
@@ -46,39 +42,14 @@ const Index = () => {
           </div>
           
           {/* Right column - Image space */}
-          <div className="flex items-top justify-center order-1 xl:order-2">
-            <div className="w-full max-w-md xl:max-w-none">
-              {/* Show illustration on mobile, actual hero image on larger screens */}
-              <div className="block xl:hidden">
-                <IllustrationPlaceholder 
-                  icon={<Car className="h-16 w-16 text-gray-400" />}
-                  title="Campus Transportation"
-                  height="h-48 md:h-64"
-                  className="bg-gradient-to-br from-campusorange-50 to-campusorange-100"
-                />
-              </div>
-              <div className="hidden xl:block">
-                <HeroImage />
-              </div>
-            </div>
-          </div>
+          
         </div>
         
         {/* Mobile-specific features showcase */}
         <div className="block md:hidden mb-8">
           <div className="grid grid-cols-2 gap-4">
-            <IllustrationPlaceholder 
-              icon={<Users className="h-8 w-8 text-campusorange-600" />}
-              title="Share Rides"
-              height="h-32"
-              className="bg-white border-campusorange-200"
-            />
-            <IllustrationPlaceholder 
-              icon={<MapPin className="h-8 w-8 text-campusorange-600" />}
-              title="Track Location"
-              height="h-32"
-              className="bg-white border-campusorange-200"
-            />
+            <IllustrationPlaceholder icon={<Users className="h-8 w-8 text-campusorange-600" />} title="Share Rides" height="h-32" className="bg-white border-campusorange-200" />
+            <IllustrationPlaceholder icon={<MapPin className="h-8 w-8 text-campusorange-600" />} title="Track Location" height="h-32" className="bg-white border-campusorange-200" />
           </div>
         </div>
         
@@ -238,8 +209,6 @@ const Index = () => {
           }
         `}
       </style>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
