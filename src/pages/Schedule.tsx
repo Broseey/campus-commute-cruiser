@@ -13,6 +13,7 @@ import {
 import { Clock, MapPin } from "lucide-react";
 import { format } from "date-fns";
 import RideBookingFormNew from "@/components/RideBookingFormNew";
+import { Link } from "react-router-dom";
 
 const Schedule = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
@@ -64,12 +65,14 @@ const Schedule = () => {
                           <p className="text-sm text-gray-500">Starting from {route.price}</p>
                         </div>
                       </div>
-                      <Button
-                        size="sm"
-                        className="bg-black text-white hover:bg-neutral-800 transform active:scale-95 transition-transform duration-200"
-                      >
-                        Select
-                      </Button>
+                      <Link to="/signin">
+                        <Button
+                          size="sm"
+                          className="bg-black text-white hover:bg-neutral-800 transform active:scale-95 transition-transform duration-200"
+                        >
+                          Book Now
+                        </Button>
+                      </Link>
                     </div>
                   ))}
                 </div>

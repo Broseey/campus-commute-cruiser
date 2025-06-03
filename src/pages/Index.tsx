@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import AvailableRides from "@/components/AvailableRides";
@@ -8,9 +9,12 @@ import { Button } from "@/components/ui/button";
 import RideBookingFormNew from "@/components/RideBookingFormNew";
 import HeroImage from "@/components/HeroImage";
 import IllustrationPlaceholder from "@/components/IllustrationPlaceholder";
+
 const Index = () => {
   const [activeTab, setActiveTab] = useState("book");
-  return <div className="min-h-screen bg-gray-50 flex flex-col">
+  
+  return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
       
       <div className="flex-1 px-4 py-6 md:py-10 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
@@ -25,14 +29,6 @@ const Index = () => {
               <p className="text-campusorange-600 font-medium text-base mb-8">
                 Safe and reliable transport for students
               </p>
-              {/* <Link to="/how-it-works">
-                <Button
-                  variant="outline"
-                  className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200 rounded-[3.5rem] md:rounded-[5.5rem]"
-                >
-                  Learn how it works
-                </Button>
-               </Link> */}
             </div>
             
             {/* Booking form */}
@@ -41,8 +37,10 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Right column - Image space */}
-          
+          {/* Right column - Hero Image for large screens */}
+          <div className="hidden xl:block xl:order-2">
+            <HeroImage />
+          </div>
         </div>
         
         {/* Mobile-specific features showcase */}
@@ -209,6 +207,8 @@ const Index = () => {
           }
         `}
       </style>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
