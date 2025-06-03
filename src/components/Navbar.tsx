@@ -5,19 +5,13 @@ import DesktopMenu from "./navbar/DesktopMenu";
 import MobileMenu from "./navbar/MobileMenu";
 import AuthButtons from "./navbar/AuthButtons";
 import { useMenuItems } from "./navbar/useMenuItems";
-import { User } from "./navbar/NavbarTypes";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, userProfile } = useAuth();
 
-  // For demo purposes - in a real app, this would come from authentication context
-  // Set to true to test the logged-in state, false for logged-out state
-  const isAuthenticated = false;
-  const currentUser: User = {
-    name: "John Doe",
-    email: "john.doe@unilag.edu.ng",
-    avatar: null
-  };
+  const isAuthenticated = !!(user && userProfile);
 
   // Custom hook to check if screen width is less than 900px
   const [isMobileMenu, setIsMobileMenu] = useState(false);
@@ -55,11 +49,7 @@ const Navbar = () => {
         {isMobileMenu ? (
           <div className="flex items-center space-x-2">
             {/* Auth buttons next to hamburger menu */}
-            <AuthButtons 
-              isAuthenticated={isAuthenticated} 
-              currentUser={currentUser} 
-              isMobile={true} 
-            />
+            <AuthButtons isMobile={true} />
             <MobileMenu 
               menuItems={menuItems}
               isAuthenticated={isAuthenticated}
@@ -70,11 +60,7 @@ const Navbar = () => {
         ) : (
           /* Desktop auth buttons */
           <div className="flex items-center space-x-2">
-            <AuthButtons 
-              isAuthenticated={isAuthenticated} 
-              currentUser={currentUser} 
-              isMobile={false} 
-            />
+            <AuthButtons isMobile={false} />
           </div>
         )}
       </div>
