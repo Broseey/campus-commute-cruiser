@@ -8,7 +8,7 @@ const HeroImage: React.FC = () => {
         <img 
           src="https://img.freepik.com/free-vector/car-sharing-concept-illustration_114360-16901.jpg?t=st=1746741441~exp=1746745041~hmac=b36861ca391beedfa1b8d51fe8ee265439b5f1f84bac686d27345fb498996a3f&w=996" 
           alt="Car sharing concept illustration" 
-          className="w-full h-full object-contain"
+          className="w-full h-full object-cover"
         />
       </div>
     </div>

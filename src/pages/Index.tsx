@@ -20,17 +20,20 @@ const Index = () => {
       <div className="flex-1 px-4 py-6 md:py-10 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         {/* Hero section with enhanced mobile layout */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 md:gap-12 mb-12 md:mb-20 mt-4 md:mt-8">
-          <div className="flex flex-col justify-center order-2 xl:order-1">
+          <div className="flex flex-col justify-center xl:order-1">
             {/* Left column - Heading and form */}
-            <div className="text-center xl:text-left mb-6 md:mb-10 max-w-xl mx-auto xl:mx-0">
-              <h1 className="text-3xl md:text-4xl xl:text-5xl font-bold mb-3 md:mb-4 tracking-tight leading-tight">
+ <div className="text-left mb-10 max-w-xl">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-none">
                 Campus Rides Made Easy
               </h1>
-              <p className="text-campusorange-600 font-medium text-sm md:text-base mb-6 md:mb-8">
+              {/* <p className="text-campusorange-600 font-medium text-base mb-8">
                 Safe and reliable transport for students
-              </p>
+              </p> */}
               <Link to="/how-it-works">
-                <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200 rounded-[2rem] md:rounded-[3.5rem] xl:rounded-[5.5rem] px-6 py-2 md:px-8 md:py-3">
+                <Button
+                  variant="outline"
+                  className="border-black text-black hover:bg-black hover:text-white transform hover:scale-105 transition-all duration-200 rounded-[3.5rem] md:rounded-[5.5rem]"
+                >
                   Learn how it works
                 </Button>
               </Link>
@@ -43,7 +46,7 @@ const Index = () => {
           </div>
           
           {/* Right column - Image space */}
-          <div className="flex items-center justify-center order-1 xl:order-2">
+          <div className="flex items-top justify-center order-1 xl:order-2">
             <div className="w-full max-w-md xl:max-w-none">
               {/* Show illustration on mobile, actual hero image on larger screens */}
               <div className="block xl:hidden">
