@@ -1,12 +1,9 @@
-
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Car, DownloadCloud, Globe, Map, Shield, Users } from "lucide-react";
-
 const HowItWorks = () => {
-  return (
-    <div className="min-h-screen bg-white flex flex-col">
+  return <div className="min-h-screen bg-white flex flex-col">
       <Navbar />
       
       {/* Hero Section */}
@@ -202,7 +199,7 @@ const HowItWorks = () => {
               </Button>
             </Link>
             <Link to="/signin">
-              <Button variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-6 h-auto text-lg">
+              <Button variant="outline" className="border-white px-8 py-6 h-auto text-lg bg-white text-zinc-900">
                 Sign in
               </Button>
             </Link>
@@ -216,8 +213,6 @@ const HowItWorks = () => {
           <p>© 2023 CampusRide. All rights reserved.</p>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default HowItWorks;
