@@ -27,7 +27,7 @@ const DriverAuthButtons = ({ isAuthenticated, currentUser, isMobile = false }: D
           size={buttonSize} 
           className={`text-white hover:bg-white/10 font-medium border-none ${buttonClasses}`}
         >
-          Driver Login
+          Login
         </Button>
       </Link>
       <Link to="/driver-signup">
