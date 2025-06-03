@@ -22,7 +22,7 @@ const Index = () => {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 md:gap-12 mb-12 md:mb-20 mt-4 md:mt-8">
           <div className="flex flex-col justify-center xl:order-1">
             {/* Left column - Heading and form */}
- <div className="text-left mb-10 max-w-xl">
+            <div className="text-left mb-2 max-w-xl">
               <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight leading-none">
                 Campus Rides Made Easy
               </h1>
