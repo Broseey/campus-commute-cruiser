@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Car, MapPin, Clock, DollarSign, Users, Shield, Star, Smartphone, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import Navbar from "@/components/Navbar";
+import DriverNavbar from "@/components/navbar/DriverNavbar";
 
 const Drive = () => {
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
+      <DriverNavbar />
       
       {/* Hero Section */}
       <section className="bg-black text-white py-20">

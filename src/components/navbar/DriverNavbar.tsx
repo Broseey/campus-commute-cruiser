@@ -1,21 +1,21 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import DesktopMenu from "./navbar/DesktopMenu";
-import MobileMenu from "./navbar/MobileMenu";
-import AuthButtons from "./navbar/AuthButtons";
-import { useMenuItems } from "./navbar/useMenuItems";
-import { User } from "./navbar/NavbarTypes";
+import DesktopMenu from "./DesktopMenu";
+import MobileMenu from "./MobileMenu";
+import DriverAuthButtons from "./DriverAuthButtons";
+import { useMenuItems } from "./useMenuItems";
+import { User } from "./NavbarTypes";
 
-const Navbar = () => {
+const DriverNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // For demo purposes - in a real app, this would come from authentication context
   // Set to true to test the logged-in state, false for logged-out state
   const isAuthenticated = false;
   const currentUser: User = {
-    name: "John Doe",
-    email: "john.doe@unilag.edu.ng",
+    name: "Driver John",
+    email: "driver.john@unilag.edu.ng",
     avatar: null
   };
 
@@ -33,14 +33,14 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  const menuItems = useMenuItems(isAuthenticated, 'user');
+  const menuItems = useMenuItems(isAuthenticated, 'driver');
 
   return (
     <nav className="bg-black py-4 px-6">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <Link to="/">
-            <span className="text-white font-bold text-2xl tracking-tight">Uniride</span>
+          <Link to="/drive">
+            <span className="text-white font-bold text-2xl tracking-tight">Uniride Driver</span>
           </Link>
         </div>
         
@@ -54,8 +54,8 @@ const Navbar = () => {
         {/* Mobile menu and auth buttons - shows when screen width < 900px */}
         {isMobileMenu ? (
           <div className="flex items-center space-x-2">
-            {/* Auth buttons next to hamburger menu */}
-            <AuthButtons 
+            {/* Driver auth buttons next to hamburger menu */}
+            <DriverAuthButtons 
               isAuthenticated={isAuthenticated} 
               currentUser={currentUser} 
               isMobile={true} 
@@ -68,9 +68,9 @@ const Navbar = () => {
             />
           </div>
         ) : (
-          /* Desktop auth buttons */
+          /* Desktop driver auth buttons */
           <div className="flex items-center space-x-2">
-            <AuthButtons 
+            <DriverAuthButtons 
               isAuthenticated={isAuthenticated} 
               currentUser={currentUser} 
               isMobile={false} 
@@ -82,4 +82,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default DriverNavbar;

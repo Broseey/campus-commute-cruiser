@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Mail, Lock, User, UserPlus, Truck, Car } from "lucide-react";
-import Navbar from "@/components/Navbar";
+import DriverNavbar from "@/components/navbar/DriverNavbar";
 import {
   Card,
   CardContent,
@@ -77,7 +77,7 @@ const DriverSignUp = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <Navbar />
+      <DriverNavbar />
       
       <div className="flex-1 flex items-center justify-center px-4 py-12">
         <Card className="w-full max-w-md bg-white border-0 shadow-lg">
