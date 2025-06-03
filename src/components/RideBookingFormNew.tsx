@@ -208,7 +208,7 @@ const RideBookingFormNew = () => {
                           variant={watchFromType === "university" ? undefined : "outline"} 
                           size="sm"
                           onClick={() => toggleLocationType("fromType", "university")}
-                          className={`${watchFromType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
+                          className={`${watchFromType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-[2rem] hover:bg-black hover:text-white transition-colors duration-200`}
                         >
                           University
                         </Button>
@@ -217,7 +217,7 @@ const RideBookingFormNew = () => {
                           variant={watchFromType === "state" ? undefined : "outline"} 
                           size="sm"
                           onClick={() => toggleLocationType("fromType", "state")}
-                          className={`${watchFromType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
+                          className={`${watchFromType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-[2rem] hover:bg-black hover:text-white transition-colors duration-200`}
                         >
                           State
                         </Button>
@@ -292,7 +292,7 @@ const RideBookingFormNew = () => {
                           variant={watchToType === "university" ? undefined : "outline"} 
                           size="sm"
                           onClick={() => toggleLocationType("toType", "university")}
-                          className={`${watchToType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
+                          className={`${watchToType === "university" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-[2rem] hover:bg-black hover:text-white transition-colors duration-200`}
                         >
                           University
                         </Button>
@@ -301,7 +301,7 @@ const RideBookingFormNew = () => {
                           variant={watchToType === "state" ? undefined : "outline"} 
                           size="sm"
                           onClick={() => toggleLocationType("toType", "state")}
-                          className={`${watchToType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-md hover:bg-black hover:text-white transition-colors duration-200`}
+                          className={`${watchToType === "state" ? "bg-black text-white border-black" : "bg-white text-black border-black"} h-8 px-3 py-1 border rounded-[2rem] hover:bg-black hover:text-white transition-colors duration-200`}
                         >
                           State
                         </Button>
