@@ -47,7 +47,7 @@ const Index = () => {
         
         {/* Mobile-specific features showcase */}
         <div className="block md:hidden mb-8">
-          <div className="grid grid-cols-2 gap-4 bg-black">
+          <div className="grid grid-cols-2 gap-4">
             <IllustrationPlaceholder icon={<Users className="h-8 w-8 text-campusorange-600" />} title="Share Rides" height="h-32" className="bg-white border-campusorange-200" />
             <IllustrationPlaceholder icon={<MapPin className="h-8 w-8 text-campusorange-600" />} title="Track Location" height="h-32" className="bg-white border-campusorange-200" />
           </div>
