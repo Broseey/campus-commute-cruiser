@@ -3,7 +3,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import AvailableRides from "@/components/AvailableRides";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Car, Calendar, CreditCard, MapPin, Users } from "lucide-react";
+import { Car, Calendar, CreditCard, MapPin, Users, Shield, Clock, Star, Coffee } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import RideBookingFormNew from "@/components/RideBookingFormNew";
@@ -13,13 +13,21 @@ import IllustrationPlaceholder from "@/components/IllustrationPlaceholder";
 const Index = () => {
   const [activeTab, setActiveTab] = useState("book");
   
+  const mobileFeatures = [
+    { icon: <Users className="h-8 w-8 text-campusorange-600" />, title: "Share Rides" },
+    { icon: <MapPin className="h-8 w-8 text-campusorange-600" />, title: "Track Location" },
+    { icon: <Shield className="h-8 w-8 text-campusorange-600" />, title: "Safe Travel" },
+    { icon: <Clock className="h-8 w-8 text-campusorange-600" />, title: "On Time" },
+    { icon: <Star className="h-8 w-8 text-campusorange-600" />, title: "Top Rated" }
+  ];
+  
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
       
       <div className="flex-1 px-4 py-6 md:py-10 md:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        {/* Hero section with enhanced mobile layout */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 md:gap-12 mb-12 md:mb-20 mt-4 md:mt-8">
+        {/* Hero section with enhanced mobile layout and improved breakpoints */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 md:gap-12 mb-12 md:mb-20 mt-4 md:mt-8 min-h-[600px] xl:min-h-[700px]">
           <div className="flex flex-col justify-center xl:order-1">
             {/* Left column - Heading and form */}
             <div className="text-left mb-2 max-w-xl">
@@ -37,17 +45,29 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Right column - Hero Image for large screens */}
-          <div className="hidden xl:block xl:order-2">
-            <HeroImage />
+          {/* Right column - Hero Image for large screens with proper alignment */}
+          <div className="hidden xl:flex xl:order-2 xl:items-center xl:justify-center">
+            <div className="w-full max-w-[600px] h-full flex items-center justify-center">
+              <HeroImage />
+            </div>
           </div>
         </div>
         
-        {/* Mobile-specific features showcase */}
-        <div className="block md:hidden mb-8">
-          <div className="grid grid-cols-2 gap-4">
-            <IllustrationPlaceholder icon={<Users className="h-8 w-8 text-campusorange-600" />} title="Share Rides" height="h-32" className="bg-white border-campusorange-200" />
-            <IllustrationPlaceholder icon={<MapPin className="h-8 w-8 text-campusorange-600" />} title="Track Location" height="h-32" className="bg-white border-campusorange-200" />
+        {/* Mobile-specific features showcase with infinite sliding */}
+        <div className="block md:hidden mb-8 overflow-hidden">
+          <div className="relative">
+            <div className="flex animate-slide-infinite space-x-4">
+              {[...mobileFeatures, ...mobileFeatures].map((feature, index) => (
+                <div key={index} className="flex-shrink-0 w-32">
+                  <IllustrationPlaceholder 
+                    icon={feature.icon} 
+                    title={feature.title} 
+                    height="h-32" 
+                    className="bg-white border-campusorange-200" 
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         
@@ -204,6 +224,15 @@ const Index = () => {
           
           .hover\\:shadow-glow-orange:hover {
             animation: glow 2s infinite;
+          }
+
+          @keyframes slide-infinite {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          
+          .animate-slide-infinite {
+            animation: slide-infinite 20s linear infinite;
           }
         `}
       </style>
