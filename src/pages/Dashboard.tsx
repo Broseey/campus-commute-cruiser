@@ -8,6 +8,8 @@ import UpcomingRide from "@/components/dashboard/UpcomingRide";
 import QuickRoutes from "@/components/dashboard/QuickRoutes";
 import RecentRides from "@/components/dashboard/RecentRides";
 import AccountLinks from "@/components/dashboard/AccountLinks";
+import RealTimeStatus from "@/components/dashboard/RealTimeStatus";
+import LiveActivityFeed from "@/components/dashboard/LiveActivityFeed";
 import MobileNavigation from "@/components/dashboard/MobileNavigation";
 import Footer from "@/components/dashboard/Footer";
 import { useAuth } from "@/contexts/AuthContext";
@@ -96,8 +98,10 @@ const Dashboard = () => {
             <QuickRoutes routes={quickRoutes} />
           </div>
           
-          {/* Right column - Activity and account */}
+          {/* Right column - Real-time activity and account */}
           <div className="space-y-6">
+            <RealTimeStatus />
+            <LiveActivityFeed />
             <RecentRides rides={recentRides} />
             <AccountLinks />
           </div>
