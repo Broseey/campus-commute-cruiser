@@ -186,14 +186,32 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signInWithGoogle = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/`
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/`
+        }
+      });
+      
+      // Handle the specific case where Google provider is not enabled
+      if (error && error.message.includes('provider is not enabled')) {
+        return { 
+          error: { 
+            message: 'Google sign-in is not configured yet. Please use email and password to sign in.' 
+          } 
+        };
       }
-    });
-    
-    return { error };
+      
+      return { error };
+    } catch (error) {
+      console.error('Google sign-in error:', error);
+      return { 
+        error: { 
+          message: 'Google sign-in is not available. Please use email and password to sign in.' 
+        } 
+      };
+    }
   };
 
   const signOut = async () => {
