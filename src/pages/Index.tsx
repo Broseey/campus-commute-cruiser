@@ -86,7 +86,7 @@ const Index = () => {
         <div className="mb-12 md:mb-16">
           <div className="bg-white rounded-[2rem] md:rounded-[3.5rem] xl:rounded-[5.5rem] shadow-sm hover:shadow-md transition-all duration-300 p-4 md:p-6">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid w-full grid-cols-2">
+              <TabsList className="grid w-full grid-cols-2 rounded-1.5rem">
                 <TabsTrigger value="book" className="data-[state=active]:bg-black data-[state=active]:text-white rounded-[1.5rem] md:rounded-[3rem] text-sm md:text-base">Available Rides</TabsTrigger>
                 <TabsTrigger value="schedule" className="data-[state=active]:bg-black data-[state=active]:text-white rounded-[1.5rem] md:rounded-[3rem] text-sm md:text-base">How It Works</TabsTrigger>
               </TabsList>

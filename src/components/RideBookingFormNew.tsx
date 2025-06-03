@@ -158,8 +158,8 @@ const RideBookingFormNew = () => {
         
         <Tabs value={bookingType} onValueChange={(v) => setBookingType(v as BookingType)} className="mb-6 rounded-[3.5rem]">
           <TabsList className="grid w-full grid-cols-2 rounded-[2rem]">
-            <TabsTrigger value="join" className="data-[state=active]:bg-black data-[state=active]:text-white hover:bg-gray-100 transition-colors rounded-[2rem]">Join a Ride</TabsTrigger>
-            <TabsTrigger value="full" className="data-[state=active]:bg-black data-[state=active]:text-white hover:bg-gray-100 transition-colors rounded-[2rem]">Book Entire Ride</TabsTrigger>
+            <TabsTrigger value="join" className="data-[state=active]:bg-black data-[state=active]:text-white hover:bg-gray-100 transition-colors rounded-[1.5rem]">Join a Ride</TabsTrigger>
+            <TabsTrigger value="full" className="data-[state=active]:bg-black data-[state=active]:text-white hover:bg-gray-100 transition-colors rounded-[1.5rem]">Book Entire Ride</TabsTrigger>
           </TabsList>
         </Tabs>
 
