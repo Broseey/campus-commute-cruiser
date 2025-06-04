@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,6 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import RoutePreview from "@/components/RoutePreview";
+import LocationInput from "@/components/LocationInput";
 
 type BookingStep = 'location' | 'date' | 'vehicle';
 type BookingType = 'join' | 'full';
@@ -66,6 +66,8 @@ const bookingFormSchema = z.object({
   to: z.string().min(1, "Please select a destination location"),
   fromType: z.enum(["university", "state"]),
   toType: z.enum(["university", "state"]),
+  fromSpecificLocation: z.string().optional(),
+  toSpecificLocation: z.string().optional(),
   date: z.date({
     required_error: "Please select a date",
   }),
@@ -89,6 +91,8 @@ const RideBookingFormNew = () => {
       to: "",
       fromType: "university",
       toType: "state",
+      fromSpecificLocation: "",
+      toSpecificLocation: "",
       time: "",
       passengers: "1",
       vehicleId: "",
@@ -149,6 +153,16 @@ const RideBookingFormNew = () => {
     // Reset location selections when types change
     form.setValue("from", "");
     form.setValue("to", "");
+    form.setValue("fromSpecificLocation", "");
+    form.setValue("toSpecificLocation", "");
+  };
+
+  // Extract state name for location input
+  const getStateName = (location: string, locationType: "university" | "state") => {
+    if (locationType === "state") {
+      return location.replace("FCT - ", ""); // Handle Abuja special case
+    }
+    return "";
   };
 
   return (
@@ -256,6 +270,32 @@ const RideBookingFormNew = () => {
                           </FormItem>
                         )}
                       />
+
+                      {/* Specific location input for Book Entire Ride */}
+                      {bookingType === 'full' && watchFromType === 'state' && watchFrom && (
+                        <div className="mt-3">
+                          <label className="block text-xs font-medium text-gray-700 mb-1">
+                            Specific location in {watchFrom}
+                          </label>
+                          <FormField
+                            control={form.control}
+                            name="fromSpecificLocation"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormControl>
+                                  <LocationInput
+                                    value={field.value || ""}
+                                    onChange={field.onChange}
+                                    placeholder={`Enter location in ${watchFrom}`}
+                                    state={getStateName(watchFrom, watchFromType)}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                   
@@ -266,7 +306,10 @@ const RideBookingFormNew = () => {
                         size="sm"
                         variant="ghost"
                         className="h-6 text-xs hover:bg-gray-100 transition-colors"
-                        onClick={() => form.setValue("from", "")}
+                        onClick={() => {
+                          form.setValue("from", "");
+                          form.setValue("fromSpecificLocation", "");
+                        }}
                       >
                         Clear
                       </Button>
@@ -340,6 +383,32 @@ const RideBookingFormNew = () => {
                           </FormItem>
                         )}
                       />
+
+                      {/* Specific location input for Book Entire Ride */}
+                      {bookingType === 'full' && watchToType === 'state' && watchTo && (
+                        <div className="mt-3">
+                          <label className="block text-xs font-medium text-gray-700 mb-1">
+                            Specific location in {watchTo}
+                          </label>
+                          <FormField
+                            control={form.control}
+                            name="toSpecificLocation"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormControl>
+                                  <LocationInput
+                                    value={field.value || ""}
+                                    onChange={field.onChange}
+                                    placeholder={`Enter location in ${watchTo}`}
+                                    state={getStateName(watchTo, watchToType)}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                   
@@ -350,7 +419,10 @@ const RideBookingFormNew = () => {
                         size="sm"
                         variant="ghost"
                         className="h-6 text-xs hover:bg-gray-100 transition-colors"
-                        onClick={() => form.setValue("to", "")}
+                        onClick={() => {
+                          form.setValue("to", "");
+                          form.setValue("toSpecificLocation", "");
+                        }}
                       >
                         Clear
                       </Button>

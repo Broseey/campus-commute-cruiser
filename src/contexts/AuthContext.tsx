@@ -2,27 +2,31 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface UserProfile {
   id: string;
   full_name: string | null;
   email: string | null;
+  phone_number: string | null;
   avatar_url: string | null;
+  phone_verified: boolean;
 }
 
 interface DriverProfile {
   id: string;
   full_name: string | null;
   email: string | null;
+  phone_number: string | null;
   avatar_url: string | null;
-  license_number: string | null;
+  phone_verified: boolean;
+  is_verified: boolean;
+  is_online: boolean;
   vehicle_make: string | null;
   vehicle_model: string | null;
   vehicle_year: number | null;
   vehicle_plate: string | null;
-  is_verified: boolean;
-  is_online: boolean;
+  license_number: string | null;
 }
 
 interface AuthContextType {
@@ -30,32 +34,21 @@ interface AuthContextType {
   session: Session | null;
   userProfile: UserProfile | null;
   driverProfile: DriverProfile | null;
-  isLoading: boolean;
-  signUp: (email: string, password: string, fullName: string) => Promise<{ error: any }>;
-  signIn: (email: string, password: string) => Promise<{ error: any }>;
+  loading: boolean;
   signOut: () => Promise<void>;
-  driverSignUp: (email: string, password: string, fullName: string) => Promise<{ error: any }>;
-  driverSignIn: (email: string, password: string) => Promise<{ error: any }>;
-  signInWithGoogle: () => Promise<{ error: any }>;
-  isDriver: boolean;
+  refreshProfiles: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [driverProfile, setDriverProfile] = useState<DriverProfile | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const fetchUserProfile = async (userId: string) => {
     try {
@@ -95,25 +88,42 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const refreshProfiles = async () => {
+    if (user) {
+      await Promise.all([
+        fetchUserProfile(user.id),
+        fetchDriverProfile(user.id)
+      ]);
+    }
+  };
+
   useEffect(() => {
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('Auth state changed:', event, session);
         setSession(session);
         setUser(session?.user ?? null);
         
         if (session?.user) {
-          // Defer profile fetching to avoid callback issues
-          setTimeout(() => {
-            fetchUserProfile(session.user.id);
-            fetchDriverProfile(session.user.id);
+          // Fetch profiles after setting user
+          setTimeout(async () => {
+            await Promise.all([
+              fetchUserProfile(session.user.id),
+              fetchDriverProfile(session.user.id)
+            ]);
+            setLoading(false);
+            
+            // Redirect to dashboard after successful login
+            if (event === 'SIGNED_IN' && location.pathname !== '/dashboard') {
+              navigate('/dashboard');
+            }
           }, 0);
         } else {
           setUserProfile(null);
           setDriverProfile(null);
+          setLoading(false);
         }
-        
-        setIsLoading(false);
       }
     );
 
@@ -123,117 +133,48 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        fetchUserProfile(session.user.id);
-        fetchDriverProfile(session.user.id);
+        Promise.all([
+          fetchUserProfile(session.user.id),
+          fetchDriverProfile(session.user.id)
+        ]).finally(() => setLoading(false));
+      } else {
+        setLoading(false);
       }
-      setIsLoading(false);
     });
 
     return () => subscription.unsubscribe();
-  }, []);
-
-  const signUp = async (email: string, password: string, fullName: string) => {
-    const redirectUrl = `${window.location.origin}/`;
-    
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: redirectUrl,
-        data: {
-          full_name: fullName,
-        }
-      }
-    });
-    
-    return { error };
-  };
-
-  const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    
-    return { error };
-  };
-
-  const driverSignUp = async (email: string, password: string, fullName: string) => {
-    const redirectUrl = `${window.location.origin}/`;
-    
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: redirectUrl,
-        data: {
-          full_name: fullName,
-          is_driver: true,
-        }
-      }
-    });
-    
-    return { error };
-  };
-
-  const driverSignIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    
-    return { error };
-  };
-
-  const signInWithGoogle = async () => {
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: `${window.location.origin}/`
-        }
-      });
-      
-      // Handle the specific case where Google provider is not enabled
-      if (error && error.message.includes('provider is not enabled')) {
-        return { 
-          error: { 
-            message: 'Google sign-in is not configured yet. Please use email and password to sign in.' 
-          } 
-        };
-      }
-      
-      return { error };
-    } catch (error) {
-      console.error('Google sign-in error:', error);
-      return { 
-        error: { 
-          message: 'Google sign-in is not available. Please use email and password to sign in.' 
-        } 
-      };
-    }
-  };
+  }, [navigate, location.pathname]);
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut();
+      setUser(null);
+      setSession(null);
+      setUserProfile(null);
+      setDriverProfile(null);
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
   };
-
-  const isDriver = !!driverProfile;
 
   const value = {
     user,
     session,
     userProfile,
     driverProfile,
-    isLoading,
-    signUp,
-    signIn,
+    loading,
     signOut,
-    driverSignUp,
-    driverSignIn,
-    signInWithGoogle,
-    isDriver,
+    refreshProfiles,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 };
