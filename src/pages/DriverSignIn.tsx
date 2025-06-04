@@ -1,11 +1,11 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Mail, Lock, LogIn, Truck } from "lucide-react";
+import { Mail, Lock, LogIn, Truck, Smartphone } from "lucide-react";
 import DriverNavbar from "@/components/navbar/DriverNavbar";
+import PhoneAuth from "@/components/auth/PhoneAuth";
 import {
   Card,
   CardContent,
@@ -21,6 +21,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -94,6 +95,10 @@ const DriverSignIn = () => {
     }
   };
 
+  const handlePhoneAuthSuccess = () => {
+    navigate(from, { replace: true });
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <DriverNavbar />
@@ -108,7 +113,7 @@ const DriverSignIn = () => {
             </div>
             <CardTitle className="text-2xl font-bold tracking-tight text-center">Driver Sign In</CardTitle>
             <CardDescription className="text-center">
-              Access your driver dashboard
+              Choose your preferred sign-in method
             </CardDescription>
           </CardHeader>
           
@@ -150,115 +155,134 @@ const DriverSignIn = () => {
               </div>
             </div>
 
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-900">Email</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
-                          <Input
-                            className="pl-10 bg-white border-gray-200"
-                            placeholder="driver@example.com"
-                            type="email"
-                            {...field}
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-900">Password</FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
-                          <Input
-                            className="pl-10 bg-white border-gray-200"
-                            placeholder="••••••••"
-                            type="password"
-                            {...field}
-                          />
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
+            <Tabs defaultValue="email" className="w-full">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="email" className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  Email
+                </TabsTrigger>
+                <TabsTrigger value="phone" className="flex items-center gap-2">
+                  <Smartphone className="h-4 w-4" />
+                  Phone
+                </TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="email" className="mt-6">
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <FormField
                       control={form.control}
-                      name="rememberMe"
+                      name="email"
                       render={({ field }) => (
-                        <FormItem className="flex flex-row items-center space-x-2">
+                        <FormItem>
+                          <FormLabel className="text-gray-900">Email</FormLabel>
                           <FormControl>
-                            <Checkbox
-                              id="rememberMe"
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
+                            <div className="relative">
+                              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                              <Input
+                                className="pl-10 bg-white border-gray-200"
+                                placeholder="driver@example.com"
+                                type="email"
+                                {...field}
+                              />
+                            </div>
                           </FormControl>
-                          <div className="space-y-1 leading-none">
-                            <FormLabel className="text-sm text-gray-600">
-                              Remember me
-                            </FormLabel>
-                          </div>
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
-                  </div>
-                  
-                  <Link
-                    to="/forgot-password"
-                    className="text-sm font-medium text-black hover:underline"
-                  >
-                    Forgot password?
-                  </Link>
-                </div>
-                
-                <Button
-                  type="submit"
-                  className="w-full bg-black text-white hover:bg-neutral-800"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <span className="flex items-center justify-center">
-                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
-                      </svg>
-                      Signing in...
-                    </span>
-                  ) : (
-                    <span className="flex items-center">
-                      <LogIn className="mr-2 h-4 w-4" />
-                      Sign in as Driver
-                    </span>
-                  )}
-                </Button>
-                
-                <div className="text-center mt-4">
-                  <p className="text-sm text-gray-600">
-                    Don't have a driver account?{" "}
-                    <Link to="/driver-signup" className="font-medium text-black hover:underline">
-                      Sign up
-                    </Link>
-                  </p>
-                </div>
-              </form>
-            </Form>
+                    
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-gray-900">Password</FormLabel>
+                          <FormControl>
+                            <div className="relative">
+                              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                              <Input
+                                className="pl-10 bg-white border-gray-200"
+                                placeholder="••••••••"
+                                type="password"
+                                {...field}
+                              />
+                            </div>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <FormField
+                          control={form.control}
+                          name="rememberMe"
+                          render={({ field }) => (
+                            <FormItem className="flex flex-row items-center space-x-2">
+                              <FormControl>
+                                <Checkbox
+                                  id="rememberMe"
+                                  checked={field.value}
+                                  onCheckedChange={field.onChange}
+                                />
+                              </FormControl>
+                              <div className="space-y-1 leading-none">
+                                <FormLabel className="text-sm text-gray-600">
+                                  Remember me
+                                </FormLabel>
+                              </div>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      
+                      <Link
+                        to="/forgot-password"
+                        className="text-sm font-medium text-black hover:underline"
+                      >
+                        Forgot password?
+                      </Link>
+                    </div>
+                    
+                    <Button
+                      type="submit"
+                      className="w-full bg-black text-white hover:bg-neutral-800"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? (
+                        <span className="flex items-center justify-center">
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                          </svg>
+                          Signing in...
+                        </span>
+                      ) : (
+                        <span className="flex items-center">
+                          <LogIn className="mr-2 h-4 w-4" />
+                          Sign in as Driver
+                        </span>
+                      )}
+                    </Button>
+                  </form>
+                </Form>
+              </TabsContent>
+              
+              <TabsContent value="phone" className="mt-6">
+                <PhoneAuth onSuccess={handlePhoneAuthSuccess} />
+              </TabsContent>
+            </Tabs>
+            
+            <div className="text-center mt-4">
+              <p className="text-sm text-gray-600">
+                Don't have a driver account?{" "}
+                <Link to="/driver-signup" className="font-medium text-black hover:underline">
+                  Sign up
+                </Link>
+              </p>
+            </div>
           </CardContent>
         </Card>
       </div>

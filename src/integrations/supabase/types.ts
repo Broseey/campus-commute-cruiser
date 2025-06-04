@@ -19,6 +19,8 @@ export type Database = {
           is_online: boolean | null
           is_verified: boolean | null
           license_number: string | null
+          phone_number: string | null
+          phone_verified: boolean | null
           updated_at: string | null
           vehicle_make: string | null
           vehicle_model: string | null
@@ -34,6 +36,8 @@ export type Database = {
           is_online?: boolean | null
           is_verified?: boolean | null
           license_number?: string | null
+          phone_number?: string | null
+          phone_verified?: boolean | null
           updated_at?: string | null
           vehicle_make?: string | null
           vehicle_model?: string | null
@@ -49,6 +53,8 @@ export type Database = {
           is_online?: boolean | null
           is_verified?: boolean | null
           license_number?: string | null
+          phone_number?: string | null
+          phone_verified?: boolean | null
           updated_at?: string | null
           vehicle_make?: string | null
           vehicle_model?: string | null
@@ -64,6 +70,8 @@ export type Database = {
           email: string | null
           full_name: string | null
           id: string
+          phone_number: string | null
+          phone_verified: boolean | null
           updated_at: string | null
         }
         Insert: {
@@ -72,6 +80,8 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id: string
+          phone_number?: string | null
+          phone_verified?: boolean | null
           updated_at?: string | null
         }
         Update: {
@@ -80,7 +90,48 @@ export type Database = {
           email?: string | null
           full_name?: string | null
           id?: string
+          phone_number?: string | null
+          phone_verified?: boolean | null
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      ride_companies: {
+        Row: {
+          company_name: string
+          contact_email: string
+          contact_phone: string | null
+          created_at: string
+          description: string | null
+          id: string
+          logo_url: string | null
+          status: string | null
+          updated_at: string
+          website_url: string | null
+        }
+        Insert: {
+          company_name: string
+          contact_email: string
+          contact_phone?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          status?: string | null
+          updated_at?: string
+          website_url?: string | null
+        }
+        Update: {
+          company_name?: string
+          contact_email?: string
+          contact_phone?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          status?: string | null
+          updated_at?: string
+          website_url?: string | null
         }
         Relationships: []
       }
